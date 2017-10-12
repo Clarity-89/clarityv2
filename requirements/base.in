@@ -13,5 +13,7 @@ django-rosetta
 django-sniplates
 django-redis
 django_admin_index
-
+django-phonenumber-field
 # djangorestframework
+django-autoslug
+django_countries
