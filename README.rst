@@ -1,4 +1,3 @@
-{% comment %}
 
 .. image:: https://requires.io/bitbucket/maykinmedia/default-project/requirements.svg?branch=master
      :target: https://requires.io/bitbucket/maykinmedia/default-project/requirements/?branch=master
