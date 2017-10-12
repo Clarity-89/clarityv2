@@ -11,8 +11,8 @@ Quick start
 
 #. Get the code::
 
-    $ git clone git@bitbucket.org:maykinmedia/{{ project_name|lower }}.git
-    $ cd {{ project_name|lower }}
+    $ git clone git@bitbucket.org:maykinmedia/clarityv2.git
+    $ cd clarityv2
 
 #. Bootstrap the virtual environment and install all required libraries. The
    ``bootstrap.py`` script basically sets the proper Django settings file to be

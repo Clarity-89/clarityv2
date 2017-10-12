@@ -14,16 +14,16 @@ ADMINS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '{{ project_name|lower }}',
-        'USER': '{{ project_name|lower }}',
-        'PASSWORD': '{{ project_name|lower }}',
+        'NAME': 'clarityv2',
+        'USER': 'clarityv2',
+        'PASSWORD': 'clarityv2',
         'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',  # Set to empty string for default.
     }
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '{{ secret_key }}'
+SECRET_KEY = 'vs124jhuwpst%gi*4n(4*h!^gp)9@&98rene5)ojm2jw**@h58'
 
 ALLOWED_HOSTS = []
 
@@ -61,7 +61,7 @@ LOGGING['loggers'].update({
         'level': 'ERROR',
         'propagate': False,
     },
-    '{{ project_name|lower }}': {
+    'clarityv2': {
         'handlers': ['project'],
         'level': 'WARNING',
         'propagate': True,

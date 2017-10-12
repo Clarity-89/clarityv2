@@ -12,9 +12,9 @@ ROOT_DIR = os.path.abspath(os.path.join(DJANGO_PROJECT_DIR, os.path.pardir, os.p
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '{{ project_name|lower }}',
-        'USER': '{{ project_name|lower }}',
-        'PASSWORD': '{{ project_name|lower }}',
+        'NAME': 'clarityv2',
+        'USER': 'clarityv2',
+        'PASSWORD': 'clarityv2',
         'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',  # Set to empty string for default.
     }

@@ -1,13 +1,13 @@
-{% templatetag openblock %} extends "master.html" {% templatetag closeblock %}
-{% templatetag openblock %} load staticfiles {% templatetag closeblock %}
+{% extends "master.html" %}
+{% load staticfiles %}
 
 
-{% templatetag openblock %} block body-class {% templatetag closeblock %}demo{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% block body-class %}demo{% endblock %}
 
 
-{% templatetag openblock %} block content {% templatetag closeblock %}
+{% block content %}
 <article class="content">
-    <img class="demo__logo-img" src="{% templatetag openblock %} static 'img/maykinmedia_logo.png' {% templatetag closeblock %}">
+    <img class="demo__logo-img" src="{% static 'img/maykinmedia_logo.png' %}">
 
     <h1 class="demo__title">It worked!</h1>
 
@@ -22,7 +22,7 @@
         </p>
 
         <p>
-            You can also checkout the <a href="{% templatetag openblock %} url 'admin:index' {% templatetag closeblock %}">admin</a>.
+            You can also checkout the <a href="{% url 'admin:index' %}">admin</a>.
         </p>
     </section>
 
@@ -31,4 +31,4 @@
         haven't configured any URLs. Get to work!
     </p>
 </article>
-{% templatetag openblock %} endblock {% templatetag closeblock %}
+{% endblock %}

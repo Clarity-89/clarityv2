@@ -71,20 +71,20 @@ Indentation
         </body>
     </html>
 
-* Indent HTML and template tags. (except ``{% templatetag openblock %} block {% templatetag closeblock %}`` on root level).
+* Indent HTML and template tags. (except ``{% block %}`` on root level).
 
   .. code-block:: django
 
-    {% templatetag openblock %} block content {% templatetag closeblock %}
+    {% block content %}
     <article>
-        {% templatetag openblock %} if show_header {% templatetag closeblock %}
-            {% templatetag openblock %} block article__header {% templatetag closeblock %}
+        {% if show_header %}
+            {% block article__header %}
                 <header>
                 </header>
-            {% templatetag openblock %} endblock article__header {% templatetag closeblock %}
-        {% templatetag openblock %} endif {% templatetag closeblock %}
+            {% endblock article__header %}
+        {% endif %}
     </article>
-    {% templatetag openblock %} endblock content {% templatetag closeblock %}
+    {% endblock content %}
 
 
 Data-attributes
@@ -287,7 +287,7 @@ Selectors
 
   .. code-block:: scss
 
-    // file src/{{ project_name|lower }}/sass/components/blocks/_block.scss
+    // file src/clarityv2/sass/components/blocks/_block.scss
 
     .block {  // That's it, no more blocks in this file
       // ...

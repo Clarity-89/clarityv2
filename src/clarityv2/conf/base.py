@@ -5,10 +5,10 @@ DJANGO_PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.
 BASE_DIR = os.path.abspath(os.path.join(DJANGO_PROJECT_DIR, os.path.pardir, os.path.pardir))
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/{{ docs_version }}/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '{{ secret_key }}'
+SECRET_KEY = 'vs124jhuwpst%gi*4n(4*h!^gp)9@&98rene5)ojm2jw**@h58'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'hijack_admin',
 
     # Project applications.
-    '{{ project_name|lower }}.accounts',
-    '{{ project_name|lower }}.utils',
+    'clarityv2.accounts',
+    'clarityv2.utils',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -65,7 +65,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = '{{ project_name|lower }}.urls'
+ROOT_URLCONF = 'clarityv2.urls'
 
 # List of callables that know how to import templates from various sources.
 RAW_TEMPLATE_LOADERS = (
@@ -87,20 +87,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                '{{ project_name|lower }}.utils.context_processors.settings',
+                'clarityv2.utils.context_processors.settings',
             ],
             'loaders': RAW_TEMPLATE_LOADERS
         },
     },
 ]
 
-WSGI_APPLICATION = '{{ project_name|lower }}.wsgi.application'
+WSGI_APPLICATION = 'clarityv2.wsgi.application'
 
 # Database: Defined in target specific settings files.
-# https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#databases
+# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 # Password validation
-# https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -119,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/{{ docs_version }}/topics/i18n/
+# https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'nl-nl'
 
@@ -139,7 +139,7 @@ LOCALE_PATHS = (
 )
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/{{ docs_version }}/howto/static-files/
+# https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 
@@ -166,7 +166,7 @@ FIXTURE_DIRS = (
     os.path.join(DJANGO_PROJECT_DIR, 'fixtures'),
 )
 
-DEFAULT_FROM_EMAIL = '{{ project_name|lower }}@example.com'
+DEFAULT_FROM_EMAIL = 'clarityv2@example.com'
 
 LOGGING_DIR = os.path.join(BASE_DIR, 'log')
 
@@ -218,7 +218,7 @@ LOGGING = {
         'project': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(LOGGING_DIR, '{{ project_name|lower }}.log'),
+            'filename': os.path.join(LOGGING_DIR, 'clarityv2.log'),
             'formatter': 'verbose',
             'maxBytes': 1024 * 1024 * 10,  # 10 MB
             'backupCount': 10
@@ -233,7 +233,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        '{{ project_name|lower }}': {
+        'clarityv2': {
             'handlers': ['project'],
             'level': 'INFO',
             'propagate': True,
@@ -260,14 +260,14 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # Allow logging in with both username+password and email+password
 AUTHENTICATION_BACKENDS = [
-    '{{ project_name|lower }}.accounts.backends.UserModelEmailBackend',
+    'clarityv2.accounts.backends.UserModelEmailBackend',
     'django.contrib.auth.backends.ModelBackend'
 ]
 
 #
 # Custom settings
 #
-PROJECT_NAME = '{{ project_name|lower }}'
+PROJECT_NAME = 'clarityv2'
 ENVIRONMENT = None
 SHOW_ALERT = True
 

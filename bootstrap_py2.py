@@ -14,7 +14,7 @@ description = """
 Set up my development environment for me!
 """
 
-project_name = '{{ project_name|lower }}'
+project_name = 'clarityv2'
 
 parser = argparse.ArgumentParser(description=description)
 parser.add_argument('target', choices=['production', 'staging', 'test', 'development'],

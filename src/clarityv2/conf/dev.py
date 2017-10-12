@@ -13,7 +13,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, '{{ project_name|lower }}.db'),
+        'NAME': os.path.join(BASE_DIR, 'clarityv2.db'),
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -27,7 +27,7 @@ DATABASES = {
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 LOGGING['loggers'].update({
-    '{{ project_name|lower }}': {
+    'clarityv2': {
         'handlers': ['console'],
         'level': 'DEBUG',
         'propagate': True,

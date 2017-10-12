@@ -1,26 +1,26 @@
-{% templatetag openblock %} load staticfiles  {% templatetag closeblock %}<!DOCTYPE html>
+{% load staticfiles  %}<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>{% templatetag openblock %} block title {% templatetag closeblock %}{{ project_name|title }}{% templatetag openblock %} endblock {% templatetag closeblock %}</title>
+        <title>{% block title %}Clarityv2{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <link href="{% templatetag openblock %} static 'css/screen.css' {% templatetag closeblock %}" media="screen" rel="stylesheet" />
-        {% templatetag openblock %} block extra_css {% templatetag closeblock %}{% templatetag openblock %} endblock {% templatetag closeblock %}
-        <link rel="shortcut icon" href="{% templatetag openblock %} static 'ico/favicon.png' {% templatetag closeblock %}">
+        <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet" />
+        {% block extra_css %}{% endblock %}
+        <link rel="shortcut icon" href="{% static 'ico/favicon.png' %}">
     </head>
 
-    <body class="{% templatetag openblock %} block body-class {% templatetag closeblock %}{% templatetag openblock %} endblock {% templatetag closeblock %}">
+    <body class="{% block body-class %}{% endblock %}">
 
         <main>
-            {% templatetag openblock %} block content {% templatetag closeblock %}
-                Override <code>{% templatetag openblock %} verbatim {% templatetag closeblock %}{% templatetag openblock %} block content {% templatetag closeblock %}{% templatetag openblock %} endverbatim {% templatetag closeblock %}</code>
+            {% block content %}
+                Override <code>{% verbatim %}{% block content %}{% endverbatim %}</code>
                 to get some actual content.
-            {% templatetag openblock %} endblock {% templatetag closeblock %}
+            {% endblock %}
         </main>
 
-        <script src="{% templatetag openblock %} static 'js/{{ project_name|lower }}.js' {% templatetag closeblock %}"></script>
+        <script src="{% static 'js/clarityv2.js' %}"></script>
     </body>
 </html>

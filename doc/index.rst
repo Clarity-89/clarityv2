@@ -1,10 +1,10 @@
 .. _index:
 
 ===================
-{{ project|title }}
+
 ===================
 
-Welcome to the documentation for the {{ project|title }} project.
+Welcome to the documentation for the  project.
 
 
 Documentation

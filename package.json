@@ -1,8 +1,8 @@
 {
-  "name": "{{ project_name|lower }}",
+  "name": "clarityv2",
   "version": "1.0.0-alpha.0",
-  "description": "{{ project_name }} project",
-  "main": "src/static/{{ project_name|lower }}/js/{{ project_name|lower }}.js",
+  "description": "clarityv2 project",
+  "main": "src/static/clarityv2/js/clarityv2.js",
   "directories": {
     "doc": "doc"
   },
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/maykinmedia/{{ project_name|lower }}.git"
+    "url": "git+ssh://git@bitbucket.org/maykinmedia/clarityv2.git"
   },
   "author": "Maykin Media",
   "license": "UNLICENSED",

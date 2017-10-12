@@ -13,13 +13,13 @@ ADMINS = ()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '{{ project_name|lower }}',
+        'NAME': 'clarityv2',
         'USER': 'jenkins',
         'PASSWORD': 'jenkins',
         'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',  # Set to empty string for default.
         'TEST': {
-            'NAME': 'test_%s' % os.getenv('JOB_NAME', default='{{ project_name|lower }}')
+            'NAME': 'test_%s' % os.getenv('JOB_NAME', default='clarityv2')
         }
     }
 }
@@ -55,7 +55,7 @@ INSTALLED_APPS += [
     'django_jenkins',
 ]
 
-PROJECT_APPS = [app.rsplit('.apps.')[0] for app in INSTALLED_APPS if app.startswith('{{ project_name|lower }}')]
+PROJECT_APPS = [app.rsplit('.apps.')[0] for app in INSTALLED_APPS if app.startswith('clarityv2')]
 
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pylint',

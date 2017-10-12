@@ -35,7 +35,7 @@ Example:
 
     import django.contrib.admin
 
-    import {{ project_name|lower }}.other_app.models
+    import clarityv2.other_app.models
 
     from .models import SomeModel
 
@@ -50,7 +50,7 @@ Example:
 
 .. code-block::
 
-    from {{ project_name }}.accounts.models import Account
+    from clarityv2.accounts.models import Account
 
     class Idea(models.Model):
         pass

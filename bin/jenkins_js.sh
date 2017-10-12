@@ -2,7 +2,7 @@
 
 virtualenv env -p python3
 
-export DJANGO_SETTINGS_MODULE={{ project_name|lower }}.conf.test
+export DJANGO_SETTINGS_MODULE=clarityv2.conf.test
 env/bin/pip install -r requirements/test.txt
 
 echo "Installing front-end build tooling + dependencies"

@@ -4,7 +4,7 @@ cur_dir="$(dirname "$0")"
 envdir=$cur_dir/../env
 
 # Helper script that sets-up the Django environment for Jenkins
-export DJANGO_SETTINGS_MODULE={{ project_name|lower }}.conf.test
+export DJANGO_SETTINGS_MODULE=clarityv2.conf.test
 if [ ! -d "$envdir" ]; then
     virtualenv $envdir -p python3
 fi

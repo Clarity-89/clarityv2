@@ -87,19 +87,19 @@ It is recommended to set up the following Jenkins jobs for a project:
 **master** branch
 -----------------
 
-1. ``{{ project_name|lower }}-django``: backend tests, runs ``./bin/jenkins_django.sh``.
-2. ``{{ project_name|lower }}-js``: frontend tests, runs ``./bin/jenkins_js.sh``.
+1. ``clarityv2-django``: backend tests, runs ``./bin/jenkins_django.sh``.
+2. ``clarityv2-js``: frontend tests, runs ``./bin/jenkins_js.sh``.
 
 **develop** branch
 ------------------
 
-1. ``{{ project_name|lower }}-django-develop``: backend tests, runs ``./bin/jenkins_django.sh``.
-2. ``{{ project_name|lower }}-django-develop-js``: frontend tests, runs ``./bin/jenkins_js.sh``.
+1. ``clarityv2-django-develop``: backend tests, runs ``./bin/jenkins_django.sh``.
+2. ``clarityv2-django-develop-js``: frontend tests, runs ``./bin/jenkins_js.sh``.
 
 pull requests
 -------------
-1. ``{{ project_name|lower }}-pr-django``: backend tests, runs ``./bin/jenkins_django_pr.sh``.
-2. ``{{ project_name|lower }}-pr-js``: frontend tests, runs ``./bin/jenkins_js.sh``.
-3. ``{{ project_name|lower }}-pr-sass``: checks that sass compiles, runs ``./bin/jenkins_sass.sh``.
-4. ``{{ project_name|lower }}-pr-isort``: checks that imports are correctly
+1. ``clarityv2-pr-django``: backend tests, runs ``./bin/jenkins_django_pr.sh``.
+2. ``clarityv2-pr-js``: frontend tests, runs ``./bin/jenkins_js.sh``.
+3. ``clarityv2-pr-sass``: checks that sass compiles, runs ``./bin/jenkins_sass.sh``.
+4. ``clarityv2-pr-isort``: checks that imports are correctly
    sorted, runs ``./bin/jenkins_isort.sh``.

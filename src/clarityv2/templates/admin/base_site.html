@@ -1,4 +1,4 @@
-{% verbatim %}{% extends "admin/base.html" %}
+{% extends "admin/base.html" %}
 {% load i18n static hijack_tags %}
 
 {% block title %}{{ title }} | {{ site_title|default:_('Administration') }}{% endblock %}
@@ -24,4 +24,4 @@
     {{ block.super }}
 
     {% include "includes/debug_alert.html" %}
-{% endblock %}{% endverbatim %}
+{% endblock %}
