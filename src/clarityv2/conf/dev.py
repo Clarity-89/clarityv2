@@ -13,8 +13,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.path.join(BASE_DIR, 'clarityv2.db'),
-        # The following settings are not used with sqlite3:
+        'NAME': 'clarity',
         'USER': 'clarity',
         'PASSWORD': 'clarity',
         'HOST': 'localhost',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
