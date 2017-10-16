@@ -12,9 +12,8 @@ from djchoices import DjangoChoices, ChoiceItem
 
 
 class Contact(models.Model):
-
     """
-    Contact details for a single contact.
+    Contact details for a single contact from a Client.
     """
 
     label = models.CharField(_('label'), max_length=50)

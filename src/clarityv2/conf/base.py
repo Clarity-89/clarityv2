@@ -1,4 +1,6 @@
 import os
+from django.utils.translation import ugettext_lazy as _
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 DJANGO_PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
@@ -120,10 +122,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
+LANGUAGES = [
+    ('en', _('English'))
+]
 
-LANGUAGE_CODE = 'nl-nl'
+LANGUAGE_CODE = 'en-uk'
 
-TIME_ZONE = 'Europe/Amsterdam'
+TIME_ZONE = 'Europe/Helsinki'
 
 USE_I18N = True
 
@@ -166,7 +171,7 @@ FIXTURE_DIRS = (
     os.path.join(DJANGO_PROJECT_DIR, 'fixtures'),
 )
 
-DEFAULT_FROM_EMAIL = 'clarityv2@example.com'
+DEFAULT_FROM_EMAIL = 'khomenkodev17@gmail.com'
 
 LOGGING_DIR = os.path.join(BASE_DIR, 'log')
 
