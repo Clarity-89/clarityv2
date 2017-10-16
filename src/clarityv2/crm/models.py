@@ -52,7 +52,7 @@ class Client(models.Model):
 
     # invoicing fields
     crn = models.CharField(_('registration number'), max_length=50, blank=True, help_text=_('KvK number'))
-    vat = models.CharField(_('VAT number'), max_length=50, blank=True)
+    vat_number = models.CharField(_('VAT number'), max_length=50, blank=True)
 
     contacts = models.ManyToManyField('Contact', blank=True)
 
@@ -68,8 +68,8 @@ class Client(models.Model):
 
 
 class TaxRates(DjangoChoices):
-    low = ChoiceItem(Decimal('0.06'), _('low'))
-    high = ChoiceItem(Decimal('0.21'), _('high'))
+    no_vat = ChoiceItem(Decimal('0.00'), _('no vat'))
+    standard = ChoiceItem(Decimal('0.20'), _('standard vat rate'))
 
 
 class Project(models.Model):
@@ -87,9 +87,9 @@ class Project(models.Model):
     # base financial information
     base_rate = models.DecimalField(_('hourly base rate'), max_digits=8, decimal_places=2, null=True, blank=True)
     flat_fee = models.DecimalField(_('flat fee'), max_digits=10, decimal_places=2, null=True, blank=True)
-    tax_rate = models.DecimalField(
+    vat = models.DecimalField(
         _('tax rate'), max_digits=4, decimal_places=2,
-        choices=TaxRates.choices, default=TaxRates.high
+        choices=TaxRates.choices, default=TaxRates.no_vat
     )
 
     class Meta:
