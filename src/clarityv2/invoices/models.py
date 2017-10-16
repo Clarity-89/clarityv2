@@ -13,8 +13,8 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from clarityv2.crm.models import TaxRates
-# from regex.utils.storages import private_media_storage
-# from regex.work_entries.models import WorkEntry
+from clarityv2.utils.storages import private_media_storage
+#from regex.work_entries.models import WorkEntry
 
 
 logger = logging.getLogger(__name__)
