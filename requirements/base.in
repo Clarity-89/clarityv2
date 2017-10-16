@@ -17,3 +17,5 @@ django-phonenumber-field
 # djangorestframework
 django-autoslug
 django_countries
+rules
+

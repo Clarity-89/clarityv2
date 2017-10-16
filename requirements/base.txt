@@ -32,5 +32,6 @@ pytz==2017.2
 raven==6.2.1
 redis==2.10.6             # via django-redis
 requests==2.18.4          # via django-rosetta, microsofttranslator
+rules==1.2.1
 six==1.11.0               # via django-compat, django-rosetta, microsofttranslator
 urllib3==1.22             # via requests
