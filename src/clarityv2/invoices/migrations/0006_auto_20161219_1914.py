@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import regex.utils.storages
+import clarityv2.utils.storages
 
 
 class Migration(migrations.Migration):
@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='invoice',
             name='pdf',
-            field=models.FileField(blank=True, storage=regex.utils.storages.PrivateMediaFileSystemStorage(), upload_to='invoices/%Y/%m', verbose_name='pdf'),
+            field=models.FileField(blank=True, storage=clarityv2.utils.storages.PrivateMediaFileSystemStorage(), upload_to='invoices/%Y/%m', verbose_name='pdf'),
         ),
     ]

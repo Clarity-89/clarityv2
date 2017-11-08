@@ -1,7 +1,6 @@
 import os
 from django.utils.translation import ugettext_lazy as _
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 DJANGO_PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 BASE_DIR = os.path.abspath(os.path.join(DJANGO_PROJECT_DIR, os.path.pardir, os.path.pardir))
@@ -54,6 +53,9 @@ INSTALLED_APPS = [
     # Project applications.
     'clarityv2.accounts',
     'clarityv2.utils',
+    'clarityv2.crm',
+    'clarityv2.invoices',
+    'clarityv2.work_entries'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -119,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 LANGUAGES = [
@@ -142,6 +143,8 @@ USE_THOUSAND_SEPARATOR = True
 LOCALE_PATHS = (
     os.path.join(DJANGO_PROJECT_DIR, 'conf', 'locale'),
 )
+
+DEFAULT_COUNTRY = 'BE'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -166,6 +169,12 @@ STATICFILES_FINDERS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+# TODO add links
+
+PRIVATE_MEDIA_ROOT = ''
+
+PRIVATE_MEDIA_URL = ''
 
 FIXTURE_DIRS = (
     os.path.join(DJANGO_PROJECT_DIR, 'fixtures'),
@@ -290,7 +299,6 @@ AXES_COOLOFF_TIME = 1  # One hour
 AXES_BEHIND_REVERSE_PROXY = True  # Default: False (we are typically using Nginx as reverse proxy)
 AXES_ONLY_USER_FAILURES = False  # Default: False (you might want to block on username rather than IP)
 AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = False  # Default: False (you might want to block on username and IP)
-
 
 # Django-hijack (and Django-hijack-admin)
 from django.core.urlresolvers import reverse_lazy

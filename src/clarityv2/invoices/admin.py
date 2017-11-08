@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.utils.translation import ugettext_lazy as _
 
-from regex.utils.views.private_media import PrivateMediaView
+from clarityv2.utils.views.private_media import PrivateMediaView
 
 from .forms import AdminInvoiceForm
 from .models import Invoice, InvoiceItem

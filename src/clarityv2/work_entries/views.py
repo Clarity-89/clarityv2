@@ -3,7 +3,7 @@ from django.db.models import F
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
-from regex.crm.models import Project
+from clarityv2.crm.models import Project
 
 from .models import WorkEntry
 

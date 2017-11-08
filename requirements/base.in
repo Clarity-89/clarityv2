@@ -2,6 +2,7 @@ psycopg2
 Pillow
 pytz
 raven
+WeasyPrint==0.38
 
 Django
 # django-admin-tools
@@ -17,5 +18,8 @@ django-phonenumber-field
 # djangorestframework
 django-autoslug
 django_countries
+django-sendfile
+django-import-export
+
 rules
 

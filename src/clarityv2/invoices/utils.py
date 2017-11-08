@@ -11,8 +11,8 @@ from django.utils import translation
 import weasyprint
 from sendfile import sendfile
 
-from regex.utils.pdf import UrlFetcher
-from regex.utils.views.pdf import PDFTemplateResponse, PDFTemplateResponseMixin
+from clarityv2.utils.pdf import UrlFetcher
+from clarityv2.utils.views.pdf import PDFTemplateResponse, PDFTemplateResponseMixin
 
 
 def render_invoice_pdf(request, invoice, template_name='invoices/invoice_detail.html'):

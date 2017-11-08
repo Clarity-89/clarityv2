@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from clarityv2.crm.models import TaxRates
 from clarityv2.utils.storages import private_media_storage
-#from regex.work_entries.models import WorkEntry
+#from clarityv2.work_entries.models import WorkEntry
 
 
 logger = logging.getLogger(__name__)
@@ -153,7 +153,7 @@ class InvoiceItem(models.Model):
     amount = models.DecimalField(_('amount'), max_digits=10, decimal_places=2)
     tax_rate = models.DecimalField(
         _('tax rate'), max_digits=4, decimal_places=2,
-        choices=TaxRates.choices, default=TaxRates.high
+        choices=TaxRates.choices, default=TaxRates.no_vat
     )
 
     content_type = models.ForeignKey('contenttypes.ContentType', blank=True, null=True)

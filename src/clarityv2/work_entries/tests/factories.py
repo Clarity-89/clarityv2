@@ -1,7 +1,7 @@
 import factory
 
-from regex.accounts.tests.factories import UserFactory
-from regex.crm.tests.factories import ProjectFactory
+from clarityv2.accounts.tests.factories import UserFactory
+from clarityv2.crm.tests.factories import ProjectFactory
 from ..models import WorkEntry
 
 

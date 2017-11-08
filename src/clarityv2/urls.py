@@ -12,8 +12,10 @@ urlpatterns = [
     url(r'^admin/password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
     url(r'^admin/hijack/', include('hijack.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', auth_views.password_reset_confirm, name='password_reset_confirm'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', auth_views.password_reset_confirm,
+        name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
+    url(r'^work_entries/', include('clarityv2.work_entries.urls', namespace='work_entries')),
 
     # Simply show the master template.
     url(r'^$', TemplateView.as_view(template_name='demo.html')),
@@ -25,6 +27,7 @@ urlpatterns += staticfiles_urlpatterns() + static(settings.MEDIA_URL, document_r
 
 if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
+
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ]

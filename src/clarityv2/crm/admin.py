@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Contact, Client, Project
-from regex.utils.admin.decorators import link_list
+from clarityv2.utils.admin.decorators import link_list
 
 
 @admin.register(Contact)
@@ -41,6 +41,6 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('name', 'client', 'base_rate', 'flat_fee', 'tax_rate')
+    list_display = ('name', 'client', 'base_rate', 'flat_fee')
     list_filter = ('client',)
     search_fields = ('name',)
