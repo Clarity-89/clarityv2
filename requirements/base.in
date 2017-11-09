@@ -9,17 +9,18 @@ Django
 django-hijack
 django-hijack-admin
 django-axes
+django-admin-index
 django-choices
 django-rosetta
 django-sniplates
 django-redis
 django_admin_index
 django-phonenumber-field
-# djangorestframework
+djangorestframework
 django-autoslug
 django_countries
 django-sendfile
 django-import-export
-
+django-allauth
 rules
 

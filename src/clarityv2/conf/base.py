@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
 
     # Note: If enabled, at least one Site object is required
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
@@ -49,13 +49,17 @@ INSTALLED_APPS = [
     'hijack',
     'compat',  # Part of hijack
     'hijack_admin',
+    'allauth',
+    'allauth.account',
+    'django_countries',
+    'import_export',
 
     # Project applications.
     'clarityv2.accounts',
     'clarityv2.utils',
     'clarityv2.crm',
     'clarityv2.invoices',
-    'clarityv2.work_entries'
+    'clarityv2.work_entries',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -92,6 +96,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'clarityv2.utils.context_processors.settings',
+                'django_admin_index.context_processors.dashboard'
             ],
             'loaders': RAW_TEMPLATE_LOADERS
         },
@@ -274,8 +279,9 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # Allow logging in with both username+password and email+password
 AUTHENTICATION_BACKENDS = [
-    'clarityv2.accounts.backends.UserModelEmailBackend',
-    'django.contrib.auth.backends.ModelBackend'
+    'rules.permissions.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 #
@@ -284,6 +290,7 @@ AUTHENTICATION_BACKENDS = [
 PROJECT_NAME = 'clarityv2'
 ENVIRONMENT = None
 SHOW_ALERT = True
+SITE_ID = 1
 
 #
 # Library settings
