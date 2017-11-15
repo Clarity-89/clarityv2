@@ -16,10 +16,10 @@ class Contact(models.Model):
     Contact details for a single contact from a Client.
     """
 
-    label = models.CharField(_('label'), max_length=50)
+    label = models.CharField(_('label'), max_length=50, blank=True)
     name = models.CharField(_('name'), max_length=255)
     email = models.EmailField(_('email'))
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(_('phone number'), blank=True)
     address = models.CharField(_('address'), max_length=255, blank=True)
     postal_code = models.CharField(_('postal code'), max_length=10, blank=True)
     city = models.CharField(_('city'), max_length=255, blank=True)
@@ -44,14 +44,15 @@ class Client(models.Model):
 
     # global company contact details
     email = models.EmailField(_('email'))
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(_('phone number'), blank=True)
     address = models.CharField(_('address'), max_length=255)
+    postal_code = models.CharField(_('postal code'), max_length=10, blank=True)
     city = models.CharField(_('city'), max_length=255)
     country = CountryField(default=settings.DEFAULT_COUNTRY, verbose_name=_('Country'))
     language = models.CharField(_('language'), max_length=10, choices=settings.LANGUAGES, default='nl')
 
     # invoicing fields
-    crn = models.CharField(_('registration number'), max_length=50, blank=True, help_text=_('KvK number'))
+    crn = models.CharField(_('registration number'), max_length=50, blank=True, help_text=_('Business ID'))
     vat_number = models.CharField(_('VAT number'), max_length=50, blank=True)
 
     contacts = models.ManyToManyField('Contact', blank=True)
@@ -73,7 +74,6 @@ class TaxRates(DjangoChoices):
 
 
 class Project(models.Model):
-
     """
     Logical entity to group work entities under.
 

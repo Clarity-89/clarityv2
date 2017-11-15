@@ -88,7 +88,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(DJANGO_PROJECT_DIR, 'templates'),
         ],
-        'APP_DIRS': False,  # conflicts with explicity specifying the loaders
+        'APP_DIRS': False,  # conflicts with explicitly specifying the loaders
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

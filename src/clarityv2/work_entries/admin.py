@@ -10,8 +10,8 @@ from .models import WorkEntry
 
 @admin.register(WorkEntry)
 class WorkEntryAdmin(ImportExportActionModelAdmin):
-    list_display = ('start', 'end', 'project', 'notes')
-    list_filter = ('project__client', 'project', 'start')
+    list_display = ('date', 'duration', 'project', 'notes')
+    list_filter = ('project__client', 'project', 'date')
     search_fields = ('notes',)
     change_list_template = 'admin/work_entries/workentry/change_list.html'
 
@@ -21,7 +21,6 @@ class WorkEntryAdmin(ImportExportActionModelAdmin):
         queryset = cl.get_queryset(request)
         duration = (
             queryset
-            .annotate(duration=F('end') - F('start'))
             .aggregate(Sum('duration'))['duration__sum']
         ) or timedelta()
         response.context_data['total_duration'] = duration.total_seconds() / 3600
