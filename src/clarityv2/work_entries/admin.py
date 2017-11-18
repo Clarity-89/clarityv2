@@ -18,7 +18,7 @@ class WorkEntryAdmin(ImportExportActionModelAdmin):
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(request, extra_context=None)
 
-        if response.hasattr('context_data'):
+        if hasattr(response, 'context_data'):
             cl = response.context_data.get('cl')
             if cl:
                 queryset = cl.get_queryset(request)
