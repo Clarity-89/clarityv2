@@ -1,0 +1,14 @@
+<th>
+    {% if sortable %}
+        <a class="entries-table__sort-header {% if order == title %}entries-table__sort-header--active{% endif %}"
+           href="?order_by={{ title }}&direction={% if direction == 'desc' %}asc{% else %}desc{% endif %}">
+            {{ label }}
+
+            {% if order == title %}
+                <i class="fa fa-arrow-{% if direction == 'desc' %}down{% else %}up{% endif %}"></i>
+            {% endif %}
+        </a>
+    {% else %}
+        {{ label }}
+    {% endif %}
+</th>

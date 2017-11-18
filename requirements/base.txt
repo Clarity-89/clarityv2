@@ -21,6 +21,7 @@ django-axes==2.3.3
 django-choices==1.6.0
 django-compat==1.0.14     # via django-hijack, django-hijack-admin
 django-countries==5.0
+django-extensions==1.9.7
 django-hijack-admin==2.1.4
 django-hijack==2.1.4
 django-import-export==0.5.1
@@ -56,9 +57,10 @@ redis==2.10.6             # via django-redis
 requests-oauthlib==0.8.0  # via django-allauth
 requests==2.18.4          # via django-allauth, django-rosetta, microsofttranslator, requests-oauthlib
 rules==1.2.1
-six==1.11.0               # via django-compat, django-rosetta, html5lib, microsofttranslator
+six==1.11.0               # via django-compat, django-extensions, django-rosetta, html5lib, microsofttranslator
 tablib==0.12.1            # via django-import-export
 tinycss2==0.6.1           # via cairosvg, cssselect2, weasyprint
+typing==3.6.2             # via django-extensions
 unicodecsv==0.14.1        # via tablib
 urllib3==1.22             # via requests
 weasyprint==0.38

@@ -11,6 +11,7 @@ django-hijack-admin
 django-axes
 django-admin-index
 django-choices
+django-extensions
 django-rosetta
 django-sniplates
 django-redis

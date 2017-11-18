@@ -2,15 +2,29 @@
 
 
 {% block content %}
-<section class="work-item-list">
-    <h1 class="work-item-list__title">{{ project.name }}</h1>
-    {% for entry in work_entries %}
-        <article class="work-item">
-            <span class="work-item__date"><i class="fa fa-calendar-o"></i> {{ entry.start|date:"d-m-y" }}</span>
-            <span class="work-item__duration"><i class="fa fa-clock-o"></i> {{ entry.duration }}</span>
-            <span class="work-item__time">{{ entry.start|date:"H:i" }} &ndash; {{ entry.end|date:"H:i" }}</span>
-            <p class="work-item__notes">{{ entry.notes }}</p>
-        </article>
-    {% endfor %}
-</section>
+    <h3 class="entries__header">{{ project.name }}</h3>
+    <table class="entries-table">
+        <thead class="entries-table__head">
+        <tr>
+            {% for header in headers %}
+                {% include "work_entries/includes/table-header.html" with title=header.name label=header.label sortable=header.sortable order=order direction=direction %}
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for entry in work_entries %}
+            <tr>
+                <td>
+                    {{ entry.notes }}
+                </td>
+                <td>
+                    {{ entry.date|date:"d/m/y" }}
+                </td>
+                <td>
+                    {{ entry.duration }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock content %}
