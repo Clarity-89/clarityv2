@@ -17,11 +17,11 @@ class WorkEntryAdmin(ImportExportActionModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(request, extra_context=None)
-        cl = response.context_data['cl']
-        queryset = cl.get_queryset(request)
-        duration = (
-            queryset
-            .aggregate(Sum('duration'))['duration__sum']
-        ) or timedelta()
-        response.context_data['total_duration'] = duration.total_seconds() / 3600
+
+        if response.hasattr('context_data'):
+            cl = response.context_data.get('cl')
+            if cl:
+                queryset = cl.get_queryset(request)
+                duration = (queryset.aggregate(Sum('duration'))['duration__sum']) or timedelta()
+                response.context_data['total_duration'] = duration.total_seconds() / 3600
         return response
