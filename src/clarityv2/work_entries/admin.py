@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.contrib import admin
-from django.db.models import F, Sum
+from django.db.models import Sum
 
 from import_export.admin import ImportExportActionModelAdmin
 

@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load i18n work_entries %}
 
 
 {% block content %}
@@ -21,10 +21,18 @@
                     {{ entry.date|date:"d/m/y" }}
                 </td>
                 <td>
-                    {{ entry.duration }}
+                    {{ entry.duration|duration }}
+                </td>
+                <td>
+                    {{ entry.total }}
                 </td>
             </tr>
         {% endfor %}
+        <tr>
+            <td><strong>{% trans 'Total' %}</strong></td>
+            <td></td>
+            <td>{{ total_hours }}</td>
+        </tr>
         </tbody>
     </table>
 {% endblock content %}

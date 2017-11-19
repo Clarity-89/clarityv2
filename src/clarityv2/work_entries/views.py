@@ -1,6 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import Sum
+
 from clarityv2.crm.models import Project
 
 from .models import WorkEntry
@@ -14,9 +16,12 @@ class WorkEntryList(LoginRequiredMixin, OrderingMixin, ListView):
     default_ordering = '-date'
     table_headers = [{'name': 'notes', 'label': _('Notes'), 'sortable': False},
                      {'name': 'date', 'label': _('Date'), 'sortable': True},
-                     {'name': 'duration', 'label': _('Duration'), 'sortable': True}]
+                     {'name': 'duration', 'label': _('Duration (hours)'), 'sortable': True},
+                     {'name': 'price', 'label': _('Price'), 'sortable': False}]
 
     def get_context_data(self, **kwargs):
         slug = self.kwargs['project_slug']
         kwargs['project'] = Project.objects.get(slug=slug)
+        duration = WorkEntry.objects.aggregate(Sum('duration'))['duration__sum']
+        kwargs['total_hours'] = duration.total_seconds() / 3600
         return super().get_context_data(**kwargs)
