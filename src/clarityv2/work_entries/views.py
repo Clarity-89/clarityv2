@@ -24,4 +24,5 @@ class WorkEntryList(LoginRequiredMixin, OrderingMixin, ListView):
         kwargs['project'] = Project.objects.get(slug=slug)
         duration = WorkEntry.objects.aggregate(Sum('duration'))['duration__sum']
         kwargs['total_hours'] = duration.total_seconds() / 3600
+
         return super().get_context_data(**kwargs)

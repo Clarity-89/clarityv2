@@ -13,28 +13,50 @@
             </tr>
             </thead>
             <tbody class="entries-table__body">
-            {% for entry in work_entries %}
+            {% regroup work_entries by date|date:"m/Y" as entry_list %}
+            {% for date in entry_list %}
                 <tr class="entries-table__row">
-                    <td class="entries-table__cell">
-                        {{ entry.notes }}
-                    </td>
-                    <td class="entries-table__cell">
-                        {{ entry.date|date:"d/m/y" }}
-                    </td>
-                    <td class="entries-table__cell">
-                        {{ entry.duration|duration }}
-                    </td>
-                    <td class="entries-table__cell">
-                        {{ entry.total }}
+                    <td class="entries-table__cell entries-table__cell--bold">{{ date.grouper }}</td>
+                    <td class="entries-table__cell entries-table__cell--empty"></td>
+                    <td class="entries-table__cell entries-table__cell--empty"></td>
+                    <td class="entries-table__cell entries-table__cell--empty"></td>
+                </tr>
+
+                {% for entry in date.list %}
+                    <tr class="entries-table__row">
+                        <td class="entries-table__cell">
+                            {{ entry.notes }}
+                        </td>
+                        <td class="entries-table__cell">
+                            {{ entry.date|date:"d/m/y" }}
+                        </td>
+                        <td class="entries-table__cell">
+                            {{ entry.duration|duration }}
+                        </td>
+                        <td class="entries-table__cell">
+                            {{ entry.total }}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                <tr class="entries-table__row entries-table__row--total">
+                    <td class="entries-table__cell entries-table__cell--bold">{% trans "Total per month" %}</td>
+                    <td class="entries-table__cell entries-table__cell--empty"></td>
+                    <td class="entries-table__cell entries-table__cell--bold">{% hours_per_month date.list %}</td>
+                    <td class="entries-table__cell entries-table__cell--bold">
+                        {% total_per_month date.list project %} &euro;
                     </td>
                 </tr>
             {% endfor %}
-            <tr class="entries-table__row">
-                <td class="entries-table__cell entries-table__cell--bold">{% trans 'Total' %}</td>
-                <td class="entries-table__cell entries-table__cell--empty"></td>
-                <td class="entries-table__cell entries-table__cell--bold">{{ total_hours }}</td>
-                <td class="entries-table__cell entries-table__cell--bold">{% total_price project total_hours %} &euro;</td>
-            </tr>
+
+{#            <tr class="entries-table__row">#}
+{#                <td class="entries-table__cell entries-table__cell--bold">{% trans 'Total' %}</td>#}
+{#                <td class="entries-table__cell entries-table__cell--empty"></td>#}
+{#                <td class="entries-table__cell entries-table__cell--bold">{{ total_hours }}</td>#}
+{#                <td class="entries-table__cell entries-table__cell--bold">#}
+{#                    {% total_price project total_hours %} &euro;#}
+{#                </td>#}
+{#            </tr>#}
             </tbody>
         </table>
     </div>
