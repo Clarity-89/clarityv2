@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 from django_webtest import WebTest
 from freezegun import freeze_time
 
-from regex.accounts.tests.factories import UserFactory, SuperUserFactory
-from regex.crm.tests.factories import ProjectFactory, ContactFactory
+from clarityv2.accounts.tests.factories import UserFactory, SuperUserFactory
+from clarityv2.crm.tests.factories import ProjectFactory, ContactFactory
 from .factories import InvoiceFactory, InvoiceItemFactory
 
 

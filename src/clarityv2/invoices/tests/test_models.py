@@ -6,8 +6,8 @@ from django.utils import timezone
 
 from freezegun import freeze_time
 
-from regex.crm.tests.factories import ClientFactory, ProjectFactory
-from regex.work_entries.tests.factories import WorkEntryFactory
+from clarityv2.crm.tests.factories import ClientFactory, ProjectFactory
+from clarityv2.work_entries.tests.factories import WorkEntryFactory
 from ..models import InvoiceItem
 from .factories import InvoiceFactory, InvoiceItemFactory
 
