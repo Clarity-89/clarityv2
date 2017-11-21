@@ -23,5 +23,6 @@ django_countries
 django-sendfile
 django-import-export
 django-allauth
+django-appconf
 rules
 
