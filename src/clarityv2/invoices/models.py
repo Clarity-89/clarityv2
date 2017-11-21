@@ -88,7 +88,7 @@ class Invoice(models.Model):
         upper = timezone.make_aware(datetime.combine(self.date, time(23, 59, 59)))
 
         work_entries = WorkEntry.objects.filter(
-            project__client=self.client, start__range=[lower, upper]
+            project__client=self.client, date__range=[lower, upper]
         ).select_related('project')
 
         with transaction.atomic():
@@ -97,8 +97,8 @@ class Invoice(models.Model):
                     invoice=self,
                     project=entry.project,
                     rate=entry.project.base_rate if not entry.project.flat_fee else 0,
-                    amount=entry.delta_to_decimal(),
-                    tax_rate=entry.project.tax_rate,
+                    amount=entry.duration.total_seconds() / 3600,
+                    tax_rate=entry.project.vat,
                     source_object=entry,
                     remarks=entry.notes
                 )

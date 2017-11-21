@@ -14,12 +14,16 @@ from .utils import render_invoice_pdf
 def generate_invoices(modeladmin, request, queryset):
     for invoice in queryset:
         invoice.generate()
+
+
 generate_invoices.short_description = _("Generate invoice details")
 
 
 def render_pdf(modeladmin, request, queryset):
     for invoice in queryset:
         render_invoice_pdf(request, invoice)
+
+
 render_pdf.short_description = _("Generate invoice pdfs")
 
 
@@ -49,11 +53,13 @@ class InvoiceAdmin(admin.ModelAdmin):
 
     def n_items(self, obj):
         return obj.n_items
+
     n_items.short_description = _('# invoice items')
 
     def invoice_items(self, obj):
         url = reverse('admin:invoices_invoiceitem_changelist')
         return '<a href="{}?invoice={}">{}</a>'.format(url, obj.pk, _('invoice items'))
+
     invoice_items.short_description = _('invoice items')
     invoice_items.allow_tags = True
 
