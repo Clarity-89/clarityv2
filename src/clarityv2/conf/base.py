@@ -149,8 +149,8 @@ LOCALE_PATHS = (
     os.path.join(DJANGO_PROJECT_DIR, 'conf', 'locale'),
 )
 
-DEFAULT_COUNTRY = 'BE'
-
+DEFAULT_COUNTRY = 'NL'
+SITE_COUNTRY = 'NL'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -175,11 +175,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-# TODO add links
+PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private_media')
 
-PRIVATE_MEDIA_ROOT = ''
+PRIVATE_MEDIA_URL = '/protected/'
 
-PRIVATE_MEDIA_URL = ''
+
+SENDFILE_BACKEND = 'sendfile.backends.nginx'
+SENDFILE_ROOT = PRIVATE_MEDIA_ROOT
+SENDFILE_URL = PRIVATE_MEDIA_URL[:-1]
 
 FIXTURE_DIRS = (
     os.path.join(DJANGO_PROJECT_DIR, 'fixtures'),
