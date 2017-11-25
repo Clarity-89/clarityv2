@@ -5,7 +5,6 @@ from sendfile import sendfile
 
 
 class PrivateMediaView(PermissionRequiredMixin, DetailView):
-
     """
     View that requires a permission to match to view a file.
     """

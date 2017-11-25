@@ -4,7 +4,6 @@ from django.utils.functional import LazyObject
 
 
 class PrivateMediaFileSystemStorage(FileSystemStorage):
-
     """
     Storage that puts files in the private media folder that isn't
     globally available.
@@ -17,8 +16,8 @@ class PrivateMediaFileSystemStorage(FileSystemStorage):
 
 
 class PrivateMediaStorage(LazyObject):
-
     def _setup(self):
         self._wrapped = PrivateMediaFileSystemStorage()
+
 
 private_media_storage = PrivateMediaStorage()
