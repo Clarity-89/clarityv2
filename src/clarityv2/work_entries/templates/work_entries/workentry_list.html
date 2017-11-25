@@ -1,4 +1,4 @@
-{% extends "master.html" %}{% load i18n work_entries %}
+{% extends "base.html" %}{% load i18n work_entries %}
 
 
 {% block content %}
@@ -49,14 +49,14 @@
                 </tr>
             {% endfor %}
 
-{#            <tr class="entries-table__row">#}
-{#                <td class="entries-table__cell entries-table__cell--bold">{% trans 'Total' %}</td>#}
-{#                <td class="entries-table__cell entries-table__cell--empty"></td>#}
-{#                <td class="entries-table__cell entries-table__cell--bold">{{ total_hours }}</td>#}
-{#                <td class="entries-table__cell entries-table__cell--bold">#}
-{#                    {% total_price project total_hours %} &euro;#}
-{#                </td>#}
-{#            </tr>#}
+            {#            <tr class="entries-table__row">#}
+            {#                <td class="entries-table__cell entries-table__cell--bold">{% trans 'Total' %}</td>#}
+            {#                <td class="entries-table__cell entries-table__cell--empty"></td>#}
+            {#                <td class="entries-table__cell entries-table__cell--bold">{{ total_hours }}</td>#}
+            {#                <td class="entries-table__cell entries-table__cell--bold">#}
+            {#                    {% total_price project total_hours %} &euro;#}
+            {#                </td>#}
+            {#            </tr>#}
             </tbody>
         </table>
     </div>
