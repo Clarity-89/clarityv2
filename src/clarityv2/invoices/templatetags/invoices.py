@@ -13,7 +13,7 @@ def company_details(client=None):
             'client': client,
             'company_name': client.name,
             'company_address': [client.address, client.city, client.get_country_display()],
-            'company_tax_identifier': client.vat,
+            'company_tax_identifier': client.vat_number,
         }
 
     config_keys = InvoicesConf._meta.names.items()
