@@ -1,7 +1,7 @@
 from django import template
 from django.conf import settings
 
-from ..conf import InvoicesConf
+from clarityv2.accounts.models import AdminUser
 
 register = template.Library()
 
@@ -12,15 +12,17 @@ def company_details(client=None):
         return {
             'client': client,
             'company_name': client.name,
-            'company_address': [client.address, client.city, client.get_country_display()],
+            'company_address': [client.address, client.postal_code + ' ' + client.city, client.get_country_display()],
             'company_tax_identifier': client.vat_number,
         }
-
-    config_keys = InvoicesConf._meta.names.items()
-    return {
-        name.lower(): getattr(settings, setting)
-        for name, setting in config_keys
-    }
+    else:
+        client = AdminUser.objects.get()
+        return {
+            'client': client,
+            'company_name': client.get_full_name,
+            'company_address': [client.get_full_street_address(), client.postal_code + ' ' + client.city,
+                                client.get_country_display()]
+        }
 
 
 @register.simple_tag

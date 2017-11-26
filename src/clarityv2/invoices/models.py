@@ -16,9 +16,7 @@ from clarityv2.crm.models import TaxRates
 from clarityv2.utils.storages import private_media_storage
 from clarityv2.work_entries.models import WorkEntry
 
-
 logger = logging.getLogger(__name__)
-
 
 RE_INVOICE_NUMBER = re.compile(r'(?P<year>20\d{2})\d{5}$')
 
@@ -56,10 +54,8 @@ class Invoice(models.Model):
 
     def generate_invoice_number(self, save=True):
         """
-        Invoice numbers must increment according to the Dutch legislation.
-
         We choose here to prefix the year that the invoice object was created,
-        and number incrementingly (+1) across the years.
+        and number incrementally (+1) across the years.
         """
         prefix = self.created.year
         agg = self.__class__.objects.aggregate(Max('invoice_number'))
@@ -122,8 +118,8 @@ class Invoice(models.Model):
 
     def get_totals(self):
         totals = self.invoiceitem_set.annotate(
-            base=F('rate')*F('amount'),
-            tax=F('rate')*F('amount')*F('tax_rate')
+            base=F('rate') * F('amount'),
+            tax=F('rate') * F('amount') * F('tax_rate')
         ).aggregate(Sum('base'), Sum('tax'))
         return totals
 

@@ -1,19 +1,8 @@
 <address>{% load i18n %}
-<p><strong>{{ company_name }}</strong></p>
-<p>{{ company_address|join:'<br>' }}</p>
+    <p><strong>{{ company_name }}</strong></p>
+    <p>{{ company_address|join:'<br>' }}</p>
 
-{% if client %}
-<p>
     {% if company_tax_identifier %}
-        <br> {{ company_tax_identifier }}
+        <p>{{ company_tax_identifier }}</p>
     {% endif %}
-</p>
-{% else %}
-<p>
-    {% blocktrans %}KVK: {{ company_kvk }}{% endblocktrans %}<br>
-    {% blocktrans %}TAX: {{ company_tax_identifier }}{% endblocktrans %}<br>
-    {% blocktrans %}IBAN: {{ company_iban }}{% endblocktrans %}
-</p>
-{% endif %}
-
 </address>

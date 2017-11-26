@@ -3,6 +3,7 @@
 {% block body-class %}pdf invoice{% endblock %}
 
 {% block header %}
+    {% company_details %}
     {% company_details invoice.client %}
 {% endblock %}
 
@@ -17,11 +18,6 @@
         </header>
 
         <summary>
-            {% blocktrans count n_items=items|length with date=invoice.date prev=invoice.get_previous.date|default:_('start') %}
-                Invoice for 1 item, spanning {{ prev }} until {{ date }}.
-            {% plural %}
-                Invoice for {{ n_items }} items, spanning {{ prev }} until {{ date }}.
-            {% endblocktrans %}
 
             {% if not invoice.vat_reverse_charge %}
                 <section>
@@ -77,9 +73,14 @@
                 </div>
             </section>
 
-            <p>{% blocktrans with due_date=invoice.due_date|date:"d/m/Y" %}Please transfer the total sum by
-                {{ due_date }}.
-            {% endblocktrans %}</p>
+            {% if invoice.due_date %}
+                <p>
+                    {% blocktrans with due_date=invoice.due_date|date:"d/m/Y" %}
+                        Please transfer the total sum by
+                        {{ due_date }}.
+                    {% endblocktrans %}
+                </p>
+            {% endif %}
         </summary>
     </article>
 
