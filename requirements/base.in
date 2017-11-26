@@ -24,5 +24,6 @@ django-sendfile
 django-import-export
 django-allauth
 django-appconf
+django-solo
 rules
 

@@ -32,6 +32,7 @@ django-redis==4.8.0
 django-rosetta==0.7.13
 django-sendfile==0.3.11
 django-sniplates==0.5.0
+django-solo==1.1.2
 django==1.11.6
 djangorestframework==3.7.3
 et-xmlfile==1.0.1         # via openpyxl

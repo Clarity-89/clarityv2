@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'django_countries',
     'import_export',
+    'solo',
 
     # Project applications.
     'clarityv2.accounts',

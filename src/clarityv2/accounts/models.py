@@ -3,6 +3,9 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+from solo.models import SingletonModel
+from django_countries.fields import CountryField
+
 from .managers import UserManager
 
 
@@ -50,5 +53,37 @@ class User(AbstractBaseUser, PermissionsMixin):
         return full_name.strip()
 
     def get_short_name(self):
-        "Returns the short name for the user."
+        """
+        Returns the short name for the user.
+        """
         return self.first_name
+
+
+class AdminUser(SingletonModel):
+    first_name = models.CharField(_('first name'), max_length=255, blank=True)
+    last_name = models.CharField(_('last name'), max_length=255, blank=True)
+    email = models.EmailField(_('email address'), blank=True)
+    phone = models.CharField(_('phone number'), max_length=150)
+    address_street = models.CharField(_('street'), max_length=255, blank=True)
+    house_number = models.CharField(_("house number"), max_length=10, blank=True)
+    city = models.CharField(_('city'), max_length=64, blank=True)
+    country = CountryField(_('country'), blank=True)
+    postal_code = models.CharField(_('postal code'), max_length=20, blank=True)
+    business_id = models.CharField(_('business ID'), max_length=50, blank=True)
+    iban = models.CharField(_('iban'), max_length=50, blank=True)
+
+    class Meta:
+        verbose_name = _('admin user')
+        verbose_name_plural = _('admin users')
+
+    def get_full_name(self):
+        """
+        Returns the first_name plus the last_name, with a space in between.
+        """
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
+
+    def get_full_street_address(self):
+        address = "{} {}".format(self.address_street, self.house_number)
+
+        return address.strip()
