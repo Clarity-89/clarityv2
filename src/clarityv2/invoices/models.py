@@ -1,6 +1,6 @@
 import logging
 import re
-from datetime import datetime, time, timedelta
+from datetime import date, datetime, time, timedelta
 
 from django.conf import settings
 from django.core import validators
@@ -147,6 +147,7 @@ class InvoiceItem(models.Model):
 
     rate = models.DecimalField(_('rate'), max_digits=10, decimal_places=2)
     amount = models.DecimalField(_('amount'), max_digits=10, decimal_places=2)
+    date = models.DateField(_('date'), default=date.today)
     tax_rate = models.DecimalField(
         _('tax rate'), max_digits=4, decimal_places=2,
         choices=TaxRates.choices, default=TaxRates.no_vat

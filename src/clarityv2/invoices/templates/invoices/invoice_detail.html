@@ -12,7 +12,7 @@
     <article>
         <header>
             <h2>{% blocktrans with number=invoice.invoice_number date=invoice.date %}
-                Invoice{{ number }}
+                Invoice {{ number }}
                 <small class="pull-right">{{ date }}</small>
             {% endblocktrans %}</h2>
         </header>
@@ -65,7 +65,9 @@
                                 <td>&euro; {{ invoice.total_no_vat|floatformat:2 }}</td>
                                 <td>&euro; {{ invoice.total_vat|floatformat:2 }}</td>
                                 <td>
-                                    <span class="total">&euro; <strong>{{ invoice.total_with_vat|floatformat:2 }}</strong></span>
+                                    <span class="total">
+                                        &euro; <strong>{{ invoice.total_with_vat|floatformat:2 }}</strong>
+                                    </span>
                                 </td>
                             </tr>
                         {% endif %}
@@ -89,12 +91,15 @@
         <table class="details">
             <thead>
             <tr>
-                <th>{% trans "remarks" %}</th>
-                <th>{% trans "amount" %}</th>
-                <th>{% trans "rate (€ / hour)" %}</th>
-                <th>{% trans "flat fee" %}</th>
+                <th>{% trans "Notes" %}</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Rate (€ / hour)" %}</th>
+                <th>{% trans "Flat fee" %}</th>
+
                 {% if not invoice.vat_reverse_charge %}
-                    <th>{% trans "tax rate" %}</th>{% endif %}
+                    <th>{% trans "Tax rate" %}</th>
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -102,14 +107,16 @@
                 {% ifchanged item.project %}
                     <tr class="project-row">
                         <th colspan="{{ invoice.vat_reverse_charge|yesno:'4,5' }}">
-                            {% blocktrans with proj=item.project.name %}{{ proj }}{% endblocktrans %}</th>
+                            {% blocktrans with proj=item.project.name %}{{ proj }}{% endblocktrans %}
+                        </th>
                     </tr>
                 {% endifchanged %}
                 <tr>
                     <td>{{ item.remarks }}</td>
+                    <td>{{ item.date|date:" d/m/Y" }}</td>
                     <td>{{ item.amount }}</td>
-                    <td>{% if item.project.base_rate %}{{ item.rate }}{% else %}{% trans "n/a" %}{% endif %}</td>
-                    <td>{% if item.project.flat_fee %}{{ item.rate }}{% else %}{% trans "n/a" %}{% endif %}</td>
+                    <td>{% if item.project.base_rate %}{{ item.rate }}{% else %}-{% endif %}</td>
+                    <td>{% if item.project.flat_fee %}{{ item.rate }}{% else %}-{% endif %}</td>
                     {% if not invoice.vat_reverse_charge %}
                         <td>{{ item.tax_rate|percentage }}</td>{% endif %}
                 </tr>
