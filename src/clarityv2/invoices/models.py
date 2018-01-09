@@ -96,7 +96,8 @@ class Invoice(models.Model):
                     amount=entry.duration.total_seconds() / 3600,
                     tax_rate=entry.project.vat,
                     source_object=entry,
-                    remarks=entry.notes
+                    remarks=entry.notes,
+                    date=entry.date
                 )
 
             # either created from hourly rate (work_entries) or manual invoice items
