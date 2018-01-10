@@ -1,0 +1,12 @@
+.invoice {
+
+  &__head {
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

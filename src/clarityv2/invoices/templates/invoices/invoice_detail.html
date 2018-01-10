@@ -3,22 +3,22 @@
 {% block body-class %}pdf invoice{% endblock %}
 
 {% block header %}
-    {% company_details %}
-    {% company_details invoice.client %}
+    <h2 class="invoice__head">{% trans "Invoice" %}</h2>
+    <div class="invoice__header">
+        <div class="invoice__details">
+            {% company_details %}
+            {% company_details invoice.client %}
+        </div>
+        <div class="invoice__info">
+            <p class="invoice__date"><strong>{% trans "Date" %}:</strong> {{ invoice.date }}</p>
+            <p class="invoice__number"><strong>{% trans "Number" %}:</strong> {{ invoice.invoice_number }}</p>
+        </div>
+    </div>
 {% endblock %}
 
-
 {% block content %}
-    <article>
-        <header>
-            <h2>{% blocktrans with number=invoice.invoice_number date=invoice.date %}
-                Invoice {{ number }}
-                <small class="pull-right">{{ date }}</small>
-            {% endblocktrans %}</h2>
-        </header>
-
-        <summary>
-
+    <div>
+        <div>
             {% if not invoice.vat_reverse_charge %}
                 <section>
                     {# Tax rates #}
@@ -83,8 +83,8 @@
                     {% endblocktrans %}
                 </p>
             {% endif %}
-        </summary>
-    </article>
+        </div>
+    </div>
 
     <section class="page-break">
         <h2>{% trans "Invoice details" %}</h2>
