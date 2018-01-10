@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Sum
 from django.views.generic import DetailView
 
 from rules.contrib.views import PermissionRequiredMixin
@@ -18,9 +18,12 @@ class InvoiceDetailView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(InvoiceDetailView, self).get_context_data(**kwargs)
         tax_rates = self.object.invoiceitem_set.values('tax_rate').annotate(num=Count('tax_rate'))
+        items = self.object.invoiceitem_set.select_related('project').order_by('project', 'tax_rate')
+        total_hours = items.aggregate(Sum('amount'))
         context.update({
             'tax_rates': tax_rates,
-            'items': self.object.invoiceitem_set.select_related('project').order_by('project', 'tax_rate')
+            'items': items,
+            'total_hours': total_hours
         })
         return context
 

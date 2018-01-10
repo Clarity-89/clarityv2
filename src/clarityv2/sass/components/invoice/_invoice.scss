@@ -9,4 +9,14 @@
     display: flex;
     justify-content: space-between;
   }
+
+  &__total-hours {
+    font-weight: bold;
+  }
+
+  &__details {
+    td {
+      padding: 0.3em;
+    }
+  }
 }
