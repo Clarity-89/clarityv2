@@ -1,2 +1,24 @@
 @import "settings/all";
 @import "components/all";
+
+@page {
+  size: a4 portrait;
+  margin: 10mm;
+}
+
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+
+  .invoice {
+    height: 100%;
+    width: 100%;
+
+    font-size: 12px;
+
+    p {
+      font-size: 12px;
+    }
+  }
+}

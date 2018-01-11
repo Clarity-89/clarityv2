@@ -5,14 +5,16 @@
 {% block header %}
     <h2 class="invoice__head">{% trans "Invoice" %}</h2>
     <div class="invoice__header">
-        <div class="invoice__details">
-            {% company_details %}
-            {% company_details invoice.client %}
-        </div>
         <div class="invoice__info">
             <p class="invoice__date"><strong>{% trans "Date" %}:</strong> {{ invoice.date }}</p>
             <p class="invoice__number"><strong>{% trans "Number" %}:</strong> {{ invoice.invoice_number }}</p>
         </div>
+
+        <div class="invoice__details">
+            {% company_details %}
+            {% company_details invoice.client %}
+        </div>
+
     </div>
 {% endblock %}
 
@@ -27,7 +29,7 @@
                         <table>
                             <tr>
                                 <th>{% trans "Rate" %}</th>
-                                <th>{% trans "number of times applied" %}</th>
+                                <th>{% trans "Number of times applied" %}</th>
                             </tr>
 
                             {% for tax_rate in tax_rates %}
@@ -53,17 +55,22 @@
             {% endif %}
         </div>
     </div>
-
+    <hr>
     <section class="page-break">
         <table class="invoice__details">
             <thead>
             <tr>
                 <th>{% trans "Notes" %}</th>
                 <th>{% trans "Date" %}</th>
-                <th>{% trans "Amount" %}</th>
-                <th>{% blocktrans %}
-                    Rate <br> (€ / hour)
-                {% endblocktrans %}
+                <th>
+                    {% blocktrans %}
+                        Amount <br> (hours)
+                    {% endblocktrans %}
+                </th>
+                <th>
+                    {% blocktrans %}
+                        Rate <br> (€ / hour)
+                    {% endblocktrans %}
                 </th>
                 <th>{% trans "Flat fee" %}</th>
 
@@ -83,7 +90,7 @@
                 {#                {% endifchanged %}#}
                 <tr>
                     <td>{{ item.remarks }}</td>
-                    <td>{{ item.date|date:" d/m/Y" }}</td>
+                    <td>{{ item.date|date:" d/m/y" }}</td>
                     <td>{{ item.amount }}</td>
                     <td>{% if item.project.base_rate %}{{ item.rate }}{% else %}-{% endif %}</td>
                     <td>{% if item.project.flat_fee %}{{ item.rate }}{% else %}-{% endif %}</td>
@@ -105,10 +112,9 @@
             </tr>
             {% if invoice.vat_reverse_charge %}
                 <tr>
-                    <th>
-                        {% trans "Total (with VAT shifted)" %}:
-                        <strong>&euro; {{ invoice.total_no_vat|floatformat:2 }}</strong>
-                    </th>
+                    <td>
+                        <strong>{% trans "Total price" %}: &euro; {{ invoice.total_no_vat|floatformat:2 }}</strong>
+                    </td>
                 </tr>
             {% else %}
                 <tr>
@@ -120,20 +126,19 @@
                     <td>&euro; {{ invoice.total_no_vat|floatformat:2 }}</td>
                     <td>&euro; {{ invoice.total_vat|floatformat:2 }}</td>
                     <td>
-                            <span class="total">
-                                &euro; <strong>{{ invoice.total_with_vat|floatformat:2 }}</strong>
-                            </span>
+                        <span class="total">
+                            &euro; <strong>{{ invoice.total_with_vat|floatformat:2 }}</strong>
+                        </span>
                     </td>
                 </tr>
             {% endif %}
-
         </table>
     </section>
 
     <section class="invoice-end">
         {% if invoice.vat_reverse_charge %}
             <hr>
-            <p>{% trans "Note: vat shift is applied to this invoice." %}</p>
+            <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
         {% endif %}
         <hr>
         <p class="pull-right">{% trans "End of invoice" %}</p>

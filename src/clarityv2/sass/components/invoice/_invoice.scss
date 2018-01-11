@@ -1,13 +1,26 @@
 .invoice {
+  // Approx A4 size in pixels
+  width: 595px;
+  height: 842px;
+  margin: 0 auto;
+  font-size: 12px;
+
+  p {
+    font-size: 12px;
+  }
 
   &__head {
     text-transform: uppercase;
     text-align: center;
+    font-size: 1.2em;
   }
 
   &__header {
-    display: flex;
-    justify-content: space-between;
+    display: block;
+  }
+
+  &__info {
+    float: right;
   }
 
   &__total-hours {
@@ -15,8 +28,15 @@
   }
 
   &__details {
+    width: 100%;
+    padding-top: 1px;
+
     td {
       padding: 0.3em;
+    }
+
+    th {
+      text-align: left;
     }
   }
 }
