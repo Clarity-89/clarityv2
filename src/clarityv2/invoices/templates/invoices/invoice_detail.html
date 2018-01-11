@@ -108,7 +108,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td class="invoice__total-hours">{% trans "Total hours" %}: {{ total_hours.amount__sum }}</td>
+                <td class="invoice__total-hours">{% trans "Total hours" %}: {{ total_hours }}</td>
             </tr>
             {% if invoice.vat_reverse_charge %}
                 <tr>
@@ -138,22 +138,11 @@
     <section class="invoice-end">
         {% if invoice.vat_reverse_charge %}
             <hr>
+            <strong class="invoice__iban">{% trans "IBAN" %}: {% iban %}</strong>
             <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
         {% endif %}
         <hr>
+        {% identity_string %}
         <p class="pull-right">{% trans "End of invoice" %}</p>
     </section>
-{% endblock %}
-
-
-{% block extrastyle %}
-    <style>
-        @page {
-            @bottom-right {
-                content: "{% blocktrans with date=invoice.date number=invoice.invoice_number %}Invoice {{ number }} - {{ date }} - Page " counter(page) " of " counter(pages){% endblocktrans %};
-                font-size: 0.75em;
-                margin-bottom: 3mm;
-            }
-        }
-    </style>
 {% endblock %}

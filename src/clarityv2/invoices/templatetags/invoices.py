@@ -29,3 +29,19 @@ def company_details(client=None):
 def company_field(prop):
     key = 'INVOICES_COMPANY_%s' % prop
     return getattr(settings, key)
+
+
+@register.inclusion_tag('invoices/tags/identity_string.html')
+def identity_string():
+    user = AdminUser.objects.get()
+    return {
+        'phone': user.phone,
+        'email': user.email,
+        'business_id': user.business_id
+    }
+
+
+@register.simple_tag
+def iban():
+    user = AdminUser.objects.get()
+    return user.iban
