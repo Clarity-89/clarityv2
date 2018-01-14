@@ -13,7 +13,7 @@ module.exports = {
     // Path to the (transpiled) js
     output: {
         path: __dirname + '/' + paths.jsDir, // directory
-        filename: paths.package.name + '.js', // file
+        filename: 'app.js', // file
     },
 
     // Add babel (see .babelrc for settings)
