@@ -18,11 +18,26 @@ module.exports = {
 
     // Add babel (see .babelrc for settings)
     module: {
-        loaders: [{
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            test: /.js?$/,
-        }]
+        // loaders: [{
+        //     exclude: /node_modules/,
+        //     loader: 'babel-loader',
+        //     test: /.js?$/,
+        // }]
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                ]
+            },
+        ]
     },
 
     devtool: 'sourcemap',
