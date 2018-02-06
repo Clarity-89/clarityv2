@@ -50,5 +50,7 @@ module.exports = {
     // Minify output
     plugins: [
         new webpack.optimize.UglifyJsPlugin({minimize: true})
-    ]
+    ],
+
+    watch: true
 };
