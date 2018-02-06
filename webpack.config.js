@@ -45,7 +45,7 @@ module.exports = {
         ]
     },
 
-    devtool: 'sourcemap',
+    devtool: 'eval-source-map',
 
     // Minify output
     plugins: [
