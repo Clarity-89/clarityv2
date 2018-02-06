@@ -48,8 +48,7 @@
             {% if invoice.due_date %}
                 <p>
                     {% blocktrans with due_date=invoice.due_date|date:"d/m/Y" %}
-                        Please transfer the total sum by
-                        {{ due_date }}.
+                        Please transfer the total sum by {{ due_date }}.
                     {% endblocktrans %}
                 </p>
             {% endif %}
@@ -94,8 +93,10 @@
                     <td>{{ item.amount }}</td>
                     <td>{% if item.project.base_rate %}{{ item.rate }}{% else %}-{% endif %}</td>
                     <td>{% if item.project.flat_fee %}{{ item.rate }}{% else %}-{% endif %}</td>
+
                     {% if not invoice.vat_reverse_charge %}
-                        <td>{{ item.tax_rate|percentage }}</td>{% endif %}
+                        <td>{{ item.tax_rate|percentage }}</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>
@@ -108,7 +109,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td class="invoice__total-hours">{% trans "Total hours" %}: {{ total_hours }}</td>
+                <td class="invoice__total-hours">{% trans "Total hours" %}: {{ invoice.total_hours }}</td>
             </tr>
             {% if invoice.vat_reverse_charge %}
                 <tr>
