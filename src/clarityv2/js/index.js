@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import {Test} from './components/HelloWorld'
 import './views/index';
 
+// SCSS
+import '../sass/screen.scss';
+
 window.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
         <Test/>,

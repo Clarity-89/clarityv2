@@ -1,6 +1,10 @@
 var webpack = require('webpack');
 var paths = require('./build/paths');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+var extractPlugin = new ExtractTextPlugin({
+    filename: '../css/screen.css'
+});
 
 /**
  * Webpack configuration
@@ -19,11 +23,10 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    {loader: 'style-loader'},
-                    {loader: 'css-loader'}
-                ]
+                test: /\.(css|sass|scss)$/,
+                use: extractPlugin.extract({
+                    use: ['css-loader', 'sass-loader']
+                })
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -49,7 +52,8 @@ module.exports = {
 
     // Minify output
     plugins: [
-        new webpack.optimize.UglifyJsPlugin({minimize: true})
+        new webpack.optimize.UglifyJsPlugin({minimize: true}),
+        extractPlugin
     ],
 
     watch: true
