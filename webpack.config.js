@@ -31,14 +31,38 @@ module.exports = {
                 test: /print\.(css|sass|scss)$/,
                 use: extractPrintCss.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    }],
                 })
             },
             {
                 test: /screen\.(css|sass|scss)$/,
                 use: extractMainCss.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    }]
                 })
             },
             {
@@ -61,7 +85,7 @@ module.exports = {
         ]
     },
 
-    devtool: 'eval-source-map',
+    devtool: 'inline-source-map',
 
     // Minify output
     plugins: [
