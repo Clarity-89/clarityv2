@@ -2,8 +2,13 @@ var webpack = require('webpack');
 var paths = require('./build/paths');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var extractPlugin = new ExtractTextPlugin({
+var extractMainCss = new ExtractTextPlugin({
     filename: '../css/screen.css'
+});
+
+
+var extractPrintCss = new ExtractTextPlugin({
+    filename: '../css/print.css'
 });
 
 /**
@@ -23,8 +28,16 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(css|sass|scss)$/,
-                use: extractPlugin.extract({
+                test: /print\.(css|sass|scss)$/,
+                use: extractPrintCss.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
+            },
+            {
+                test: /screen\.(css|sass|scss)$/,
+                use: extractMainCss.extract({
+                    fallback: 'style-loader',
                     use: ['css-loader', 'sass-loader']
                 })
             },
@@ -53,7 +66,7 @@ module.exports = {
     // Minify output
     plugins: [
         new webpack.optimize.UglifyJsPlugin({minimize: true}),
-        extractPlugin
+        extractMainCss, extractPrintCss
     ],
 
     watch: true
