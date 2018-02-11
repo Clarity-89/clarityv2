@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^work_entries/', include('clarityv2.work_entries.urls', namespace='work_entries')),
 
     # Simply show the master template.
-    url(r'^$', TemplateView.as_view(template_name='demo.html')),
+    url(r'^', include('clarityv2.homepage.urls', namespace='home')),
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static
