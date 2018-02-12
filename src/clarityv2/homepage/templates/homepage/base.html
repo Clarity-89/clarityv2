@@ -1,5 +1,16 @@
 {% extends "base.html" %}{% load i18n staticfiles %}
 
-{% block content %}
+{% block header %}
     {% include "includes/navbar.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="greeting row flex-center">
+        {% blocktrans %}
+            <h2 class="sm-12 md-5 col center">
+                Hello, I am Oleksandr, a front end web developer, based in Helsinki, Finland.
+            </h2>
+        {% endblocktrans %}
+    </div>
+
 {% endblock %}

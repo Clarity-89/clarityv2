@@ -1,4 +1,4 @@
-{% load staticfiles %}<!DOCTYPE html>
+{% load i18n staticfiles %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -22,6 +22,12 @@
 <main>
     {% block content %} {% endblock %}
 </main>
+
+<footer class="footer">
+    <div class="sm-12 col">
+        <p class="footer__text-copyright">© Copyright {% now "Y" %} Oleksandr Khomenko. {% trans "All rights reserved" %}.</p>
+    </div>
+</footer>
 
 <script src="{% static 'js/app.js' %}"></script>
 </body>
