@@ -1,0 +1,20 @@
+.navbar {
+  padding: 1em 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &--right {
+    list-style: none;
+    display: flex;
+
+  }
+
+  &__tab {
+    padding: 0 1em;
+
+    &:before {
+      content: ''; // Reset custom list style
+    }
+  }
+}

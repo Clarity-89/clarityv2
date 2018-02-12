@@ -1,5 +1,5 @@
-{% extends "base.html" %}{% load i18n %}
+{% extends "base.html" %}{% load i18n staticfiles %}
 
 {% block content %}
-    <h1>Homepage</h1>
+    {% include "includes/navbar.html" %}
 {% endblock %}

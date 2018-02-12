@@ -1,0 +1,13 @@
+{% load i18n staticfiles %}
+<nav class="navbar">
+    <div class="navbar--left">
+        <a class="no-underline" href="/">{% trans "Home" %}</a>
+    </div>
+
+    <ul class="navbar--right">
+        <li class="navbar__tab"><a class="no-underline" href="#">{% trans "About" %}</a></li>
+        <li class="navbar__tab"><a class="no-underline" href="#">{% trans "Portfolio" %}</a></li>
+        <li class="navbar__tab"><a class="no-underline" href="#">{% trans "Contact" %}</a></li>
+        <li class="navbar__tab"><a class="no-underline" href="#">{% trans "Login" %}</a></li>
+    </ul>
+</nav>
