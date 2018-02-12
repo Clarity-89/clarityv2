@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'clarityv2.crm',
     'clarityv2.invoices',
     'clarityv2.work_entries',
+    'clarityv2.homepage',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -124,6 +124,10 @@ class Invoice(models.Model):
         ).aggregate(Sum('base'), Sum('tax'))
         return totals
 
+    def total_hours(self):
+        items = self.invoiceitem_set.select_related('project').order_by('project', 'tax_rate')
+        return items.aggregate(Sum('amount'))['amount__sum']
+
     @property
     def total_no_vat(self):
         return self.get_totals()['base__sum']
