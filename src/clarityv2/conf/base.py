@@ -1,5 +1,6 @@
 import os
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 DJANGO_PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'hijack_admin',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'django_countries',
     'import_export',
     'solo',
@@ -181,7 +183,6 @@ PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private_media')
 
 PRIVATE_MEDIA_URL = '/protected/'
 
-
 SENDFILE_BACKEND = 'sendfile.backends.nginx'
 SENDFILE_ROOT = PRIVATE_MEDIA_ROOT
 SENDFILE_URL = PRIVATE_MEDIA_URL[:-1]
@@ -297,6 +298,8 @@ ENVIRONMENT = None
 SHOW_ALERT = True
 SITE_ID = 1
 
+# Allauth
+LOGIN_REDIRECT_URL = reverse_lazy('accounts:projects')
 #
 # Library settings
 #
