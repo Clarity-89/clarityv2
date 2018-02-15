@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Sum
+from django.shortcuts import get_object_or_404
 
 from clarityv2.crm.models import Project
 
@@ -19,10 +20,21 @@ class WorkEntryList(LoginRequiredMixin, OrderingMixin, ListView):
                      {'name': 'duration', 'label': _('Duration (hours)'), 'sortable': True},
                      {'name': 'price', 'label': _('Price'), 'sortable': False}]
 
+    def _get_project_filters(self):
+        return {
+            'slug': self.kwargs['project_slug'],
+            'client__contacts__user': self.request.user
+        }
+
     def get_context_data(self, **kwargs):
-        slug = self.kwargs['project_slug']
-        kwargs['project'] = Project.objects.get(slug=slug)
+        qs = Project.objects.filter(**self._get_project_filters())
+        kwargs['project'] = get_object_or_404(qs)
         duration = WorkEntry.objects.aggregate(Sum('duration'))['duration__sum']
         kwargs['total_hours'] = duration.total_seconds() / 3600
 
         return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        filters = {'project__%s' % key: value for key, value in self._get_project_filters().items()}
+        return qs.filter(**filters)
