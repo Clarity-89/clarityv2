@@ -3,4 +3,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &__form {
+    p {
+      margin-bottom: 1em
+    ;
+    }
+  }
 }

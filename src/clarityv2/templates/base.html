@@ -7,7 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
+    {% block main_css %}
+        <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
+    {% endblock %}
     <link href="{% static 'css/print.css' %}" media="print" rel="stylesheet"/>
     {% block extra_css %}{% endblock %}
     <link rel="shortcut icon" href="{% static 'ico/favicon.png' %}">
@@ -25,7 +27,8 @@
 
 <footer class="footer">
     <div class="sm-12 col">
-        <p class="footer__text-copyright">© Copyright {% now "Y" %} Oleksandr Khomenko. {% trans "All rights reserved" %}.</p>
+        <p class="footer__text-copyright">© Copyright {% now "Y" %} Oleksandr
+            Khomenko. {% trans "All rights reserved" %}.</p>
     </div>
 </footer>
 
