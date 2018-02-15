@@ -300,6 +300,11 @@ SITE_ID = 1
 
 # Allauth
 LOGIN_REDIRECT_URL = reverse_lazy('accounts:projects')
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+
 #
 # Library settings
 #
