@@ -11,6 +11,11 @@ var extractPrintCss = new ExtractTextPlugin({
     filename: '../css/print.css'
 });
 
+// Separate loader for styles with Bootstrap
+var extractBSCss = new ExtractTextPlugin({
+    filename: '../css/style.css'
+});
+
 /**
  * Webpack configuration
  * Run using "webpack" or "gulp js"
@@ -45,10 +50,27 @@ module.exports = {
                         }
                     }],
                 })
-            },
-            {
+            }, {
                 test: /screen\.(css|sass|scss)$/,
                 use: extractMainCss.extract({
+                    fallback: 'style-loader',
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    }, {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                            minimize: true
+                        }
+                    }]
+                })
+            }, {
+                test: /style\.(css|sass|scss)$/,
+                use: extractBSCss.extract({
                     fallback: 'style-loader',
                     use: [{
                         loader: 'css-loader',
@@ -90,7 +112,7 @@ module.exports = {
     // Minify output
     plugins: [
         new webpack.optimize.UglifyJsPlugin({minimize: true}),
-        extractMainCss, extractPrintCss
+        extractMainCss, extractPrintCss, extractBSCss
     ],
 
     watch: true

@@ -1,15 +1,15 @@
-{% extends "base.html" %}{% load i18n %}
+{% extends "bs.html" %}{% load i18n %}
 
 
 {% block content %}
-    <section class="dashboard">
+    <section class="projects">
         {% for project in projects %}
 
             {% ifchanged project.client %}
                 <h1 class="client">{{ project.client.name }}</h1>
             {% endifchanged %}
 
-            <article class="dashboard__item project">
+            <div class="dashboard__item project">
                 <h2 class="project__title">{{ project.name }}</h2>
                 <p class="project__details">
                     <i class="fa fa-eur"></i>
@@ -25,7 +25,7 @@
                             {{ count }} work entries logged
                         {% endblocktrans %}</a>
                 </p>
-            </article>
+            </div>
 
         {% endfor %}
 
