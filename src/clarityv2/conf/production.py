@@ -6,24 +6,25 @@ import raven
 #
 
 DEBUG = False
+ENVIRONMENT = 'production'
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    'Alex', 'khomenkodev17@gmail.com'
 )
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'clarityv2',
-        'USER': 'clarityv2',
-        'PASSWORD': 'clarityv2',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',  # Set to empty string for default.
     }
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'vs124jhuwpst%gi*4n(4*h!^gp)9@&98rene5)ojm2jw**@h58'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = ['claritydev.net', '188.166.1.116']
 
@@ -33,7 +34,7 @@ ALLOWED_HOSTS = ['claritydev.net', '188.166.1.116']
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2", # NOTE: watch out for multiple projects using the same cache!
+        "LOCATION": "redis://127.0.0.1:6379/2",  # NOTE: watch out for multiple projects using the same cache!
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             "IGNORE_EXCEPTIONS": True,
@@ -93,7 +94,6 @@ CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = 'DENY'
 # Only set this when we're behind Nginx as configured in our example-deployment
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 
 #
 # Library settings
