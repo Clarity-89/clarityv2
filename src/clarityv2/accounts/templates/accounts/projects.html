@@ -14,16 +14,25 @@
                 <p class="project__details">
                     <i class="fa fa-eur"></i>
                     {% if project.flat_fee %}
-                        {% trans "Flat fee" %}: {{ project.flat_fee }}
+                        {% trans "Flat fee" %}: {{ project.flat_fee }} &euro;
                     {% else %}
-                        {% trans "Hourly rate" %}: {{ project.base_rate }}
+                        {% trans "Hourly rate" %}: {{ project.base_rate }} &euro;
                     {% endif %}
                 </p>
                 <p class="project__details">
                     <a href="{% url 'work_entries:list' project_slug=project.slug %}">
-                        {% blocktrans with count=project.n_workentries trimmed %}
-                            {{ count }} work entries logged
-                        {% endblocktrans %}</a>
+                        {% with project.n_workentries as count %}
+                            {% if count > 1 %}
+                                {% blocktrans %}
+                                    {{ count }} work entries logged
+                                {% endblocktrans %}
+                            {% elif count == 1 %}
+                                {% blocktrans %}
+                                    {{ count }} work entry logged
+                                {% endblocktrans %}
+                            {% endif %}
+                        {% endwith %}
+                    </a>
                 </p>
             </div>
 
