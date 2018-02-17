@@ -25,7 +25,7 @@ DATABASES = {
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'vs124jhuwpst%gi*4n(4*h!^gp)9@&98rene5)ojm2jw**@h58'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['claritydev.net', '188.166.1.116']
 
 # Redis cache backend
 # NOTE: If you do not use a cache backend, do not use a session backend or
