@@ -19,6 +19,7 @@
                         {% trans "Hourly rate" %}: {{ project.base_rate }} &euro;
                     {% endif %}
                 </p>
+
                 <p class="project__details">
                     <a href="{% url 'work_entries:list' project_slug=project.slug %}">
                         {% with project.n_workentries as count %}
