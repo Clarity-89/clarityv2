@@ -14,9 +14,9 @@
                 <p class="project__details">
                     <i class="fa fa-eur"></i>
                     {% if project.flat_fee %}
-                        {{ project.flat_fee }} {% trans "flat fee" %}
+                        {% trans "Flat fee" %}: {{ project.flat_fee }}
                     {% else %}
-                        {{ project.base_rate }} {% trans "hourly rate" %}
+                        {% trans "Hourly rate" %}: {{ project.base_rate }}
                     {% endif %}
                 </p>
                 <p class="project__details">

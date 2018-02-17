@@ -1,3 +1,9 @@
+.entries {
+  &__container {
+    padding-top: 3em;
+  }
+}
+
 .entries-table {
   text-align: left;
   font-size: 16px;
@@ -11,10 +17,6 @@
 
   &__row:nth-child(even), &__row--header {
     background: #f5f5f5;
-  }
-
-  &__container {
-    padding: 0 10%;
   }
 
   &__cell {

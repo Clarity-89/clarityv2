@@ -16,6 +16,22 @@ var extractBSCss = new ExtractTextPlugin({
     filename: '../css/style.css'
 });
 
+var extractConfig = {
+    fallback: 'style-loader',
+    use: [{
+        loader: 'css-loader',
+        options: {
+            sourceMap: true,
+            minimize: true
+        }
+    }, {
+        loader: 'sass-loader',
+        options: {
+            sourceMap: true,
+            minimize: true
+        }
+    }],
+};
 /**
  * Webpack configuration
  * Run using "webpack" or "gulp js"
@@ -34,58 +50,13 @@ module.exports = {
         rules: [
             {
                 test: /print\.(css|sass|scss)$/,
-                use: extractPrintCss.extract({
-                    fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            minimize: true
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                            minimize: true
-                        }
-                    }],
-                })
+                use: extractPrintCss.extract(extractConfig)
             }, {
                 test: /screen\.(css|sass|scss)$/,
-                use: extractMainCss.extract({
-                    fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            minimize: true
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                            minimize: true
-                        }
-                    }]
-                })
+                use: extractMainCss.extract(extractConfig)
             }, {
                 test: /style\.(css|sass|scss)$/,
-                use: extractBSCss.extract({
-                    fallback: 'style-loader',
-                    use: [{
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                            minimize: true
-                        }
-                    }, {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                            minimize: true
-                        }
-                    }]
-                })
+                use: extractBSCss.extract(extractConfig)
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
