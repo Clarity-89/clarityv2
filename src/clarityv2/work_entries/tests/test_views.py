@@ -24,10 +24,24 @@ class WorkEntryTests(WebTest):
         Assert that users can see work entries for their projects.
         """
         project1 = ProjectFactory.create(client=self.client1)
-        WorkEntryFactory.create(project=project1, user=self.user1)
+        we1 = WorkEntryFactory.create(project=project1, user=self.user1)
         project2 = ProjectFactory.create(client=self.client2)
-        WorkEntryFactory.create(project=project2, user=self.user2)
-        WorkEntryFactory.create(project=project2, user=self.user2)
+        we2 = WorkEntryFactory.create(project=project2, user=self.user2)
+        we3 = WorkEntryFactory.create(project=project2, user=self.user2)
 
-        response1 = self.app.get(reverse('work_entries:list', kwargs={'project_slug': project1.slug}))
-        self.assertQuerysetEqual(len(response1.context['work_entries']), 1)
+        page1 = self.app.get(reverse('work_entries:list', kwargs={'project_slug': project1.slug}), user=self.user1)
+        self.assertEqual(page1.status_code, 200)
+        entries = page1.context['work_entries']
+        self.assertEqual(entries.count(), 1)
+        self.assertEqual(entries.first(), we1)
+
+        page2 = self.app.get(reverse('work_entries:list', kwargs={'project_slug': project2.slug}), user=self.user2)
+        self.assertEqual(page1.status_code, 200)
+        entries = page2.context['work_entries']
+        self.assertEqual(entries.count(), 2)
+        self.assertEqual(entries.first(), we2)
+
+        # Accessing other users' projects is not possible
+        page3 = self.app.get(reverse('work_entries:list', kwargs={'project_slug': project1.slug}), user=self.user2,
+                             expect_errors=True)
+        self.assertEqual(page3.status_code, 404)
