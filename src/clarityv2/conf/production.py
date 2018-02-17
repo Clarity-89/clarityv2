@@ -84,7 +84,6 @@ LOGGING['loggers'].update({
 #
 
 # Show active environment in admin.
-ENVIRONMENT = 'production'
 SHOW_ALERT = False
 
 # We will assume we're running under https
@@ -103,14 +102,14 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 INSTALLED_APPS = INSTALLED_APPS + [
     'raven.contrib.django.raven_compat',
 ]
-RAVEN_CONFIG = {
-    'dsn': 'https://',
-    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
-}
+# RAVEN_CONFIG = {
+#     'dsn': 'https://',
+#     'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+# }
 LOGGING['handlers'].update({
     'sentry': {
         'level': 'WARNING',
         'class': 'raven.handlers.logging.SentryHandler',
-        'dsn': RAVEN_CONFIG['dsn']
+        #'dsn': RAVEN_CONFIG['dsn']
     },
 })
