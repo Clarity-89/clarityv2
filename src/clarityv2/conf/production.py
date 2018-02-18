@@ -53,7 +53,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 # The file storage engine to use when collecting static files with the
 # collectstatic management command.
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Production logging facility.
 LOGGING['loggers'].update({
