@@ -28,23 +28,23 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = ['claritydev.net', '188.166.1.116', '0.0.0.0']
 
-# Redis cache backend
-# NOTE: If you do not use a cache backend, do not use a session backend or
-# cached template loaders that rely on a backend.
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2",  # NOTE: watch out for multiple projects using the same cache!
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "IGNORE_EXCEPTIONS": True,
-        }
-    }
-}
-
-# Caching sessions.
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = "default"
+# # Redis cache backend
+# # NOTE: If you do not use a cache backend, do not use a session backend or
+# # cached template loaders that rely on a backend.
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django_redis.cache.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379/2",  # NOTE: watch out for multiple projects using the same cache!
+#         "OPTIONS": {
+#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#             "IGNORE_EXCEPTIONS": True,
+#         }
+#     }
+# }
+#
+# # Caching sessions.
+# SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+# SESSION_CACHE_ALIAS = "default"
 
 # Caching templates.
 TEMPLATES[0]['OPTIONS']['loaders'] = [
