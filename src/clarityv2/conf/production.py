@@ -86,10 +86,10 @@ LOGGING['loggers'].update({
 # Show active environment in admin.
 SHOW_ALERT = False
 
-# We will assume we're running under https
+# We will assume we're running under https # TODO enable after HTTPS is setup
 # SESSION_COOKIE_SECURE = True
 # SESSION_COOKIE_HTTPONLY = True
-# CSRF_COOKIE_SECURE = False  # TODO enable after SSL is setup
+# CSRF_COOKIE_SECURE = False
 # X_FRAME_OPTIONS = 'DENY'
 # # Only set this when we're behind Nginx as configured in our example-deployment
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
