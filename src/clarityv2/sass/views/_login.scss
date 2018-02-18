@@ -14,7 +14,15 @@
 
       &:last-of-type {
         display: flex;
-        margin-right: 1em;
+
+        label {
+          margin-right: 1em;
+        }
+
+        input {
+          width: 15px;
+          height: 15px;
+        }
       }
     }
 
