@@ -53,7 +53,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 # The file storage engine to use when collecting static files with the
 # collectstatic management command.
-#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 # Production logging facility.
 LOGGING['loggers'].update({
@@ -89,7 +89,7 @@ SHOW_ALERT = False
 # We will assume we're running under https
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False  # TODO enable after SSL is setup
 X_FRAME_OPTIONS = 'DENY'
 # Only set this when we're behind Nginx as configured in our example-deployment
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
