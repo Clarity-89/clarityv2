@@ -31,6 +31,10 @@
                                 {% blocktrans %}
                                     {{ count }} work entry logged
                                 {% endblocktrans %}
+                            {% else %}
+                                {% blocktrans %}
+                                    No entries for the project have been logged yet
+                                {% endblocktrans %}
                             {% endif %}
                         {% endwith %}
                     </a>
