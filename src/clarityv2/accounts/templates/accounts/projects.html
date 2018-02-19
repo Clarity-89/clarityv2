@@ -21,26 +21,27 @@
                 </p>
 
                 <p class="project__details">
-                    <a href="{% url 'work_entries:list' project_slug=project.slug %}">
-                        {% with project.n_workentries as count %}
-                            {% if count > 1 %}
+                    {% with project.n_workentries as count %}
+                        {% if count > 1 %}
+                            <a href="{% url 'work_entries:list' project_slug=project.slug %}">
                                 {% blocktrans %}
                                     {{ count }} work entries logged
                                 {% endblocktrans %}
-                            {% elif count == 1 %}
+                            </a>
+                        {% elif count == 1 %}
+                            <a href="{% url 'work_entries:list' project_slug=project.slug %}">
                                 {% blocktrans %}
                                     {{ count }} work entry logged
                                 {% endblocktrans %}
-                            {% else %}
-                                {% blocktrans %}
-                                    No entries for the project have been logged yet
-                                {% endblocktrans %}
-                            {% endif %}
-                        {% endwith %}
-                    </a>
+                            </a>
+                        {% else %}
+                            {% blocktrans %}
+                                No entries for the project have been logged yet
+                            {% endblocktrans %}
+                        {% endif %}
+                    {% endwith %}
                 </p>
             </div>
-
         {% endfor %}
     </section>
 {% endblock content %}
