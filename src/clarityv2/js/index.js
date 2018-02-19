@@ -11,9 +11,6 @@ import '../sass/print.scss';
 window.addEventListener('DOMContentLoaded', () => {
     let el = document.getElementById('react-test');
     if (el) {
-        ReactDOM.render(
-            <Test/>,
-            document.getElementById('react-test')
-        );
+        ReactDOM.render(<Test/>, el);
     }
 });
