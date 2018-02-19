@@ -9,11 +9,11 @@ import '../sass/style.scss';
 import '../sass/print.scss';
 
 window.addEventListener('DOMContentLoaded', () => {
-    ReactDOM.render(
-        <Test/>,
-        document.getElementById('react-test')
-    );
-
-    console.log('test', document.getElementById('react-test'))
-
+    let el = document.getElementById('react-test');
+    if (el) {
+        ReactDOM.render(
+            <Test/>,
+            document.getElementById('react-test')
+        );
+    }
 });
