@@ -5,6 +5,10 @@
 
 {% block head_title %}{% trans "Log In" %}{% endblock %}
 
+{% block header %}
+    {% include "includes/navbar.html" with active='login' %}
+{% endblock %}
+
 {% block content %}
 
     <div class="login">

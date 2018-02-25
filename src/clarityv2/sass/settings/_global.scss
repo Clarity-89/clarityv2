@@ -3,6 +3,10 @@ a.no-underline {
   text-decoration: none;
   background-image: none;
   color: inherit;
+
+  &.active {
+    text-decoration: underline;
+  }
 }
 
 p {

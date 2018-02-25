@@ -1,0 +1,46 @@
+{% extends "base.html" %}{% load i18n staticfiles %}
+{% block header %}
+    {% include "includes/navbar.html" with active='about' %}
+{% endblock %}
+
+{% block content %}
+    <div class="about">
+        <div class="about__inner">
+            {#            <div class="about__block about__block--img">#}
+            {#                <img src="" class="about__img">#}
+            {#            </div>#}
+            <div class="about__block about__block--text">
+                {% blocktrans %}
+                    <p>
+                        Based in Helsinki, Finland. Currently working as a web developer at Digital Foodie Ltd., an
+                        online eCommerce and fulfilment platform. Sometimes I take freelance work.
+                    </p>
+                    <br>
+                    <p>
+                        I specialise in front-end web development using modern tools but also have experience with
+                        back-end and devOps work. Technologies I have worked with include:
+                    </p>
+                    <ul>
+                        <li>Bootstrap, Materialize, Material Design Lite, Paper.css</li>
+                        <li>ES201x, Backbone.js, jQuery, React</li>
+                        <li>Jasmine, Mocha, Chai, Sinon</li>
+                        <li>Grunt, Gulp, Browserify, Webpack</li>
+                        <li>Handlebars, Mustache</li>
+                        <li>Django, Ruby/Rails</li>
+                        <li>Kubernetes, CI</li>
+                    </ul>
+                    <p>
+                        I am passionate about learning new things and applying my knowledge to build exciting stuff.
+                        Computers aside, I enjoy sports, listening to the music and reading books.
+                    </p>
+                    <br>
+                    <p>Certification:</p>
+                    <ul>
+                        <li>Harvard's CS50 Honor Code Certificate</li>
+                        <li> Free Code Camp's Front End Development Program</li>
+                    </ul>
+                {% endblocktrans %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
