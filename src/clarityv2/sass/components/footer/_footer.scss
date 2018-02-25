@@ -1,8 +1,25 @@
 .footer {
   height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1em;
 
   &__text-copyright {
     font-size: 16px;
     text-align: right;
+  }
+
+  &__social {
+    text-align: left;
+    display: flex;
+    justify-content: space-around;
+    width: 100px;
+    background-image: none;
+  }
+
+  &__logo {
+    height: 32px;
+    width: 32px;
   }
 }

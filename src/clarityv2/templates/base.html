@@ -26,11 +26,17 @@
 </main>
 
 <footer class="footer">
-    <div class="sm-12 col">
-        <p class="footer__text-copyright">
-            © Copyright {% now "Y" %} Oleksandr Khomenko. {% trans "All rights reserved" %}.
-        </p>
-    </div>
+    <p class="footer__social">
+        <a class="footer__social footer__social--li" href="https://www.linkedin.com/in/oleksandr-khomenko-81310b48/">
+            <img class="footer__logo" src="{% static 'img/logos/linkedin.png' %}">
+        </a>
+        <a class="footer__social footer__social--li" href="https://github.com/Clarity-89">
+            <img class="footer__logo" src="{% static 'img/logos/github.png' %}">
+        </a>
+    </p>
+    <p class="footer__text-copyright">
+        © Copyright {% now "Y" %} Oleksandr Khomenko. {% trans "All rights reserved" %}.
+    </p>
 </footer>
 
 <script src="{% static 'js/app.js' %}"></script>

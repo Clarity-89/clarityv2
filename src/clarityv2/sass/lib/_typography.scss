@@ -1,11 +1,9 @@
 @import 'color';
 
-
 $typography-color-link: $color-light-blue;
 $typography-font-family-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $typography-font-family-body: Georgia, "Times New Roman", Times, serif;
 $typography-font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
-
 
 @mixin heading {
   font-family: $typography-font-family-heading;
@@ -41,7 +39,6 @@ $typography-font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monos
   font-size: 0.75em;
 }
 
-
 @mixin body {
   font-family: $typography-font-family-body;
   line-height: 1.5;
@@ -52,7 +49,6 @@ $typography-font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monos
   font-family: $typography-font-family-monospace;
 }
 
-
 @mixin link {
   color: $typography-color-link;
   text-decoration: none;
@@ -60,5 +56,11 @@ $typography-font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monos
   &:focus,
   &:hover {
     text-decoration: underline;
+  }
+}
+
+@include xs-screen {
+  h2 {
+    font-size: 2.5rem;
   }
 }
