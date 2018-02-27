@@ -19,6 +19,7 @@ urlpatterns = [
         name='password_reset_confirm'),
     url(r'^invoices/', include('clarityv2.invoices.urls', namespace='invoices')),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
+    url(r'^portfolio/$', include('clarityv2.portfolio.urls', namespace='portfolio')),
     url(r'^work_entries/', include('clarityv2.work_entries.urls', namespace='work_entries')),
 
     # Simply show the master template.

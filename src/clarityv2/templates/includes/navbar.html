@@ -6,7 +6,7 @@
 
     <ul class="navbar--right">
         <li class="navbar__tab">
-            <a class="no-underline {% if active == 'portfolio' %}active{% endif %}" href="#">
+            <a class="no-underline {% if active == 'portfolio' %}active{% endif %}" href="{% url 'portfolio:list' %}">
                 {% trans "Portfolio" %}
             </a>
         </li>
