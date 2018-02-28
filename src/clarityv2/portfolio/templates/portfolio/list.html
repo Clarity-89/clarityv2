@@ -1,3 +1,21 @@
-<div class="portfolio">
+{% extends "base.html" %}{% load i18n staticfiles %}
+{% block header %}
+    {% include "includes/navbar.html" with active="portfolio" %}
+{% endblock %}
 
-</div>
+{% block content %}
+    <div class="portfolio col">
+        {% for entry in portfolio %}
+            <div class="card portfolio__entry">
+                <a href="{{ entry.url }}" class="portfolio__link">
+                    <img src="{{ entry.image.url }}" alt="{{ entry.name }}">
+
+                    <div class="card-body">
+                        <h4 class="card-title">{{ entry.name }}</h4>
+                        <div class="card-text">{{ entry.description|safe }}</div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

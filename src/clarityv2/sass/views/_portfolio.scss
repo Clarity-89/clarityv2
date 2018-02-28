@@ -1,3 +1,14 @@
 .portfolio {
+  display: flex;
+  justify-content: center;
 
+  &__entry {
+    margin-right: 2em;
+    width: 20rem;
+  }
+
+  &__link {
+    background-image: none;
+    display: block;
+  }
 }
