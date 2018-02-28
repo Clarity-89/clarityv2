@@ -5,4 +5,4 @@ from .models import Entry
 
 @admin.register(Entry)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'description', 'published', 'order')
+    list_display = ('name', 'image', 'description', 'published', 'order', 'url')

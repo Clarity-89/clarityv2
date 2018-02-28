@@ -20,6 +20,7 @@ class Entry(models.Model):
 
     order = models.PositiveIntegerField(default=0)
     published = models.BooleanField(_('published'), default=True)
+    url = models.URLField(_('URL'), null=True)
     objects = EntryQueryset.as_manager()
 
     class Meta:
