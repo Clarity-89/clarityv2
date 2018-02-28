@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django_countries',
     'import_export',
     'solo',
+    'ckeditor',
 
     # Project applications.
     'clarityv2.accounts',
@@ -330,3 +331,12 @@ HIJACK_REGISTER_ADMIN = False
 # This is a CSRF-security risk.
 # See: http://django-hijack.readthedocs.io/en/latest/configuration/#allowing-get-method-for-hijack-views
 HIJACK_ALLOW_GET_REQUESTS = True
+
+#
+# RICH TEXT EDITOR
+#
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+    },
+}
