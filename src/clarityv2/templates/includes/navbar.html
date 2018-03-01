@@ -1,7 +1,7 @@
 {% load i18n staticfiles %}
 <nav class="navbar">
     <div class="navbar--left">
-        <a class="no-underline" href="/">{% trans "Home" %}</a>
+        <a class="no-underline {% if active == 'home' %}active{% endif %}" href="/">{% trans "Home" %}</a>
     </div>
 
     <ul class="navbar--right">
