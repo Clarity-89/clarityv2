@@ -1,0 +1,17 @@
+.contact {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80%;
+  font-size: 30px;
+
+  &__header {
+    margin: 0;
+    font-size: 3rem;
+  }
+
+  &__means-item {
+    margin: 0.5em 0;
+  }
+}

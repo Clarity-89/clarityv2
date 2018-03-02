@@ -5,7 +5,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="contact">
-
+    <div class="contact col">
+        <h4 class="contact__header">{% trans "Get in touch" %}:</h4>
+        <ul class="contact__means">
+            <li class="contact__means-item">
+                <a href="mailto:khomenkodev17@gmailcom" class="no-underline">{% trans "Send an email" %}</a>
+            </li>
+            <li class="contact__means-item">
+                <a href="https://www.linkedin.com/in/oleksandr-khomenko-81310b48/" class="no-underline">
+                    {% trans "Connect on LinkedIn" %}
+                </a>
+            </li>
+            <li class="contact__means-item">
+                <a href="https://github.com/Clarity-89" class="no-underline">
+                    {% trans "View code on GitHub" %}
+                </a>
+            </li>
+        </ul>
     </div>
 {% endblock %}
