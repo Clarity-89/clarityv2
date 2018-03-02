@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^admin/hijack/', include('hijack.urls')),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', auth_views.password_reset_confirm,
         name='password_reset_confirm'),
+    url(r'^contact/', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^invoices/', include('clarityv2.invoices.urls', namespace='invoices')),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
     url(r'^portfolio/', include('clarityv2.portfolio.urls', namespace='portfolio')),
