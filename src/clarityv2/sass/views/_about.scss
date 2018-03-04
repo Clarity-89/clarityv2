@@ -17,4 +17,12 @@
   &__img {
     filter: grayscale(100%);
   }
+
+  @include xs-screen {
+    padding: 1em 5%;
+
+    &__inner {
+      max-width: 100%;
+    }
+  }
 }
