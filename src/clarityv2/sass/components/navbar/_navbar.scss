@@ -1,3 +1,5 @@
+$bar-top: 10;
+
 .navbar {
   padding: 1em 2em;
   display: flex;
@@ -23,27 +25,109 @@
   }
 
   @include xs-screen {
-    padding: 1em;
+    padding: 1em 0;
+    flex-flow: wrap;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      padding: 0 1em 1em;
+    }
 
     &__toggle {
-      &, &:active, &:focus, &:visited {
+      padding: 0;
+
+      &, &:active, &:focus, &:visited, &:hover {
         display: block;
         border: none;
         background: transparent;
         box-shadow: none;
         margin: 0;
       }
-
     }
 
     &__collapse {
       max-height: 500px;
-      overflow-y: visible;
-      transition: max-height 0.5s linear;
+      overflow-y: auto;
+      transition: max-height 0.3s ease-out;
+      width: 100%;
+      z-index: 1;
+      background: $white;
+      box-shadow: 15px 28px 25px -18px rgba(0, 0, 0, .2);
 
       &--collapsed {
         max-height: 0;
         overflow-y: hidden;
+        z-index: 1;
+        background: $white;
+      }
+    }
+
+    &--right {
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      z-index: 1;
+      background: $white;
+    }
+
+    &__tab {
+      padding: 1em 1.5em;
+      border-bottom: $border;
+      z-index: 1;
+      background: $white;
+
+      &:first-child {
+        border-top: $border;
+      }
+    }
+
+    &__icon {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      transform: rotate(0deg);
+      transition: .5s ease-in-out;
+      cursor: pointer;
+
+      span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background: $text-color;
+        border-radius: 3px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: .25s ease-in-out;
+
+        @for $i from 0 through 2 {
+          &:nth-child(#{$i+1}) {
+            top: #{$i * $bar-top}px;
+          }
+        }
+      }
+
+      &.open {
+        span {
+          &:nth-child(1) {
+            top: #{$bar-top}px;
+            transform: rotate(135deg);
+          }
+
+          &:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+          }
+
+          &:nth-child(3) {
+            top: #{$bar-top}px;
+            transform: rotate(-135deg);
+          }
+        }
       }
     }
   }

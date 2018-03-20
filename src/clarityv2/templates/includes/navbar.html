@@ -1,7 +1,18 @@
 {% load i18n staticfiles %}
 <nav class="navbar">
-    <div class="navbar--left">
-        <a class="no-underline {% if active == 'home' %}active{% endif %}" href="/">{% trans "Home" %}</a>
+    <div class="navbar__header">
+        <div class="navbar--left">
+            <a class="no-underline {% if active == 'home' %}active{% endif %}" href="/">{% trans "Home" %}</a>
+        </div>
+
+        <button type="button" class="navbar__toggle collapsed" aria-expanded="false">
+            {% comment %} <i class="fa fa-bars" aria-hidden="true"></i>{% endcomment %}
+            <div id="nav-icon" class="navbar__icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
     </div>
 
     <div class="navbar__collapse navbar__collapse--collapsed">
@@ -29,10 +40,4 @@
             </li>
         </ul>
     </div>
-
-    <button type="button" class="navbar__toggle collapsed" data-toggle="collapse"
-            data-target="#navbar-collapse" aria-expanded="false">
-        <i class="fa fa-bars" aria-hidden="true"></i>
-    </button>
-
 </nav>
