@@ -4,26 +4,35 @@
         <a class="no-underline {% if active == 'home' %}active{% endif %}" href="/">{% trans "Home" %}</a>
     </div>
 
-    <ul class="navbar--right">
-        <li class="navbar__tab">
-            <a class="no-underline {% if active == 'portfolio' %}active{% endif %}" href="{% url 'portfolio:list' %}">
-                {% trans "Portfolio" %}
-            </a>
-        </li>
-        <li class="navbar__tab">
-            <a class="no-underline {% if active == 'about' %}active{% endif %}" href="{% url 'about' %}">
-                {% trans "About" %}
-            </a>
-        </li>
-        <li class="navbar__tab">
-            <a class="no-underline {% if active == 'contact' %}active{% endif %}" href="{% url 'contact' %}">
-                {% trans "Contact" %}
-            </a>
-        </li>
-        <li class="navbar__tab">
-            <a class="no-underline {% if active == 'login' %}active{% endif %}" href="{% url 'account_login' %}">
-                {% trans "Login" %}
-            </a>
-        </li>
-    </ul>
+    <div class="navbar__collapse navbar__collapse--collapsed">
+        <ul class="navbar--right">
+            <li class="navbar__tab">
+                <a class="no-underline {% if active == 'portfolio' %}active{% endif %}"
+                   href="{% url 'portfolio:list' %}">
+                    {% trans "Portfolio" %}
+                </a>
+            </li>
+            <li class="navbar__tab">
+                <a class="no-underline {% if active == 'about' %}active{% endif %}" href="{% url 'about' %}">
+                    {% trans "About" %}
+                </a>
+            </li>
+            <li class="navbar__tab">
+                <a class="no-underline {% if active == 'contact' %}active{% endif %}" href="{% url 'contact' %}">
+                    {% trans "Contact" %}
+                </a>
+            </li>
+            <li class="navbar__tab">
+                <a class="no-underline {% if active == 'login' %}active{% endif %}" href="{% url 'account_login' %}">
+                    {% trans "Login" %}
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <button type="button" class="navbar__toggle collapsed" data-toggle="collapse"
+            data-target="#navbar-collapse" aria-expanded="false">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+
 </nav>

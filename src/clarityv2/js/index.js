@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Test} from './components/HelloWorld'
+import {Test} from './components/react/HelloWorld';
+import Navbar from './components/navbar';
 import './views/index';
 
 // SCSS
@@ -13,4 +14,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (el) {
         ReactDOM.render(<Test/>, el);
     }
+
+    Navbar.init();
 });

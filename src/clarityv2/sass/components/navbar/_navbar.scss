@@ -17,4 +17,34 @@
       content: ''; // Reset custom list style
     }
   }
+
+  &__toggle {
+    display: none;
+  }
+
+  @include xs-screen {
+    padding: 1em;
+
+    &__toggle {
+      &, &:active, &:focus, &:visited {
+        display: block;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        margin: 0;
+      }
+
+    }
+
+    &__collapse {
+      max-height: 500px;
+      overflow-y: visible;
+      transition: max-height 0.5s linear;
+
+      &--collapsed {
+        max-height: 0;
+        overflow-y: hidden;
+      }
+    }
+  }
 }

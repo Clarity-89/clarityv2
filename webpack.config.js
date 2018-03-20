@@ -34,7 +34,7 @@ var extractConfig = {
 };
 /**
  * Webpack configuration
- * Run using "webpack" or "gulp js"
+ * Run using "webpack"
  */
 module.exports = {
     // Path to the js entry point (source)
@@ -75,6 +75,10 @@ module.exports = {
                     }
                 }
             },
+            {
+                test: /\.(woff|woff2|eot|ttf)$/,
+                loader: 'url-loader'
+            }
         ]
     },
 
