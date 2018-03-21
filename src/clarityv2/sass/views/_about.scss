@@ -1,8 +1,9 @@
 .about {
   display: flex;
   justify-content: center;
-  padding: 1em 10%;
   align-items: center;
+  flex-direction: column;
+  padding: 1em 10%;
   height: 100%;
 
   &__inner {
@@ -19,7 +20,7 @@
   }
 
   @include xs-screen {
-    padding: 1em 5%;
+    padding: 2em 5%;
 
     &__inner {
       max-width: 100%;
