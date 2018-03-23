@@ -14,4 +14,8 @@
   &__means-item {
     margin: 0.5em 0;
   }
+
+  @include xs-screen {
+    height: 100%;
+  }
 }
