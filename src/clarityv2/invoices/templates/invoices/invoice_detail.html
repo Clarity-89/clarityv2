@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load i18n math invoices %}
+{% extends "bs.html" %}{% load i18n math invoices %}
 
 {% block body-class %}pdf invoice{% endblock %}
 
@@ -104,7 +104,7 @@
     </section>
 
     <section class="highlight">
-        <table>
+        <table class="invoice__totals">
             <tr>
                 <td></td>
             </tr>
