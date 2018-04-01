@@ -26,6 +26,7 @@
     {% block content %} {% endblock %}
 </main>
 
+{%  block footer %}
 <footer class="footer">
     <p class="footer__social">
         <a class="footer__social footer__social--li" href="https://www.linkedin.com/in/oleksandr-khomenko-81310b48/">
@@ -39,6 +40,7 @@
         © Copyright {% now "Y" %} Oleksandr Khomenko. {% trans "All rights reserved" %}.
     </p>
 </footer>
+{% endblock footer %}
 
 <script src="{% static 'js/app.js' %}"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
