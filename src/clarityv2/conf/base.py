@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'import_export',
     'solo',
     'ckeditor',
+    'django_extensions',
 
     # Project applications.
     'clarityv2.accounts',
