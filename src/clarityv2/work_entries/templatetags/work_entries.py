@@ -12,7 +12,7 @@ def duration(td):
     total_seconds = int(td.total_seconds())
     hours = total_seconds / 3600
 
-    return '{}'.format(hours)
+    return '{}'.format(round(float(hours), 2))
 
 
 @register.simple_tag
@@ -28,7 +28,7 @@ def total_hours(entries):
     total = 0.0
     for entry in entries:
         total = total + (entry.duration.total_seconds() / 3600)
-    return total
+    return round(float(total), 2)
 
 
 @register.simple_tag
@@ -44,4 +44,4 @@ def total_per_month(entries, project):
     rate = project.base_rate
     total = total_hours(entries)
 
-    return (Decimal(total) * rate).quantize(TWO_DIGITS)
+    return (Decimal(round(float(total), 2)) * rate).quantize(TWO_DIGITS)

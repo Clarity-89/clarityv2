@@ -30,5 +30,5 @@ class WorkEntry(models.Model):
             rate = self.project.base_rate
             total_seconds = int(self.duration.total_seconds())
             duration = total_seconds / 3600
-            return (Decimal(duration) * rate).quantize(TWO_DIGITS)
+            return (Decimal(round(float(duration), 2)) * rate).quantize(TWO_DIGITS)
         return self.project.flat_fee
