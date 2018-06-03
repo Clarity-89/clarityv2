@@ -156,8 +156,8 @@ LOCALE_PATHS = (
     os.path.join(DJANGO_PROJECT_DIR, 'conf', 'locale'),
 )
 
-DEFAULT_COUNTRY = 'NL'
-SITE_COUNTRY = 'NL'
+DEFAULT_COUNTRY = 'FI'
+SITE_COUNTRY = 'FI'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
