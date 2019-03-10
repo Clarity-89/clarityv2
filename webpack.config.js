@@ -1,36 +1,24 @@
 var webpack = require('webpack');
 var paths = require('./build/paths');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-var extractMainCss = new ExtractTextPlugin({
+var extractMainCss = new MiniCssExtractPlugin({
     filename: '../css/screen.css'
 });
 
 
-var extractPrintCss = new ExtractTextPlugin({
+var extractPrintCss = new MiniCssExtractPlugin({
     filename: '../css/print.css'
 });
 
 // Separate loader for styles with Bootstrap
-var extractBSCss = new ExtractTextPlugin({
+var extractBSCss = new MiniCssExtractPlugin({
     filename: '../css/style.css'
 });
 
 var extractConfig = {
     fallback: 'style-loader',
-    use: [{
-        loader: 'css-loader',
-        options: {
-            sourceMap: true,
-            minimize: true
-        }
-    }, {
-        loader: 'sass-loader',
-        options: {
-            sourceMap: true,
-            minimize: true
-        }
-    }],
+    use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
 };
 /**
  * Webpack configuration
@@ -50,13 +38,13 @@ module.exports = {
         rules: [
             {
                 test: /print\.(css|sass|scss)$/,
-                use: extractPrintCss.extract(extractConfig)
+                use: extractConfig.use
             }, {
                 test: /screen\.(css|sass|scss)$/,
-                use: extractMainCss.extract(extractConfig)
+                use: extractConfig.use
             }, {
                 test: /style\.(css|sass|scss)$/,
-                use: extractBSCss.extract(extractConfig)
+                use: extractConfig.use
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -66,7 +54,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -82,13 +70,18 @@ module.exports = {
         ]
     },
 
+    plugins: [
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: '../css/screen.css'
+        })
+    ],
+
     devtool: 'inline-source-map',
 
     // Minify output
-    plugins: [
-        new webpack.optimize.UglifyJsPlugin({minimize: true}),
-        extractMainCss, extractPrintCss, extractBSCss
-    ],
-
-    watch: true
+    optimization: {
+        minimize: false
+    },
 };

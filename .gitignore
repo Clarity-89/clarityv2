@@ -23,3 +23,6 @@ local.py
 /static/
 /mail/
 /log/*.log*
+backup/
+
+private_media/

@@ -7,10 +7,13 @@ export default class Navbar {
         let navToggle = document.querySelector('.navbar__toggle');
         let navIcon = document.getElementById('nav-icon');
 
-        navToggle.addEventListener('click', () => {
-            let isCollapsed = nav.classList.contains('navbar__collapse--collapsed');
-            nav.classList.toggle('navbar__collapse--collapsed', !isCollapsed);
-            navIcon.classList.toggle('open');
-        })
+        if (navToggle) {
+
+            navToggle.addEventListener('click', () => {
+                let isCollapsed = nav.classList.contains('navbar__collapse--collapsed');
+                nav.classList.toggle('navbar__collapse--collapsed', !isCollapsed);
+                navIcon.classList.toggle('open');
+            })
+        }
     }
 }
