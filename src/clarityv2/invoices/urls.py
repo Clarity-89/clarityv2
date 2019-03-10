@@ -1,9 +1,9 @@
-from django.conf.urls import url
+from django.urls import path
 
 from .views import InvoiceDetailView, InvoiceDetailPDFView
 
 
 urlpatterns = [
-    url(r'^invoice/(?P<invoice_number>\d+)/$', InvoiceDetailView.as_view(), name='detail'),
-    url(r'^invoice/(?P<invoice_number>\d+)/pdf/$', InvoiceDetailPDFView.as_view(), name='detail-pdf'),
+    path('invoice/<int:invoice_number>)/', InvoiceDetailView.as_view(), name='detail'),
+    path('invoice/<int:invoice_number>/pdf/', InvoiceDetailPDFView.as_view(), name='detail-pdf'),
 ]
