@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('base_rate', models.DecimalField(verbose_name='hourly base rate', decimal_places=2, max_digits=8)),
                 ('flat_fee', models.DecimalField(verbose_name='flat fee', decimal_places=2, max_digits=10)),
                 ('tax_rate', models.DecimalField(choices=[(Decimal('0.06'), 'low'), (Decimal('0.21'), 'high')], verbose_name='tax rate', decimal_places=2, max_digits=4, default=Decimal('0.21'))),
-                ('client', models.ForeignKey(to='crm.Client')),
+                ('client', models.ForeignKey(to='crm.Client', on_delete=models.PROTECT)),
             ],
         ),
         migrations.AlterField(

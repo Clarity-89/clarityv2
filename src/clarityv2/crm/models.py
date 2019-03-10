@@ -25,7 +25,7 @@ class Contact(models.Model):
     city = models.CharField(_('city'), max_length=255, blank=True)
     country = CountryField(default=settings.DEFAULT_COUNTRY, verbose_name=_('Country'))
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.PROTECT)
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
@@ -80,7 +80,7 @@ class Project(models.Model):
     Clients can have multiple projects going on.
     """
 
-    client = models.ForeignKey(Client)
+    client = models.ForeignKey(Client, on_delete=models.PROTECT)
     name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from='name')
 

@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                 ('country', django_countries.fields.CountryField(default='NL', max_length=2, verbose_name='Country')),
                 ('created', models.DateTimeField(auto_now_add=True, verbose_name='created')),
                 ('modified', models.DateTimeField(auto_now=True, verbose_name='modified')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, blank=True, null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.PROTECT)),
             ],
             options={
                 'verbose_name_plural': 'contacts',

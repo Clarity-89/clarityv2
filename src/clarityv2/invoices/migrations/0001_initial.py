@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('received', models.DateTimeField(verbose_name='received', blank=True, null=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True, null=True)),
-                ('client', models.ForeignKey(to='crm.Client')),
+                ('client', models.ForeignKey(to='crm.Client', on_delete=models.PROTECT)),
             ],
         ),
         migrations.CreateModel(
@@ -34,9 +34,9 @@ class Migration(migrations.Migration):
                 ('tax_rate', models.DecimalField(verbose_name='tax rate', decimal_places=2, choices=[(Decimal('0.06'), 'low'), (Decimal('0.21'), 'high')], max_digits=4, default=Decimal('0.21'))),
                 ('object_id', models.IntegerField(blank=True, null=True)),
                 ('remarks', models.TextField(verbose_name='remarks', blank=True)),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType', blank=True, null=True)),
-                ('invoice', models.ForeignKey(to='invoices.Invoice')),
-                ('project', models.ForeignKey(to='crm.Project', blank=True, null=True)),
+                ('content_type', models.ForeignKey(to='contenttypes.ContentType', blank=True, null=True, on_delete=models.PROTECT)),
+                ('invoice', models.ForeignKey(to='invoices.Invoice', on_delete=models.PROTECT)),
+                ('project', models.ForeignKey(to='crm.Project', blank=True, null=True, on_delete=models.PROTECT)),
             ],
         ),
     ]

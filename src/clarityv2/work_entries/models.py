@@ -9,8 +9,8 @@ from clarityv2.invoices.constants import TWO_DIGITS
 
 
 class WorkEntry(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    project = models.ForeignKey('crm.Project')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    project = models.ForeignKey('crm.Project', on_delete=models.PROTECT)
     date = models.DateField(_('date'), default=datetime.date.today)
     duration = models.DurationField(_('duration'))
 

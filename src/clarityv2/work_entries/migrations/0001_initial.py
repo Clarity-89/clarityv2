@@ -20,8 +20,8 @@ class Migration(migrations.Migration):
                 ('start', models.DateTimeField(verbose_name='start')),
                 ('end', models.DateTimeField(verbose_name='start')),
                 ('notes', models.TextField(blank=True)),
-                ('project', models.ForeignKey(to='crm.Project')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('project', models.ForeignKey(to='crm.Project', on_delete=models.PROTECT)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.PROTECT)),
             ],
             options={
                 'verbose_name_plural': 'work entries',
