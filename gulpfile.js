@@ -11,7 +11,11 @@ const sassFiles = ["style", "print", "screen"].map(
 function scss(cb) {
     gulp.src(sassFiles)
         .pipe(sourcemaps.init())
-        .pipe(sass().on("error", sass.logError))
+        .pipe(
+            sass({
+                includePaths: ["./node_modules"]
+            }).on("error", sass.logError)
+        )
         .pipe(gulp.dest(`${paths.cssDir}`));
     cb();
 }
