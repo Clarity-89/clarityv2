@@ -24,7 +24,7 @@
         "font-awesome": "^4.7.0",
         "material-design-icons": "2.2.3",
         "normalize.css": "^4.0.0",
-        "papercss": "^1.4.1",
+        "papercss": "^1.6.1",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
         "save-dev": "^2.0.0"
@@ -39,6 +39,8 @@
         "bourbon": "^4.2.6",
         "css-loader": "^2.1.1",
         "file-loader": "^1.1.6",
+        "gulp": "^4.0.0",
+        "gulp-sass": "^4.0.2",
         "istanbul-instrumenter-loader": "^1.0.0",
         "jasmine-core": "^2.5.2",
         "jshint": "^2.9.3",
