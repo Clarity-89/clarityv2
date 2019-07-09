@@ -28,17 +28,17 @@ ALLOWED_HOSTS = ['*']
 LOGGING['loggers'].update({
     'clarityv2': {
         'handlers': ['console'],
-        'level': 'DEBUG',
+        'level': 'INFO',
         'propagate': True,
     },
     'django': {
         'handlers': ['console'],
-        'level': 'DEBUG',
+        'level': 'INFO',
         'propagate': True,
     },
     'django.db.backends': {
         'handlers': ['django'],
-        'level': 'DEBUG',
+        'level': 'INFO',
         'propagate': False,
     },
     'performance': {
