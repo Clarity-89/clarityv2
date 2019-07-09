@@ -27,4 +27,4 @@ django-allauth
 django-appconf
 django-solo
 rules
-
+phonenumbers
