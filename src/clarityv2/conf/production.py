@@ -24,7 +24,7 @@ DATABASES = {
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = '1111' #os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = ['claritydev.net', '188.166.1.116', '0.0.0.0']
 
@@ -100,8 +100,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Raven
 INSTALLED_APPS = INSTALLED_APPS + [
-    'raven.contrib.django.raven_compat',
-    'django-axes'
+    'raven.contrib.django.raven_compat'
 ]
 # RAVEN_CONFIG = {
 #     'dsn': 'https://',
