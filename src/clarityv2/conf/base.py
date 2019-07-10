@@ -301,7 +301,7 @@ AUTH_USER_MODEL = 'accounts.User'
 # Allow logging in with both username+password and email+password
 AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
-    'axes.backends.AxesBackend',
+    # 'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
