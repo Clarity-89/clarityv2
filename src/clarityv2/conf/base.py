@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     # 'admin_tools.dashboard',
 
     # External applications.
-    'axes',
+    # 'axes',
     'sniplates',
     'hijack',
     'compat',  # Part of hijack
@@ -72,7 +72,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'axes.middleware.AxesMiddleware',
+    # 'axes.middleware.AxesMiddleware',
     # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

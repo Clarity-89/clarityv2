@@ -101,6 +101,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Raven
 INSTALLED_APPS = INSTALLED_APPS + [
     'raven.contrib.django.raven_compat',
+    'django-axes'
 ]
 # RAVEN_CONFIG = {
 #     'dsn': 'https://',
