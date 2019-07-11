@@ -26,6 +26,7 @@ class BlogPost(models.Model):
     tags = TaggableManager()
     published = models.BooleanField(_('published'), default=False)
     objects = BlogPostQueryset.as_manager()
+    description = models.TextField(_('description'), blank=True, null=True)
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
@@ -51,4 +52,4 @@ class BlogPost(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog_post:detail', kwargs={'slug': self.slug})
+        return reverse('blog:detail', kwargs={'slug': self.slug})
