@@ -7,10 +7,12 @@
 <div class="blog__container">
     <ul class="blog__list">
         {% for post in  blog_posts %}
-        <li class="blog__item">
-        <a href="{{ post.get_absolute_url }}" class="blog__name">{{ post.name }}</a>
-        <p class="blog__text">{{ post.text }}</p>
-        </li>
+            <li class="blog__item">
+                <a href="{{ post.get_absolute_url }}" class="blog__name">{{ post.name }}</a>
+                <small class="blog_pub-date">{{ post.pub_date }}</small>
+                <p class="blog__text">{{ post.text }}</p>
+                <div class="blog__tags">{{ blog.tags }}</div>
+            </li>
         {% endfor %}
     </ul>
 </div>

@@ -19,8 +19,8 @@ class BlogPostQueryset(models.QuerySet):
 
 
 class BlogPost(models.Model):
-    title = models.CharField(_('name'), max_length=255)
-    slug = AutoSlugField(_('slug'), populate_from='name', unique=True)
+    title = models.CharField(_('title'), max_length=255)
+    slug = AutoSlugField(_('slug'), populate_from='title', unique=True)
     image = models.ImageField(_('image'), blank=True, upload_to='blog')
     text = RichTextField(blank=True)
     tags = TaggableManager()
@@ -29,11 +29,11 @@ class BlogPost(models.Model):
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
-    pub_date = models.DateTimeField(_('publish_date'), null=True)
+    pub_date = models.DateTimeField(_('publish date'), blank=True, null=True)
 
     class Meta:
         verbose_name = _('blog post')
-        verbose_name_plural = _('blog post')
+        verbose_name_plural = _('blog posts')
         ordering = ['pub_date']
 
     def save(self, *args, **kwargs):
