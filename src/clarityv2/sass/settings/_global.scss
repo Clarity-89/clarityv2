@@ -5,7 +5,7 @@ a.no-underline {
   color: inherit;
 
   &.active {
-    text-decoration: underline;
+    border-color: $active;
   }
 }
 

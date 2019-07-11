@@ -6656,13 +6656,19 @@ a.text-dark:focus, a.text-dark:hover {
     border: 1px solid #ddd !important; } }
 
 /*# sourceMappingURL=bootstrap.min.css.map */
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg); }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg); } }
+
 /* Overrides for global styles */
 a.no-underline {
   text-decoration: none;
   background-image: none;
   color: inherit; }
   a.no-underline.active {
-    text-decoration: underline; }
+    border-color: #0071de; }
 
 p {
   margin: 0;
@@ -6684,10 +6690,6 @@ main {
 
 .errorlist li {
   color: red; }
-
-@media only screen and (max-width: 767px) {
-  h2 {
-    font-size: 2.5rem; } }
 
 .content h1 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -6821,24 +6823,24 @@ main {
         transition: max-height 0.3s ease-out;
         width: 100%;
         z-index: 1;
-        background: #fff;
+        background: #FFF;
         box-shadow: 15px 28px 25px -18px rgba(0, 0, 0, 0.2); }
         .navbar__collapse--collapsed {
           max-height: 0;
           overflow-y: hidden;
           z-index: 1;
-          background: #fff; }
+          background: #FFF; }
       .navbar--right {
         flex-direction: column;
         padding: 0;
         margin: 0;
         z-index: 1;
-        background: #fff; }
+        background: #FFF; }
       .navbar__tab {
         padding: 1em 1.5em;
         border-bottom: 1px solid #808080;
         z-index: 1;
-        background: #fff; }
+        background: #FFF; }
         .navbar__tab:first-child {
           border-top: 1px solid #808080; }
       .navbar__icon {
