@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -27,11 +29,23 @@ class BlogPost(models.Model):
 
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
+    pub_date = models.DateTimeField(_('publish_date'), null=True)
 
     class Meta:
         verbose_name = _('blog post')
         verbose_name_plural = _('blog post')
-        ordering = ['created']
+        ordering = ['pub_date']
+
+    def save(self, *args, **kwargs):
+        """
+        Set publish date to the date when object published status is switched to True, reset the date if object is
+         unpublished
+        """
+        if self.published and self.pub_date is None:
+            self.pub_date = datetime.now()
+        elif not self.published and self.pub_date is not None:
+            self.pub_date = None
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

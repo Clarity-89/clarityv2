@@ -3,3 +3,14 @@
 {% block header %}
     {% include "includes/navbar.html" with active="blog" %}
 {% endblock %}
+
+<div class="blog__container">
+    <ul class="blog__list">
+        {% for post in  blog_posts %}
+        <li class="blog__item">
+        <a href="{{ post.get_absolute_url }}" class="blog__name">{{ post.name }}</a>
+        <p class="blog__text">{{ post.text }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
