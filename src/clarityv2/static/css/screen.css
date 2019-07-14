@@ -4469,7 +4469,8 @@ main {
         justify-content: space-between;
         width: 100%;
         align-items: center;
-        padding: 0 1em 1em; }
+        padding: 0;
+        margin: 0; }
       .navbar__toggle {
         padding: 0; }
         .navbar__toggle, .navbar__toggle:active, .navbar__toggle:focus, .navbar__toggle:visited, .navbar__toggle:hover {
@@ -4537,6 +4538,9 @@ main {
         .navbar__icon.open span:nth-child(3) {
           top: 10px;
           transform: rotate(-135deg); } }
+  @media only screen and (min-width: 767px) and (max-width: 1024px) {
+    .navbar__header {
+      margin: 0; } }
 
 .footer {
   display: flex;
@@ -4648,6 +4652,11 @@ main {
   color: #41403e;
   font-size: 22px;
   margin-bottom: 10px; }
+  .blog__title--large {
+    font-size: 42px; }
+    @media only screen and (max-width: 767px) {
+      .blog__title--large {
+        font-size: 36px; } }
   .blog__title:hover {
     text-decoration: underline; }
 
@@ -4659,6 +4668,14 @@ main {
 .blog__footer {
   font-size: 14px;
   padding: 10px 0; }
+
+.blog__text {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px; }
+  @media only screen and (max-width: 767px) {
+    .blog__text {
+      font-size: 18px; } }
 
 .greeting {
   display: flex;

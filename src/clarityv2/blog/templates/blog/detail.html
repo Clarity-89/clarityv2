@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="blog__container">
-        {{ blog_post.text|safe }}
-    </div>
+    <article class="blog__container">
+        <h3 class="blog__title blog__title--large">{{ blog_post.title }}</h3>
+        <section class="blog__text">{{ blog_post.text|safe }}</section>
+    </article>
 {% endblock %}

@@ -46,6 +46,15 @@
     font-size: 22px;
     margin-bottom: 10px;
 
+    &--large {
+      font-size: 42px;
+
+      @media only screen and (max-width: $xs-screen) {
+        font-size: 36px;
+      }
+    }
+
+
     &:hover {
       text-decoration: underline;
     }
@@ -60,5 +69,15 @@
   &__footer {
     font-size: 14px;
     padding: 10px 0;
+  }
+
+  &__text {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    @media only screen and (max-width: $xs-screen) {
+      font-size: 18px;
+    }
   }
 }
