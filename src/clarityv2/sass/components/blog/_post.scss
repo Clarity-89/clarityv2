@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 24px;
   }
 
   &__item {
@@ -46,17 +47,22 @@
     font-size: 22px;
     margin-bottom: 10px;
 
+    &:hover {
+      text-decoration: underline;
+    }
+
     &--large {
       font-size: 42px;
+      text-align: left;
+      margin-bottom: 0;
+
+      &:hover {
+        text-decoration: none;
+      }
 
       @media only screen and (max-width: $xs-screen) {
         font-size: 36px;
       }
-    }
-
-
-    &:hover {
-      text-decoration: underline;
     }
   }
 
@@ -72,12 +78,15 @@
   }
 
   &__text {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 24px;
+    @include text-block;
 
     @media only screen and (max-width: $xs-screen) {
       font-size: 18px;
     }
+  }
+
+  &__header {
+    width: 100%;
+    @include text-block;
   }
 }

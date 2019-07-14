@@ -88,3 +88,9 @@
     animation-direction: normal, alternate;
   }
 }
+
+@mixin text-block() {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
