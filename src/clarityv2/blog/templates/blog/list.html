@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load i18n staticfiles %}
+{% extends "base.html" %}{% load i18n staticfiles blog %}
 
 {% block header %}
     {% include "includes/navbar.html" with active="blog" %}
@@ -18,7 +18,7 @@
                             <p class="blog__description">{{ post.description }}</p>
                             <div class="blog__tags">{{ blog.tags }}</div>
                             <p class="blog__footer">
-                                {{ post.pub_date|date }} <span>&#183;</span> 10 min read
+                                {{ post.pub_date|date }} <span>&#183;</span> {% time_to_read text=post.text %}
                             </p>
                         </div>
                     </div>
