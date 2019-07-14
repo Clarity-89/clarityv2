@@ -39,10 +39,12 @@
     padding: 16px;
   }
 
-  &__name {
+  &__title {
     display: inline-block;
     background-image: none;
     color: $text-color;
+    font-size: 22px;
+    margin-bottom: 10px;
 
     &:hover {
       text-decoration: underline;
@@ -52,9 +54,11 @@
   &__description {
     text-align: justify;
     font-size: 16px;
+    color: $text-secondary;
   }
 
   &__footer {
     font-size: 14px;
+    padding: 10px 0;
   }
 }

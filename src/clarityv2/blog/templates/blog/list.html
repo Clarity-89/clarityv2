@@ -14,10 +14,12 @@
                     <div class="blog__inner sm-12 md-8 lg-6">
                         <div class="blog__image" style="background-image: url({{ post.image.url }})"></div>
                         <div class="blog__info">
-                            <a href="{{ post.get_absolute_url }}" class="blog__name">{{ post.title }}</a>
+                            <a href="{{ post.get_absolute_url }}" class="blog__title">{{ post.title }}</a>
                             <p class="blog__description">{{ post.description }}</p>
                             <div class="blog__tags">{{ blog.tags }}</div>
-                            <p class="blog__footer">{{ post.pub_date }} * 10 min read</p>
+                            <p class="blog__footer">
+                                {{ post.pub_date|date }} <span>&#183;</span> 10 min read
+                            </p>
                         </div>
                     </div>
                 </li>
