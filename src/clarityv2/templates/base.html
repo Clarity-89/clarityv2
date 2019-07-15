@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Oleksandr Khomenko - web developer, personal website and portfolio">
     <meta name="author" content="Oleksandr Khomenko">
-    <meta name="keywords" content="Web Developer, Front-end, Front End, Full-stack, Full Stack, Freelance, Freelance Web Developer">
+    <meta name="keywords"
+          content="Web Developer, Front-end, Front End, Full-stack, Full Stack, Freelance, Freelance Web Developer">
 
     {% block main_css %}
         <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
@@ -26,43 +27,34 @@
     {% block content %} {% endblock %}
 </main>
 
-{%  block footer %}
-<footer class="footer">
-    <p class="footer__social">
-        <a class="footer__social" href="https://www.linkedin.com/in/oleksandr-khomenko-81310b48/">
-            <img class="footer__logo" src="{% static 'img/logos/linkedin.png' %}" alt="Linkedin">
-        </a>
+{% block footer %}
+    <footer class="footer">
+        <p class="footer__social">
+            <a class="footer__social" href="https://www.linkedin.com/in/oleksandr-khomenko-81310b48/">
+                <img class="footer__logo" src="{% static 'img/logos/linkedin.png' %}" alt="Linkedin">
+            </a>
 
-        <a class="footer__social" href="https://github.com/Clarity-89">
-            <img class="footer__logo" src="{% static 'img/logos/github.png' %}" alt="Github">
-        </a>
+            <a class="footer__social" href="https://github.com/Clarity-89">
+                <img class="footer__logo" src="{% static 'img/logos/github.png' %}" alt="Github">
+            </a>
 
-        <a class="footer__social" href="https://www.codewars.com/users/Clarity">
-            <img class="footer__logo" src="{% static 'img/logos/codewars.svg' %}" alt="Codewars">
-        </a>
+            <a class="footer__social" href="https://www.codewars.com/users/Clarity">
+                <img class="footer__logo" src="{% static 'img/logos/codewars.svg' %}" alt="Codewars">
+            </a>
 
-        <a class="footer__social" href="https://twitter.com/Clarity_89">
-            <img class="footer__logo" src="{% static 'img/logos/twitter.png' %}" alt="Twitter">
-        </a>
-    </p>
-    <p class="footer__text-copyright">
-        © Copyright {% now "Y" %} Oleksandr Khomenko. {% trans "All rights reserved" %}.
-    </p>
-</footer>
+            <a class="footer__social" href="https://twitter.com/Clarity_89">
+                <img class="footer__logo" src="{% static 'img/logos/twitter.png' %}" alt="Twitter">
+            </a>
+        </p>
+        <p class="footer__text-copyright">
+            © Copyright {% now "Y" %} Oleksandr Khomenko. {% trans "All rights reserved" %}.
+        </p>
+    </footer>
 {% endblock footer %}
 
-<script src="{% static 'js/app.js' %}"></script>
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115058175-1"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-    gtag('config', 'UA-115058175-1');
-</script>
+{% block scripts %}
+    <script src="{% static 'js/app.js' %}"></script>
+    {% include 'includes/scripts.html' %}
+{% endblock %}
 </body>
 </html>

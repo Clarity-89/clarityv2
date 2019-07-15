@@ -6685,6 +6685,9 @@ main {
 .errorlist li {
   color: red; }
 
+li::before {
+  content: '' !important; }
+
 .content h1 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 2em; }
@@ -7013,10 +7016,28 @@ main {
   align-items: center;
   justify-content: space-between; }
 
-.blog__share {
-  margin: 0; }
-  .blog__share i {
-    margin-right: 10px; }
+.blog__social-list {
+  margin: 0;
+  padding: 0;
+  display: flex; }
+
+.blog__social-list-item {
+  display: flex;
+  align-items: center;
+  margin-right: 10px; }
+  .blog__social-list-item a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    background-image: none;
+    margin: 0; }
+    .blog__social-list-item a:hover {
+      cursor: pointer; }
+
+.blog__social-logo {
+  width: 25px;
+  height: 25px; }
 
 .blog__text {
   max-width: 900px;

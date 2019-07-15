@@ -17,8 +17,21 @@
                         <span class="badge">{{ tag }}</span>
                     {% endfor %}
                 </div>
-
-                <button class="blog__share btn-small"><i class="fa fa-share-alt"></i>{% trans "Share" %}</button>
+                <ul class="blog__social-list">
+                    <li class="blog__social-list-item">
+                        <a href="https://twitter.com/intent/tweet?text={{ blog_post.title }}&url=https://claritydev.net{{ request.path }}"
+                           rel="me" popover-top="{% trans 'Share on Twitter' %}">
+                            <img class="blog__social-logo" src="{% static 'img/logos/twitter.png' %}" alt="Twitter">
+                        </a>
+                    </li>
+                    <li class="blog__social-list-item">
+                        <a href="https://www.facebook.com/dialog/share?app_id=293175408156583&href=https://claritydev.net{{ request.path }}&redirect_uri=https://claritydev.net{{ request.path }}"
+                           popover-top="{% trans 'Share on Facebook' %}">
+                            <img class="blog__social-logo" src="{% static 'img/logos/fb.png' %}"
+                                 alt="Facebook">
+                        </a>
+                    </li>
+                </ul>
             </div>
         </section>
         <section class="blog__text">{{ blog_post.text|safe }}</section>
