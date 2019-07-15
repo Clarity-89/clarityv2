@@ -8,7 +8,7 @@ class BlogPostListView(ListView):
     queryset = BlogPost.objects.published()
     template_name = 'blog/list.html'
     context_object_name = 'blog_posts'
-    #paginate_by = 10
+    paginate_by = 2
 
 
 class BlogPostDetailView(DetailView):
