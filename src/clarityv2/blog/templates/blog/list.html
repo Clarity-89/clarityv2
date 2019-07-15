@@ -20,6 +20,11 @@
                             <p class="blog__footer">
                                 {{ post.pub_date|date }} <span>&#183;</span> {% time_to_read text=post.text %}
                             </p>
+                            <div class="blog__tags">
+                                {% for tag in post.tags.all %}
+                                    <span class="badge">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                 </li>

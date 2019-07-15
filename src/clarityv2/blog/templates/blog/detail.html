@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load i18n staticfiles blog %}
+{% extends "base.html" %}{% load i18n staticfiles blog social_share %}
 
 {% block header %}
     {% include "includes/navbar.html" with active="blog" %}
@@ -11,6 +11,15 @@
             <p class="blog__footer">
                 {{ blog_post.pub_date|date }} <span>&#183;</span> {% time_to_read text=blog_post.text %}
             </p>
+            <div class="blog__extra">
+                <div class="blog__tags">
+                    {% for tag in blog_post.tags.all %}
+                        <span class="badge">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+
+                <button class="blog__share btn-small"><i class="fa fa-share-alt"></i>{% trans "Share" %}</button>
+            </div>
         </section>
         <section class="blog__text">{{ blog_post.text|safe }}</section>
     </article>
