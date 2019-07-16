@@ -354,6 +354,7 @@ HIJACK_ALLOW_GET_REQUESTS = True
 #
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': None,
+        'toolbar': 'full',
+        'extraPlugins': ','.join(['codesnippet'])
     },
 }
