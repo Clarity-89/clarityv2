@@ -127,6 +127,10 @@
     @media only screen and (max-width: $xs-screen) {
       font-size: 18px;
     }
+
+    p {
+      margin-bottom: 10px;
+    }
   }
 
   &__header {
