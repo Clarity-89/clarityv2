@@ -1,0 +1,55 @@
+{% extends "base.html" %}{% load i18n staticfiles blog %}
+
+{% block header %}
+    {% include "includes/navbar.html" with active="blog" %}
+{% endblock %}
+
+{% block content %}
+    <div class="blog__container">
+        <h3 class="blog__header">{% trans "Latest posts" %}</h3>
+        <ul class="blog__list">
+            {% for post in  blog_posts %}
+                <li class="blog__item row flex-center">
+
+                    <div class="blog__inner sm-12 md-8 lg-6">
+                        {% if post.image %}
+                            <div class="blog__image" style="background-image: url({{ post.image.url }})"></div>
+                        {% endif %}
+                        <div class="blog__info">
+                            <a href="{{ post.get_absolute_url }}" class="blog__title">
+                                {{ post.title }}
+                                {% if request.user.is_superuser and not post.published %}
+                                    <span class="badge secondary">{% trans 'Draft' %}</span>
+                                {% endif %}
+                            </a>
+                            <p class="blog__description">{{ post.description }}</p>
+                            <p class="blog__footer">
+                                {{ post.pub_date|date }} <span>&#183;</span> {% time_to_read text=post.text %}
+                            </p>
+                            <div class="blog__tags">
+                                {% for tag in post.tags.all %}
+                                    <span class="badge">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% if is_paginated %}
+        <div class="blog__pagination">
+            {% if page_obj.has_previous %}
+                <a href="{% url 'blog:list' %}?page={{ page_obj.previous_page_number }}"><<</a>
+            {% endif %}
+            <span class="page-current">
+                    {% blocktrans with num=page_obj.number num_pages=page_obj.paginator.num_pages %}
+                        Page {{ num }} of {{ num_pages }}
+                    {% endblocktrans %}
+                </span>
+            {% if page_obj.has_next %}
+                <a href="{% url 'blog:list' %}?page={{ page_obj.next_page_number }}">>></a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'solo',
     'ckeditor',
     'django_extensions',
+    'taggit',
+    'django_social_share',
 
     # Project applications.
     'clarityv2.accounts',
@@ -67,6 +69,7 @@ INSTALLED_APPS = [
     'clarityv2.work_entries',
     'clarityv2.homepage',
     'clarityv2.portfolio',
+    'clarityv2.blog'
 ]
 
 MIDDLEWARE = [
@@ -351,6 +354,8 @@ HIJACK_ALLOW_GET_REQUESTS = True
 #
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': None,
+        'toolbar': 'full',
+        'extraPlugins': ','.join(['codesnippet']),
+        'scayt_autoStartup': True
     },
 }

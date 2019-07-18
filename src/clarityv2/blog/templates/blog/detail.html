@@ -1,0 +1,35 @@
+{% extends "base.html" %}{% load i18n staticfiles blog %}
+
+{% block header %}
+    {% include "includes/navbar.html" with active="blog" %}
+{% endblock %}
+
+{% block content %}
+    <article class="blog__container">
+        <section class="blog__header">
+            <h3 class="blog__title blog__title--large">{{ blog_post.title }}</h3>
+            <p class="blog__footer">
+                {{ blog_post.pub_date|date }} <span>&#183;</span> {% time_to_read text=blog_post.text %}
+            </p>
+            <div class="blog__extra">
+                <div class="blog__tags">
+                    {% for tag in blog_post.tags.all %}
+                        <span class="badge">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <ul class="blog__social-list">
+                    <li class="blog__social-list-item">
+                        <a href="https://twitter.com/intent/tweet?text={{ blog_post.title }}&url=https://claritydev.net{{ request.path }}"
+                           rel="me" popover-top="{% trans 'Share on Twitter' %}">
+                            <img class="blog__social-logo" src="{% static 'img/logos/twitter.png' %}" alt="Twitter">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        {% if blog_post.image %}
+            <section class="blog__image blog__image--large" style="background-image: url({{ blog_post.image.url }})"></section>
+        {% endif %}
+        <section class="blog__text">{{ blog_post.text|safe }}</section>
+    </article>
+{% endblock %}

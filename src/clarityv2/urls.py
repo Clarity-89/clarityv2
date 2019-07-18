@@ -21,6 +21,7 @@ urlpatterns = [
     path('reset/done/', auth_views.PasswordResetCompleteView, name='password_reset_complete'),
     path('portfolio/', include(('clarityv2.portfolio.urls', 'portfolio'), namespace='portfolio')),
     path('work_entries/', include(('clarityv2.work_entries.urls', 'work_entries'), namespace='work_entries')),
+    path('blog/', include(('clarityv2.blog.urls', 'blog'), namespace='blog')),
 
     # Simply show the master template.
     path(r'', include(('clarityv2.homepage.urls', 'home'), namespace='home')),

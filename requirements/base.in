@@ -26,5 +26,7 @@ django-import-export
 django-allauth
 django-appconf
 django-solo
+django-taggit
 rules
 phonenumbers
+readtime

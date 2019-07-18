@@ -4,6 +4,12 @@
   }
 }
 
+@mixin sm-screen() {
+  @media only screen and (min-width: $xs-screen) and (max-width: 1024px) {
+    @content;
+  }
+}
+
 @mixin bob-animation($el) {
   /* Bob animation for icons; src: https://codepen.io/vavik96/pen/waBgya */
   @-webkit-keyframes hvr-bob {
@@ -65,7 +71,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-   #{$el}:hover,  #{$el}:focus, #{$el}:active {
+  #{$el}:hover, #{$el}:focus, #{$el}:active {
     -webkit-animation-name: hvr-bob-float, hvr-bob;
     animation-name: hvr-bob-float, hvr-bob;
     -webkit-animation-duration: .3s, 1.5s;
@@ -81,4 +87,10 @@
     -webkit-animation-direction: normal, alternate;
     animation-direction: normal, alternate;
   }
+}
+
+@mixin text-block() {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
 }

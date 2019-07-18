@@ -1,6 +1,6 @@
 @import 'color';
 
-$typography-color-link: $color-light-blue;
+$typography-color-link: $light-blue;
 $typography-font-family-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $typography-font-family-body: Georgia, "Times New Roman", Times, serif;
 $typography-font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -56,11 +56,5 @@ $typography-font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monos
   &:focus,
   &:hover {
     text-decoration: underline;
-  }
-}
-
-@include xs-screen {
-  h2 {
-    font-size: 2.5rem;
   }
 }
