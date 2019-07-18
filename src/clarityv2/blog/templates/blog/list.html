@@ -18,7 +18,6 @@
                         <div class="blog__info">
                             <a href="{{ post.get_absolute_url }}" class="blog__title">{{ post.title }}</a>
                             <p class="blog__description">{{ post.description }}</p>
-                            <div class="blog__tags">{{ blog.tags }}</div>
                             <p class="blog__footer">
                                 {{ post.pub_date|date }} <span>&#183;</span> {% time_to_read text=post.text %}
                             </p>
@@ -36,15 +35,15 @@
     {% if is_paginated %}
         <div class="blog__pagination">
             {% if page_obj.has_previous %}
-                <a href="/blog?page={{ page_obj.previous_page_number }}"><<</a>
+                <a href="{% url 'blog:list' %}?page={{ page_obj.previous_page_number }}"><<</a>
             {% endif %}
-                 <span class="page-current">
+            <span class="page-current">
                     {% blocktrans with num=page_obj.number num_pages=page_obj.paginator.num_pages %}
                         Page {{ num }} of {{ num_pages }}
                     {% endblocktrans %}
                 </span>
             {% if page_obj.has_next %}
-                <a href="/blog?page={{ page_obj.next_page_number }}">>></a>
+                <a href="{% url 'blog:list' %}?page={{ page_obj.next_page_number }}">>></a>
             {% endif %}
         </div>
     {% endif %}
