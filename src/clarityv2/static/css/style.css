@@ -7055,6 +7055,10 @@ pre code {
       font-size: 18px; } }
   .blog__text p {
     margin-bottom: 10px; }
+  .blog__text ul {
+    margin: 0 0 20px 0; }
+  .blog__text li {
+    line-height: 1.6; }
 
 .blog__header {
   width: 100%;

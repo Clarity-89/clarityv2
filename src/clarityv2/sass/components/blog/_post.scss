@@ -131,12 +131,21 @@
     p {
       margin-bottom: 10px;
     }
+
+    ul {
+      margin: 0 0 20px 0;
+    }
+
+    li {
+      line-height: 1.6;
+    }
   }
 
   &__header {
     width: 100%;
     @include text-block;
   }
+
 
   &__pagination {
     width: 100%;
