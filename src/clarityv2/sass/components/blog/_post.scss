@@ -34,6 +34,12 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    &--large {
+      height: 400px;
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
   }
 
   &__info {

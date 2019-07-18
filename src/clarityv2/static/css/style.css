@@ -6981,6 +6981,10 @@ pre code {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; }
+  .blog__image--large {
+    height: 400px;
+    max-width: 900px;
+    margin-bottom: 24px; }
 
 .blog__info {
   display: flex;
