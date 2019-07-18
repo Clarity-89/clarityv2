@@ -16,7 +16,12 @@
                             <div class="blog__image" style="background-image: url({{ post.image.url }})"></div>
                         {% endif %}
                         <div class="blog__info">
-                            <a href="{{ post.get_absolute_url }}" class="blog__title">{{ post.title }}</a>
+                            <a href="{{ post.get_absolute_url }}" class="blog__title">
+                                {{ post.title }}
+                                {% if request.user.is_superuser and not post.published %}
+                                    <span class="badge secondary">{% trans 'Draft' %}</span>
+                                {% endif %}
+                            </a>
                             <p class="blog__description">{{ post.description }}</p>
                             <p class="blog__footer">
                                 {{ post.pub_date|date }} <span>&#183;</span> {% time_to_read text=post.text %}
