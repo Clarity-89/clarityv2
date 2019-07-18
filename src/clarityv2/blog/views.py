@@ -19,6 +19,12 @@ class BlogPostListView(ListView):
 
 class BlogPostDetailView(DetailView):
     model = BlogPost
-    queryset = BlogPost.objects.published()
+    queryset = BlogPost.objects.all()
     template_name = 'blog/detail.html'
     context_object_name = 'blog_post'
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.user.is_superuser:
+            return qs
+        return qs.published()
