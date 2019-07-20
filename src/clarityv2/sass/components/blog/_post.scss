@@ -17,15 +17,21 @@
     }
 
     &:nth-child(even) {
-      .blog__inner {
-        flex-direction: row-reverse;
-      }
+       @media only screen and (min-width: $xs-screen) {
+         .blog__inner {
+           flex-direction: row-reverse;
+         }
+       }
     }
   }
 
   &__inner {
     display: flex;
     align-items: center;
+
+    @media only screen and (max-width: $xs-screen) {
+      flex-direction: column;
+    }
   }
 
   &__image {
@@ -132,6 +138,9 @@
 
     @media only screen and (max-width: $xs-screen) {
       font-size: 18px;
+      max-width: initial;
+      padding: 16px;
+      width: 100%;
     }
 
     p {
@@ -166,5 +175,9 @@
         text-decoration: underline;
       }
     }
+  }
+
+  &__list {
+    padding: 0;
   }
 }
