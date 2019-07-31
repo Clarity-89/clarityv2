@@ -7155,10 +7155,14 @@ pre code, pre code * {
 
 .portfolio {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  flex-flow: wrap; }
   .portfolio__entry {
-    margin-right: 2em;
+    margin: 0 32px 32px 0;
     width: 20rem; }
+    .portfolio__entry img {
+      max-height: 200px;
+      margin: 0 auto; }
   .portfolio__link {
     background-image: none;
     display: block;
