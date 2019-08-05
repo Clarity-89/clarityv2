@@ -154,6 +154,10 @@
     li {
       line-height: 1.6;
     }
+
+    img {
+      margin: 0 auto; // center images inside text
+    }
   }
 
   &__header {
