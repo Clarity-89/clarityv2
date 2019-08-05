@@ -416,6 +416,8 @@ pre code, pre code * {
     margin: 0 0 20px 0; }
   .blog__text li {
     line-height: 1.6; }
+  .blog__text img {
+    margin: 0 auto; }
 
 .blog__header {
   width: 100%;
