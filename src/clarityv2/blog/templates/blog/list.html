@@ -24,7 +24,7 @@
                             </a>
                             <p class="blog__description">{{ post.description }}</p>
                             <p class="blog__footer">
-                                {{ post.pub_date|date }} <span>&#183;</span> {% time_to_read text=post.text %}
+                                {{ post.pub_date|date }} <span>&#183;</span> {% time_to_read text=post.text|striptags %}
                             </p>
                             <div class="blog__tags">
                                 {% for tag in post.tags.all %}

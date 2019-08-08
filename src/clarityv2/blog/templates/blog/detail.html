@@ -11,7 +11,7 @@
         <section class="blog__header">
             <h3 class="blog__title blog__title--large">{{ blog_post.title }}</h3>
             <p class="blog__footer">
-                {{ blog_post.pub_date|date }} <span>&#183;</span> {% time_to_read text=blog_post.text %}
+                {{ blog_post.pub_date|date }} <span>&#183;</span> {% time_to_read text=blog_post.text|striptags %}
             </p>
             <div class="blog__extra">
                 <div class="blog__tags">
