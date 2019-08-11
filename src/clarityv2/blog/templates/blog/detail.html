@@ -5,6 +5,12 @@
 {% block header %}
     {% include "includes/navbar.html" with active="blog" %}
 {% endblock %}
+{% block thumbnail %}
+    {% if  blog_post.image %}
+        <meta property="og:image" content="{{ blog_post.image.url }}">
+        <meta property="twitter:image" content="{{ blog_post.image.url }}"/>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
     <article class="blog__container">
