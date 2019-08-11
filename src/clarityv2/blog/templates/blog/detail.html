@@ -7,7 +7,7 @@
 {% endblock %}
 {% block thumbnail %}
     {% if  blog_post.image %}
-        <meta property="og:image" content="https://claritydev.net/{{ blog_post.image.path }}">
+        <meta property="og:image" content="https://claritydev.net/{{ blog_post.image.url }}">
     {% endif %}
 {% endblock %}
 
