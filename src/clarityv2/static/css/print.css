@@ -36,6 +36,9 @@ pre code, pre code * {
   pre code, pre code * {
     font-size: 14px !important; } }
 
+h5 {
+  font-size: 1.2rem; }
+
 .content h1 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 2em; }
