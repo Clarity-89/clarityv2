@@ -7,8 +7,7 @@
 {% endblock %}
 {% block thumbnail %}
     {% if  blog_post.image %}
-        <meta property="og:image" content="{{ blog_post.image.url }}">
-        <meta property="twitter:image" content="{{ blog_post.image.url }}"/>
+        <meta property="og:image" content="https://claritydev.net/{{ blog_post.image.path }}">
     {% endif %}
 {% endblock %}
 
@@ -36,8 +35,9 @@
             </div>
         </section>
         {% if blog_post.image %}
-            <section class="blog__image blog__image--large"
-                     style="background-image: url({{ blog_post.image.url }})"></section>
+{#            <section class="blog__image blog__image--large"#}
+{#                     style="background-image: url({{ blog_post.image.url }})"></section>#}
+            <img src="{{ blog_post.image.url }}"/>
         {% endif %}
         <section class="blog__text">{{ blog_post.text|safe }}</section>
     </article>
