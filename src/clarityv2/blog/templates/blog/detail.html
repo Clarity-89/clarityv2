@@ -35,9 +35,8 @@
             </div>
         </section>
         {% if blog_post.image %}
-{#            <section class="blog__image blog__image--large"#}
-{#                     style="background-image: url({{ blog_post.image.url }})"></section>#}
-            <img src="{{ blog_post.image.url }}"/>
+            <section class="blog__image blog__image--large"
+                     style="background-image: url({{ blog_post.image.url }})"></section>
         {% endif %}
         <section class="blog__text">{{ blog_post.text|safe }}</section>
     </article>
