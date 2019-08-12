@@ -7,8 +7,9 @@
 {% endblock %}
 {% block thumbnail %}
     {% if  blog_post.image %}
-        <meta property="og:image" content="https://claritydev.net{{ blog_post.image.url }}">
-        <meta itemprop="image" content="https://claritydev.net{{ blog_post.image.url }}">
+        <meta property="og:image" content="{{ blog_post.image.url }}">
+        <meta itemprop="image"
+              content="https://res.cloudinary.com/practicaldev/image/fetch/s--KSCIf6HS--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://res.cloudinary.com/practicaldev/image/fetch/s--1f5NBvdd--/c_imagga_scale%2Cf_auto%2Cfl_progressive%2Ch_420%2Cq_auto%2Cw_1000/https://thepracticaldev.s3.amazonaws.com/i/dehtf80qj6qml4l75vv8.jpeg">
     {% endif %}
 {% endblock %}
 
