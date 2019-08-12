@@ -17,11 +17,11 @@
     }
 
     &:nth-child(even) {
-       @media only screen and (min-width: $xs-screen) {
-         .blog__inner {
-           flex-direction: row-reverse;
-         }
-       }
+      @media only screen and (min-width: $xs-screen) {
+        .blog__inner {
+          flex-direction: row-reverse;
+        }
+      }
     }
   }
 
@@ -136,13 +136,6 @@
   &__text {
     @include text-block;
 
-    @media only screen and (max-width: $xs-screen) {
-      font-size: 18px;
-      max-width: initial;
-      padding: 16px;
-      width: 100%;
-    }
-
     p {
       margin-bottom: 10px;
     }
@@ -157,6 +150,25 @@
 
     img {
       margin: 0 auto; // center images inside text
+    }
+
+    p, a, ul, li, ol {
+      font-family: 'Open Sans', sans-serif !important;
+      font-size: 18px;
+    }
+
+    code {
+      font-family: monospace !important;
+    }
+
+    @media only screen and (max-width: $xs-screen) {
+      max-width: initial;
+      padding: 16px;
+      width: 100%;
+
+      p, a, ul, li, ol {
+        font-size: 16px;
+      }
     }
   }
 
