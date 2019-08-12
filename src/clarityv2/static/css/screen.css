@@ -4659,6 +4659,8 @@ h5 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; }
+  .blog__image--backup {
+    display: none; }
   .blog__image--large {
     height: 400px;
     max-width: 900px;

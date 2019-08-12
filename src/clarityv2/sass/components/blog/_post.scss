@@ -41,6 +41,10 @@
     background-position: center;
     background-repeat: no-repeat;
 
+    &--backup {
+      display: none;
+    }
+
     &--large {
       height: 400px;
       max-width: 900px;
