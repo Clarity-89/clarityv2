@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     # 'django.contrib.admindocs',
     # 'django.contrib.humanize',
-    # 'django.contrib.sitemaps',
+    'django.contrib.sitemaps',
 
     # django-admin-tools
     # 'admin_tools',

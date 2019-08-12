@@ -5,6 +5,8 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.base import TemplateView
 from django.contrib.auth import views as auth_views
+from django.contrib.sitemaps.views import sitemap
+from sitemaps import BlogSitemap, StaticViewSitemap
 
 urlpatterns = [
     # path(r'admin_tools/', include('admin_tools.urls')),
@@ -25,6 +27,10 @@ urlpatterns = [
 
     # Simply show the master template.
     path(r'', include(('clarityv2.homepage.urls', 'home'), namespace='home')),
+
+    # sitemaps
+    path('sitemap.xml', sitemap, {'sitemaps': {'blog': BlogSitemap, 'pages': StaticViewSitemap}},
+         name='django.contrib.sitemaps.views.sitemap')
 ]
 
 # NOTE: The staticfiles_urlpatterns also discovers static files (ie. no need to run collectstatic). Both the static
