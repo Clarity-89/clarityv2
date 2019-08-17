@@ -339,7 +339,16 @@ h5 {
   .blog__image--large {
     height: 400px;
     max-width: 900px;
-    margin-bottom: 24px; }
+    margin-bottom: 24px;
+    position: relative; }
+  .blog__image-credit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    font-size: 12px; }
 
 .blog__info {
   display: flex;

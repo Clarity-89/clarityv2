@@ -37,9 +37,13 @@
         </section>
         {% if blog_post.image %}
             <section class="blog__image blog__image--large"
-                     style="background-image: url({{ blog_post.image.url }})"></section>
-            <img class="blog__image--backup" src="{{ blog_post.image.url }}" alt="Thumbnail"/>
+                     style="background-image: url({{ blog_post.image.url }})">
+                {% if blog_post.image_credit %}
+                    <p class="blog__image-credit">{% trans 'Image credit' %}: {{ blog_post.image_credit }}</p>
+                {% endif %}
+            </section>
         {% endif %}
         <section class="blog__text">{{ blog_post.text|safe }}</section>
     </article>
 {% endblock %}
+

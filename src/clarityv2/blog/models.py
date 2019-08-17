@@ -22,6 +22,7 @@ class BlogPost(models.Model):
     title = models.CharField(_('title'), max_length=255)
     slug = AutoSlugField(_('slug'), populate_from='title', unique=True)
     image = models.ImageField(_('image'), blank=True, null=True, upload_to='blog')
+    image_credit = models.CharField(_('image_credit'), max_length=255, blank=True, null=True)
     text = RichTextField(blank=True)
     tags = TaggableManager()
     published = models.BooleanField(_('published'), default=False)
