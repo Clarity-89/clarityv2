@@ -5,7 +5,7 @@ var paths = require("./build/paths");
  * Webpack configuration
  * Run using "webpack"
  */
-module.exports = {
+module.exports = (env, argv) => ({
     // Path to the js entry point (source)
     entry: __dirname + "/" + paths.jsEntry,
 
@@ -47,6 +47,6 @@ module.exports = {
 
     // Minify output
     optimization: {
-        minimize: false
+        minimize: argv.mode === 'production'
     }
-};
+});
