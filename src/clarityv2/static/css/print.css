@@ -417,6 +417,8 @@ h5 {
     line-height: 1.6; }
   .blog__text img {
     margin: 0 auto; }
+    .blog__text img.square-image {
+      border-radius: 0; }
   .blog__text p, .blog__text a, .blog__text ul, .blog__text li, .blog__text ol {
     font-family: 'Open Sans', sans-serif !important;
     font-size: 18px; }

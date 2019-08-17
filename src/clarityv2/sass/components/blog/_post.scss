@@ -154,6 +154,10 @@
 
     img {
       margin: 0 auto; // center images inside text
+
+      &.square-image {
+        border-radius: 0;
+      }
     }
 
     p, a, ul, li, ol {
