@@ -1,15 +1,16 @@
 import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
-from django.utils.translation import ugettext_lazy as _
 from django.db.models import Sum
 from django.db.models.functions import ExtractYear
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import ListView
 
 from clarityv2.crm.models import Project
 
-from .models import WorkEntry
 from .mixins import OrderingMixin
+from .models import WorkEntry
 
 
 class WorkEntryList(LoginRequiredMixin, OrderingMixin, ListView):

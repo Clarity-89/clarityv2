@@ -1,8 +1,10 @@
-import factory
 from datetime import timedelta
+
+import factory
 
 from clarityv2.accounts.tests.factories import UserFactory
 from clarityv2.crm.tests.factories import ProjectFactory
+
 from ..models import WorkEntry
 
 

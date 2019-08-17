@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Contact, Client, Project
 from clarityv2.utils.admin.decorators import link_list
+
+from .models import Client, Contact, Project
 
 
 @admin.register(Contact)

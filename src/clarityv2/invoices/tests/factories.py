@@ -1,6 +1,6 @@
 import factory
-
 from regex.crm.tests.factories import ClientFactory
+
 from ..models import Invoice, InvoiceItem
 
 

@@ -6,9 +6,9 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from autoslug.fields import AutoSlugField
-from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
-from djchoices import DjangoChoices, ChoiceItem
+from djchoices import ChoiceItem, DjangoChoices
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Contact(models.Model):

@@ -3,11 +3,11 @@ import re
 from datetime import date, datetime, time, timedelta
 
 from django.conf import settings
-from django.core import validators
-from django.urls import reverse
-from django.db import models, transaction
-from django.db.models import F, Sum, Max
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.core import validators
+from django.db import models, transaction
+from django.db.models import F, Max, Sum
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _

@@ -3,7 +3,10 @@ from django.urls import reverse
 from django_webtest import WebTest
 
 from clarityv2.accounts.tests.factories import UserFactory
-from clarityv2.crm.tests.factories import ClientFactory, ProjectFactory, ContactFactory
+from clarityv2.crm.tests.factories import (
+    ClientFactory, ContactFactory, ProjectFactory
+)
+
 from .factories import WorkEntryFactory
 
 

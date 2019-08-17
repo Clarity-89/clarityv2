@@ -3,8 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from solo.models import SingletonModel
 from django_countries.fields import CountryField
+from solo.models import SingletonModel
 
 from .managers import UserManager
 

@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+
 from hijack_admin.admin import HijackUserAdminMixin
 from solo.admin import SingletonModelAdmin
 
-from .models import User, AdminUser
+from .models import AdminUser, User
 
 
 @admin.register(User)

@@ -1,6 +1,7 @@
 from django.contrib.sitemaps import Sitemap
-from clarityv2.blog.models import BlogPost
 from django.urls import reverse
+
+from clarityv2.blog.models import BlogPost
 
 
 class BlogSitemap(Sitemap):

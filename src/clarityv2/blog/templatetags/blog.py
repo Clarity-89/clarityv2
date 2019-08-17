@@ -1,6 +1,6 @@
-import readtime
-
 from django import template
+
+import readtime
 
 register = template.Library()
 

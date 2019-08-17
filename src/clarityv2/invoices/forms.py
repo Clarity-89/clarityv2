@@ -1,6 +1,7 @@
 from django import forms
 
 from clarityv2.utils.admin.widgets import PrivateFileWidget
+
 from .models import Invoice
 
 
