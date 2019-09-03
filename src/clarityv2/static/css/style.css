@@ -7086,9 +7086,11 @@ h5 {
     margin: 0 auto; }
     .blog__text img.square-image {
       border-radius: 0; }
-  .blog__text p, .blog__text a, .blog__text ul, .blog__text li, .blog__text ol {
+  .blog__text * {
     font-family: 'Open Sans', sans-serif !important;
     font-size: 18px; }
+  .blog__text h3, .blog__text h4, .blog__text h5, .blog__text h6 {
+    font-weight: bold; }
   .blog__text code {
     font-family: monospace !important; }
   @media only screen and (max-width: 767px) {
