@@ -7,8 +7,14 @@
 {% endblock %}
 {% block thumbnail %}
     {% if  blog_post.image %}
-        <meta property="og:image" content="{{ blog_post.image.url }}">
         <meta property="image" content="{{ blog_post.image.url }}">
+        <!-- Twitter tags -->
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:creator" content="@Clarity_89"/>
+        <meta property="og:url" content="{{ request.get_host }}{{ blog_post.get_absolute_url }}"/>
+        <meta property="og:title" content="{{ blog_post.title }}"/>
+        <meta property="og:description" content="{{ blog_post.description|truncatechars:140 }}"/>
+        <meta property="og:image" content="{{ blog_post.image.url }}">
     {% endif %}
 {% endblock %}
 
