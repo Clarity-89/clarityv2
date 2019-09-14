@@ -3,12 +3,17 @@
 {% block header %}
     {% include "includes/navbar.html" with active='home' %}
 {% endblock %}
+{% block thumbnail %}
+    <meta property="og:image" content="{{ request.META.HTTP_HOST }}/media/blog/deathtostock.jpg">
+    <meta itemprop="image" content="{{ request.META.HTTP_HOST }}/media/blog/deathtostock.jpg">
+{% endblock %}
 
 {% block content %}
     <div class="greeting row flex-center">
         {% blocktrans %}
             <h3 class="sm-12 md-5 col center">
-                Hello, I am Oleksandr (Alex for short), a web developer with a focus on Front end, based in Helsinki, Finland.
+                Hello, I am Oleksandr (Alex for short), a web developer with a focus on Front end, based in Helsinki,
+                Finland.
             </h3>
         {% endblocktrans %}
     </div>
