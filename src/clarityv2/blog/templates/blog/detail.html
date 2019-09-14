@@ -7,8 +7,8 @@
 {% endblock %}
 {% block thumbnail %}
     {% if  blog_post.image %}
-        <meta property="og:image" content="{{ request.get_host}}{{ blog_post.image.url }}">
-        <meta property="image" content="{{ request.get_host}}{{ blog_post.image.url }}">
+        <meta property="og:image" content="{{ blog_post.image.url }}">
+        <meta property="image" content="{{ blog_post.image.url }}">
     {% endif %}
 {% endblock %}
 
