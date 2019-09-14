@@ -36,7 +36,7 @@ class BlogPost(models.Model):
     class Meta:
         verbose_name = _('blog post')
         verbose_name_plural = _('blog posts')
-        ordering = ['pub_date']
+        ordering = ['-pub_date']
 
     def save(self, *args, **kwargs):
         """
