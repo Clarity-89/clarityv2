@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Oleksandr Khomenko - web developer, personal website and portfolio">
     <meta name="author" content="Oleksandr Khomenko">
-    <meta name="keywords"
-          content="Web Developer, Front-end, Front End, Full-stack, Full Stack, Freelance, Freelance Web Developer">
     <meta name="google-site-verification" content="U6RD1PbTLGlZGkXkbAFJaodD9xpct_2HZ1s1CQGSS88"/>
-    {% block thumbnail %}{% endblock %}
+    {% block thumbnail %}
+        <meta property="og:image" content="{{ request.get_host}}/media/blog/deathtostock.jpg">
+        <meta property="image" content="{{ request.get_host }}/media/blog/deathtostock.jpg">
+    {% endblock %}
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 

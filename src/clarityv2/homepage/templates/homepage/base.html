@@ -3,10 +3,6 @@
 {% block header %}
     {% include "includes/navbar.html" with active='home' %}
 {% endblock %}
-{% block thumbnail %}
-    <meta property="og:image" content="{{ request.META.HTTP_HOST }}/media/blog/deathtostock.jpg">
-    <meta itemprop="image" content="{{ request.META.HTTP_HOST }}/media/blog/deathtostock.jpg">
-{% endblock %}
 
 {% block content %}
     <div class="greeting row flex-center">
