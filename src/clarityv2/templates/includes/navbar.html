@@ -39,28 +39,28 @@
                     {% trans "Contact" %}
                 </a>
             </li>
-            {% if user.is_authenticated %}
-                <li class="navbar__tab">
-                    <a class="no-underline {% if active == 'projects' %}active{% endif %}"
-                       href="{% url 'accounts:projects' %}">
-                        {% trans "Projects" %}
-                    </a>
-                </li>
-
-                <li class="navbar__tab">
-                    <a class="no-underline {% if active == 'logout' %}active{% endif %}"
-                       href="{% url 'account_logout' %}">
-                        {% trans "Logout" %}
-                    </a>
-                </li>
-            {% else %}
-                <li class="navbar__tab">
-                    <a class="no-underline {% if active == 'login' %}active{% endif %}"
-                       href="{% url 'account_login' %}">
-                        {% trans "Login" %}
-                    </a>
-                </li>
-            {% endif %}
+{#            {% if user.is_authenticated %}#}
+{#                <li class="navbar__tab">#}
+{#                    <a class="no-underline {% if active == 'projects' %}active{% endif %}"#}
+{#                       href="{% url 'accounts:projects' %}">#}
+{#                        {% trans "Projects" %}#}
+{#                    </a>#}
+{#                </li>#}
+{##}
+{#                <li class="navbar__tab">#}
+{#                    <a class="no-underline {% if active == 'logout' %}active{% endif %}"#}
+{#                       href="{% url 'account_logout' %}">#}
+{#                        {% trans "Logout" %}#}
+{#                    </a>#}
+{#                </li>#}
+{#            {% else %}#}
+{#                <li class="navbar__tab">#}
+{#                    <a class="no-underline {% if active == 'login' %}active{% endif %}"#}
+{#                       href="{% url 'account_login' %}">#}
+{#                        {% trans "Login" %}#}
+{#                    </a>#}
+{#                </li>#}
+{#            {% endif %}#}
         </ul>
     </div>
 </nav>
