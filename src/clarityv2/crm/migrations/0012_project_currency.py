@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='project',
             name='currency',
-            field=models.CharField(choices=[('usd', 'USD'), ('euro', 'u"€"')], default='euro', max_length=20, verbose_name='currency'),
+            field=models.CharField(choices=[('usd', 'USD'), ('euro', '€')], default='euro', max_length=20, verbose_name='currency'),
         ),
     ]

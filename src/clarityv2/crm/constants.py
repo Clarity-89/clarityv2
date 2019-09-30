@@ -5,4 +5,4 @@ from djchoices import ChoiceItem, DjangoChoices
 
 class Currencies(DjangoChoices):
     usd = ChoiceItem('usd', _('USD'))
-    euro = ChoiceItem('euro', _('u"\u20AC"'))
+    euro = ChoiceItem('euro', _('\u20AC'))
