@@ -114,7 +114,7 @@
             {% if invoice.vat_reverse_charge %}
                 <tr>
                     <td>
-                        <strong>{% trans "Total price" %}: {{ currency }}  {{ invoice.total_no_vat|floatformat:2 }}</strong>
+                        <strong>{% trans "Total price" %}: {{ currency }} {{ invoice.total_no_vat|floatformat:2 }}</strong>
                     </td>
                 </tr>
             {% else %}
@@ -140,7 +140,9 @@
         {% if invoice.vat_reverse_charge %}
             <hr>
             <strong class="invoice__iban">{% trans "IBAN" %}: {% iban %}</strong>
-            <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
+            {% if invoice.client.country != 'US' %}
+                <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
+            {% endif %}
         {% endif %}
         <hr>
         {% identity_string %}
