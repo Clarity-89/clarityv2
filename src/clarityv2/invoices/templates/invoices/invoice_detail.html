@@ -139,7 +139,7 @@
     <section class="invoice-end">
         {% if invoice.vat_reverse_charge %}
             <hr>
-            <strong class="invoice__iban">{% trans "IBAN" %}: {% iban %}</strong>
+            {% bank_details %}
             {% if invoice.client.country != 'US' %}
                 <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
             {% endif %}

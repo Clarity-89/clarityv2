@@ -45,3 +45,14 @@ def identity_string():
 def iban():
     user = AdminUser.objects.get()
     return user.iban
+
+
+@register.inclusion_tag('invoices/tags/bank_details.html')
+def bank_details():
+    user = AdminUser.objects.get()
+    return {
+        'bank': user.bank,
+        'branch': user.bank_branch,
+        'iban': user.iban,
+        'swift': user.swift
+    }
