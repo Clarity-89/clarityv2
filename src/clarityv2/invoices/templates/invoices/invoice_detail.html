@@ -66,13 +66,16 @@
                         Amount <br> (hours)
                     {% endblocktrans %}
                 </th>
-                <th>
-                    {% blocktrans %}
-                        Rate <br> ({{ currency }} / hour)
-                    {% endblocktrans %}
-                </th>
-                <th>{% trans "Flat fee" %}</th>
-
+                {% if items.first.project.base_rate %}
+                    <th>
+                        {% blocktrans %}
+                            Rate <br> ({{ currency }} / hour)
+                        {% endblocktrans %}
+                    </th>
+                {% endif %}
+                {% if items.first.project.flat_fee %}
+                    <th>{% trans "Flat fee" %}</th>
+                {% endif %}
                 {% if not invoice.vat_reverse_charge %}
                     <th>{% trans "Tax rate" %}</th>
                 {% endif %}
@@ -91,8 +94,12 @@
                     <td>{{ item.remarks }}</td>
                     <td>{{ item.date|date:" d/m/y" }}</td>
                     <td>{{ item.amount }}</td>
-                    <td>{% if item.project.base_rate %}{{ item.rate }}{% else %}-{% endif %}</td>
-                    <td>{% if item.project.flat_fee %}{{ item.rate }}{% else %}-{% endif %}</td>
+                    {% if item.project.base_rate %}
+                        <td>{{ item.rate }}</td>
+                    {% endif %}
+                    {% if item.project.flat_fee %}
+                        <td>{{ item.rate }}</td>
+                    {% endif %}
 
                     {% if not invoice.vat_reverse_charge %}
                         <td>{{ item.tax_rate|percentage }}</td>
@@ -139,10 +146,12 @@
     <section class="invoice-end">
         {% if invoice.vat_reverse_charge %}
             <hr>
-            {% bank_details %}
             {% if invoice.client.country != 'US' %}
                 <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
+                <br>
             {% endif %}
+            <h6>{% trans 'Payment information' %}</h6>
+            {% bank_details %}
         {% endif %}
         <hr>
         {% identity_string %}
