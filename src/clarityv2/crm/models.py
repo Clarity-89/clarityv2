@@ -10,6 +10,8 @@ from django_countries.fields import CountryField
 from djchoices import ChoiceItem, DjangoChoices
 from phonenumber_field.modelfields import PhoneNumberField
 
+from .constants import Currencies
+
 
 class Contact(models.Model):
     """
@@ -91,6 +93,7 @@ class Project(models.Model):
         _('tax rate'), max_digits=4, decimal_places=2,
         choices=TaxRates.choices, default=TaxRates.no_vat
     )
+    currency = models.CharField(_('currency'), max_length=20, choices=Currencies, default=Currencies.euro)
 
     class Meta:
         verbose_name = _('project')
