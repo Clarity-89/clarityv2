@@ -68,7 +68,7 @@
                 </th>
                 <th>
                     {% blocktrans %}
-                        Rate <br> (€ / hour)
+                        Rate <br> ({{ currency }} / hour)
                     {% endblocktrans %}
                 </th>
                 <th>{% trans "Flat fee" %}</th>
@@ -114,7 +114,7 @@
             {% if invoice.vat_reverse_charge %}
                 <tr>
                     <td>
-                        <strong>{% trans "Total price" %}: &euro; {{ invoice.total_no_vat|floatformat:2 }}</strong>
+                        <strong>{% trans "Total price" %}: {{ currency }}  {{ invoice.total_no_vat|floatformat:2 }}</strong>
                     </td>
                 </tr>
             {% else %}

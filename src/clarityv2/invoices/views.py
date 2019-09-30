@@ -23,7 +23,8 @@ class InvoiceDetailView(PermissionRequiredMixin, DetailView):
         context.update({
             'tax_rates': tax_rates,
             'items': items,
-            'total_hours': total_hours
+            'total_hours': total_hours,
+            'currency': items.first().project.get_currency_display()
         })
         return context
 
