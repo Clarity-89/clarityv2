@@ -25,10 +25,11 @@ class DeductionAdmin(admin.ModelAdmin):
                 response.context_data['total_amount'] = amount
         return response
 
+
     def get_urls(self):
         extra = [
             url(
-                r'^(<pk>)/file/$',
+                r'^(?P<pk>.*)/file/$',
                 self.admin_site.admin_view(PrivateMediaView.as_view()),
                 name='deductions_receipt'
             ),
