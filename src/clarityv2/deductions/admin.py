@@ -7,6 +7,12 @@ from clarityv2.utils.views.private_media import PrivateMediaView
 from .models import Deduction
 
 
+class DeductionPrivateMediaView(PrivateMediaView):
+    model = Deduction
+    permission_required = 'invoices.can_view_invoice'
+    file_field = 'receipt'
+
+
 @admin.register(Deduction)
 class DeductionAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'amount')
@@ -30,8 +36,8 @@ class DeductionAdmin(admin.ModelAdmin):
         extra = [
             url(
                 r'^(?P<pk>.*)/file/$',
-                self.admin_site.admin_view(PrivateMediaView.as_view()),
-                name='deductions_receipt'
+                self.admin_site.admin_view(DeductionPrivateMediaView.as_view()),
+                name='deductions_deduction_receipt'
             ),
         ]
         return extra + super().get_urls()
