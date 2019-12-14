@@ -70,7 +70,8 @@ INSTALLED_APPS = [
     'clarityv2.work_entries',
     'clarityv2.homepage',
     'clarityv2.portfolio',
-    'clarityv2.blog'
+    'clarityv2.blog',
+    'clarityv2.deductions'
 ]
 
 MIDDLEWARE = [
