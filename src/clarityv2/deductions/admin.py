@@ -1,5 +1,8 @@
+from django.conf.urls import url
 from django.contrib import admin
 from django.db.models import Sum
+
+from clarityv2.utils.views.private_media import PrivateMediaView
 
 from .models import Deduction
 
@@ -21,3 +24,13 @@ class DeductionAdmin(admin.ModelAdmin):
                 amount = queryset.aggregate(Sum('amount'))['amount__sum']
                 response.context_data['total_amount'] = amount
         return response
+
+    def get_urls(self):
+        extra = [
+            url(
+                r'^(<pk>)/file/$',
+                self.admin_site.admin_view(PrivateMediaView.as_view()),
+                name='deductions_receipt'
+            ),
+        ]
+        return extra + super().get_urls()
