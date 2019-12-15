@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from django.contrib import admin
 from django.db.models import Sum
 
@@ -34,8 +34,8 @@ class DeductionAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         extra = [
-            url(
-                r'^(?P<pk>.*)/file/$',
+            path(
+                '<pk>/file/',
                 self.admin_site.admin_view(DeductionPrivateMediaView.as_view()),
                 name='deductions_deduction_receipt'
             ),
