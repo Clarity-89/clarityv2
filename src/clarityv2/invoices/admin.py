@@ -40,7 +40,6 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
     list_filter = ('client', 'date', 'due_date', 'received')
     search_fields = ('invoice_number',)
     private_media_fields = ('pdf',)
-    private_media_view_options = {'permission_required': 'invoices.can_view_invoice'}
     inlines = [InvoiceItemInline]
     actions = [generate_invoices, render_pdf]
 
