@@ -12,9 +12,11 @@ from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
+from privates.fields import PrivateMediaFileField
+
 from clarityv2.crm.models import TaxRates
-from clarityv2.utils.storages import private_media_storage
 from clarityv2.work_entries.models import WorkEntry
+
 
 logger = logging.getLogger(__name__)
 
@@ -32,10 +34,7 @@ class Invoice(models.Model):
         validators=[validators.RegexValidator(RE_INVOICE_NUMBER)]
     )
     due_date = models.DateTimeField(_('due date'), null=True, blank=True)
-    pdf = models.FileField(
-        _('pdf'), blank=True, upload_to='invoices/%Y/%m',
-        storage=private_media_storage
-    )
+    pdf = PrivateMediaFileField(_('pdf'), blank=True, upload_to='invoices/%Y/%m')
 
     received = models.DateTimeField(_('received'), null=True, blank=True)
 

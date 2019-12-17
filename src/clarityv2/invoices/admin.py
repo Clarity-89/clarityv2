@@ -4,7 +4,7 @@ from django.db.models import Count
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from clarityv2.utils.views.private_media import PrivateMediaView
+from privates.admin import PrivateMediaMixin
 
 from .forms import AdminInvoiceForm
 from .models import Invoice, InvoiceItem
@@ -32,19 +32,15 @@ class InvoiceItemInline(admin.TabularInline):
     extra = 0
 
 
-class InvoicePrivateMediaView(PrivateMediaView):
-    model = Invoice
-    permission_required = 'invoices.can_view_invoice'
-    file_field = 'pdf'
-
-
 @admin.register(Invoice)
-class InvoiceAdmin(admin.ModelAdmin):
+class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
     form = AdminInvoiceForm
     list_display = ('client', 'date', 'due_date', 'received', 'invoice_number',
                     'created', 'n_items', 'generated', 'invoice_items')
     list_filter = ('client', 'date', 'due_date', 'received')
     search_fields = ('invoice_number',)
+    private_media_fields = ('pdf',)
+    private_media_view_options = {'permission_required': 'invoices.can_view_invoice'}
     inlines = [InvoiceItemInline]
     actions = [generate_invoices, render_pdf]
 
@@ -62,16 +58,6 @@ class InvoiceAdmin(admin.ModelAdmin):
 
     invoice_items.short_description = _('invoice items')
     invoice_items.allow_tags = True
-
-    def get_urls(self):
-        extra = [
-            url(
-                r'^(?P<pk>.*)/pdf/$',
-                self.admin_site.admin_view(InvoicePrivateMediaView.as_view()),
-                name='invoices_invoice_pdf'
-            ),
-        ]
-        return extra + super(InvoiceAdmin, self).get_urls()
 
 
 @admin.register(InvoiceItem)
