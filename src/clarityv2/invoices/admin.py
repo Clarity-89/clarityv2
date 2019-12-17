@@ -43,6 +43,8 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
     inlines = [InvoiceItemInline]
     actions = [generate_invoices, render_pdf]
 
+    permission_required = 'invoices.can_view_invoice'
+
     def get_queryset(self, request=None):
         return super().get_queryset(request=request).annotate(n_items=Count('invoiceitem'))
 
