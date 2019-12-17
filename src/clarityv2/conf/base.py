@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'django_extensions',
     'taggit',
+    'privates',
 
     # Project applications.
     'clarityv2.accounts',
