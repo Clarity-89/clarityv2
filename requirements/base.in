@@ -27,6 +27,7 @@ django-allauth
 django-appconf
 django-solo
 django-taggit
+django-privates
 rules
 phonenumbers
 readtime
