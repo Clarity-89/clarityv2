@@ -1,4 +1,3 @@
-from django.conf.urls import url
 from django.contrib import admin
 from django.db.models import Count
 from django.urls import reverse
