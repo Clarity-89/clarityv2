@@ -7089,7 +7089,7 @@ h5 {
   .blog__text * {
     font-family: 'Open Sans', sans-serif !important;
     font-size: 18px; }
-  .blog__text h3, .blog__text h4, .blog__text h5, .blog__text h6 {
+  .blog__text h2, .blog__text h3, .blog__text h4, .blog__text h5, .blog__text h6 {
     font-weight: bold; }
   .blog__text code, .blog__text code * {
     font-family: monospace !important; }
