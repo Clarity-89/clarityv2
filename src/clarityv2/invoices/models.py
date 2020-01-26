@@ -91,7 +91,7 @@ class Invoice(models.Model):
                 InvoiceItem.objects.create(
                     invoice=self,
                     project=entry.project,
-                    rate=entry.project.base_rate if not entry.project.flat_fee else 0,
+                    rate=entry.project.base_rate if not entry.project.flat_fee else entry.project.flat_fee,
                     amount=entry.duration.total_seconds() / 3600,
                     tax_rate=entry.project.vat,
                     source_object=entry,

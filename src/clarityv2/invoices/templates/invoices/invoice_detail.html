@@ -62,17 +62,17 @@
                 <tr>
                     <th>{% trans "Notes" %}</th>
                     <th>{% trans "Date" %}</th>
-                    <th>
-                        {% blocktrans %}
-                            Amount <br> (hours)
-                        {% endblocktrans %}
-                    </th>
                     {% if items.first.project.base_rate %}
+                        <th>
+                            {% trans "Hours" %}
+                        </th>
                         <th>
                             {% blocktrans %}
                                 Rate <br> ({{ currency }} / hour)
                             {% endblocktrans %}
                         </th>
+                    {% else %}
+                        <th>{% trans "Amount" %}</th>
                     {% endif %}
                     {% if items.first.project.flat_fee %}
                         <th>{% trans "Flat fee" %}</th>
@@ -94,7 +94,11 @@
                     <tr>
                         <td>{{ item.remarks|linebreaks }}</td>
                         <td>{{ item.date|date:" d/m/y" }}</td>
-                        <td>{{ item.amount }}</td>
+                        {% if item.project.base_rate %}
+                            <td>{{ item.amount }}</td>
+                        {% else %}
+                            <td>{{ item.amount|stringformat:'d' }}</td>
+                        {% endif %}
                         {% if item.project.base_rate %}
                             <td>{{ item.rate }}</td>
                         {% endif %}
@@ -116,9 +120,11 @@
                 <tr>
                     <td></td>
                 </tr>
-                <tr>
-                    <td class="invoice__total-hours">{% trans "Total hours" %}: {{ invoice.total_hours }}</td>
-                </tr>
+                {% if not items.first.project.flat_fee %}
+                    <tr>
+                        <td class="invoice__total-hours">{% trans "Total hours" %}: {{ invoice.total_hours }}</td>
+                    </tr>
+                {% endif %}
                 {% if invoice.vat_reverse_charge %}
                     <tr>
                         <td>
