@@ -72,7 +72,7 @@ class Client(models.Model):
 
 class TaxRates(DjangoChoices):
     no_vat = ChoiceItem(Decimal('0.00'), _('no vat'))
-    standard = ChoiceItem(Decimal('0.20'), _('standard vat rate'))
+    standard = ChoiceItem(Decimal('0.24'), _('standard vat rate'))
 
 
 class Project(models.Model):
