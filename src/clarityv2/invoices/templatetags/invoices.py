@@ -3,6 +3,7 @@ from django.conf import settings
 
 from clarityv2.accounts.models import AdminUser
 
+
 register = template.Library()
 
 
@@ -21,7 +22,8 @@ def company_details(client=None):
             'client': client,
             'company_name': client.get_entity_name,
             'company_address': [client.get_full_street_address(), client.postal_code + ' ' + client.city,
-                                client.get_country_display()]
+                                client.get_country_display()],
+            'company_tax_identifier': client.vat_number
         }
 
 
