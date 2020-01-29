@@ -71,6 +71,7 @@ class AdminUser(SingletonModel):
     country = CountryField(_('country'), blank=True)
     postal_code = models.CharField(_('postal code'), max_length=20, blank=True)
     business_id = models.CharField(_('business ID'), max_length=50, blank=True)
+    vat_number = models.CharField(_('VAT number'), max_length=50, blank=True)
     iban = models.CharField(_('iban'), max_length=50, blank=True)
     bank = models.CharField(_('bank'), max_length=50, blank=True)
     bank_branch = models.CharField(_('bank branch'), max_length=50, blank=True)
