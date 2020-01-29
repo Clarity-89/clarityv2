@@ -87,6 +87,14 @@ class AdminUser(SingletonModel):
         full_name = '%s %s' % (self.first_name, self.last_name)
         return full_name.strip()
 
+    def get_entity_name(self):
+        """
+        Returns company name or person full name
+        """
+        if self.company_name is not None:
+            return self.company_name
+        return self.get_full_name()
+
     def get_full_street_address(self):
         address = "{} {}".format(self.address_street, self.house_number)
 

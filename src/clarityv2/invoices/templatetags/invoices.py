@@ -19,7 +19,7 @@ def company_details(client=None):
         client = AdminUser.objects.get()
         return {
             'client': client,
-            'company_name': client.get_full_name,
+            'company_name': client.get_entity_name,
             'company_address': [client.get_full_street_address(), client.postal_code + ' ' + client.city,
                                 client.get_country_display()]
         }
