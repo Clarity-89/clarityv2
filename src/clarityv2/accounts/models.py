@@ -60,6 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class AdminUser(SingletonModel):
+    company_name = models.CharField(_('company name'), max_length=255, blank=True)
     first_name = models.CharField(_('first name'), max_length=255, blank=True)
     last_name = models.CharField(_('last name'), max_length=255, blank=True)
     email = models.EmailField(_('email address'), blank=True)
