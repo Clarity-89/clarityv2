@@ -33,6 +33,7 @@ class Invoice(models.Model):
         unique=True, default=None, null=True,
         validators=[validators.RegexValidator(RE_INVOICE_NUMBER)]
     )
+    reference_number = models.CharField(_('reference number'), max_length=50, blank=True, null=True)
     due_date = models.DateTimeField(_('due date'), null=True, blank=True)
     pdf = PrivateMediaFileField(_('pdf'), blank=True, upload_to='invoices/%Y/%m')
 
