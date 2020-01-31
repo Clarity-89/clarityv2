@@ -7,7 +7,7 @@ from freezegun import freeze_time
 
 from clarityv2.crm.tests.factories import ProjectFactory
 
-from ..utils import render_invoice_pdf, generate_ref_number
+from ..utils import render_invoice_pdf, generate_ref_number, generate_rf_reference
 from .factories import InvoiceFactory, InvoiceItemFactory
 
 
@@ -45,3 +45,15 @@ class InvoiceReferenceTests(TestCase):
         self.assertEquals('1234561', generate_ref_number('0000123456'))
         self.assertEquals('7778282823', generate_ref_number('0777828282'))
         self.assertEquals('2019000280', generate_ref_number('0201900028'))
+
+    def test_generate_rf_reference(self):
+        # Should work for generic numbers
+        self.assertEquals('RF341234561', generate_rf_reference(123456))
+        self.assertEquals('RF817778282823', generate_rf_reference(777828282))
+        self.assertEquals('RF372019000280', generate_rf_reference(201900028))
+
+        # Should handle leading 0
+        self.assertEquals('RF341234561', generate_rf_reference('0123456'))
+        self.assertEquals('RF341234561', generate_rf_reference('0000123456'))
+        self.assertEquals('RF817778282823', generate_rf_reference('0777828282'))
+        self.assertEquals('RF372019000280', generate_rf_reference('0201900028'))

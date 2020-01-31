@@ -84,15 +84,16 @@ class InvoicePDFTemplateResponseMixin(PDFTemplateResponseMixin):
 
 
 INVOICE_MULTIPLIERS = [1, 3, 7]
+RF_NUM_BASE = '2715'
 
 
-def generate_ref_number(invoice_number):
+def generate_ref_number(base):
     """
     Generate Finnish reference number, where it must be between 4 (3 base chars + checksum) and
     20 (19 base + 1 checksum) characters long.
     Rules for generating the checksum: https://www.finanssiala.fi/maksujenvalitys/dokumentit/Forming_a_Finnish_reference_number.pdf
     """
-    str_number = str(invoice_number).lstrip("0")
+    str_number = str(base).lstrip("0")
 
     if 19 < len(str_number) < 3:
         raise ValueError('Invoice number must be min 3 and max 19 chars long')
@@ -106,3 +107,28 @@ def generate_ref_number(invoice_number):
         checksum_num = 0
 
     return f'{str_number}{checksum_num}'
+
+
+def get_rf_checksum(rf_base):
+    """
+    Get the two checksum digits by subtracting modulo 97 of RF base from 98
+    """
+
+    remainder = int(rf_base) % 97
+    digits = 98 - remainder
+
+    if digits < 10:
+        return '0' + str(digits)
+
+    return str(digits)
+
+
+def generate_rf_reference(base):
+    """
+    Generate Creditor reference: https://en.wikipedia.org/wiki/Creditor_Reference for international payments
+    Format: FR + 2 checksum numbers + Finnish reference number
+    """
+    ref_number = generate_ref_number(base)
+    rf_base = ref_number + RF_NUM_BASE + '00'
+
+    return 'RF' + get_rf_checksum(rf_base) + ref_number
