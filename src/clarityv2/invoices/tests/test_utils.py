@@ -7,7 +7,9 @@ from freezegun import freeze_time
 
 from clarityv2.crm.tests.factories import ProjectFactory
 
-from ..utils import render_invoice_pdf, generate_ref_number, generate_rf_reference
+from ..utils import (
+    generate_ref_number, generate_rf_reference, render_invoice_pdf
+)
 from .factories import InvoiceFactory, InvoiceItemFactory
 
 

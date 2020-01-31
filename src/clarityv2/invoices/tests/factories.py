@@ -1,4 +1,5 @@
 import factory
+
 from clarityv2.crm.tests.factories import ClientFactory
 
 from ..models import Invoice, InvoiceItem

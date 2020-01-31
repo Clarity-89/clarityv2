@@ -3,7 +3,6 @@ from django.conf import settings
 
 from clarityv2.accounts.models import AdminUser
 
-
 register = template.Library()
 
 

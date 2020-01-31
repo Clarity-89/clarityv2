@@ -132,3 +132,9 @@ def generate_rf_reference(base):
     rf_base = ref_number + RF_NUM_BASE + '00'
 
     return 'RF' + get_rf_checksum(rf_base) + ref_number
+
+
+def generate_invoice_reference(client, invoice_number):
+    if client.country == 'FI':
+        return generate_ref_number(invoice_number)
+    return generate_rf_reference(invoice_number)
