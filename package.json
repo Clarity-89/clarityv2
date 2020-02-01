@@ -18,7 +18,6 @@
     "homepage": "claritydev.net",
     "dependencies": {
         "bootstrap": "^4.0.0",
-        "bourbon-neat": "^1.8.0",
         "font-awesome": "^4.7.0",
         "normalize.css": "^4.0.0",
         "papercss": "^1.6.1",
