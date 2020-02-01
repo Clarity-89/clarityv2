@@ -1,11 +1,8 @@
 {
     "name": "clarityv2",
-    "version": "1.0.0-alpha.0",
-    "description": "clarityv2 project",
+    "version": "1.0.0",
+    "description": "Personal website",
     "main": "src/static/clarityv2/js/clarityv2.js",
-    "directories": {
-        "doc": "doc"
-    },
     "scripts": {
         "build": "node ./node_modules/gulp/bin/gulp.js build && webpack --config webpack.config.js --mode=production",
         "gulp": "node ./node_modules/gulp/bin/gulp.js watch",
