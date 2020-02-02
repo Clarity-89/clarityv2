@@ -1,5 +1,6 @@
 import factory
-from regex.crm.tests.factories import ClientFactory
+
+from clarityv2.crm.tests.factories import ClientFactory
 
 from ..models import Invoice, InvoiceItem
 

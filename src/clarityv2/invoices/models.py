@@ -17,6 +17,7 @@ from privates.fields import PrivateMediaFileField
 from clarityv2.crm.models import TaxRates
 from clarityv2.work_entries.models import WorkEntry
 
+from .utils import generate_invoice_reference
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,7 @@ class Invoice(models.Model):
         unique=True, default=None, null=True,
         validators=[validators.RegexValidator(RE_INVOICE_NUMBER)]
     )
+    reference_number = models.CharField(_('reference number'), max_length=50, blank=True, null=True)
     due_date = models.DateTimeField(_('due date'), null=True, blank=True)
     pdf = PrivateMediaFileField(_('pdf'), blank=True, upload_to='invoices/%Y/%m')
 
@@ -97,12 +99,14 @@ class Invoice(models.Model):
                     source_object=entry,
                     remarks=entry.notes,
                     date=entry.date
+
                 )
 
             # either created from hourly rate (work_entries) or manual invoice items
             if work_entries or self.invoiceitem_set.exists():
                 self.generated = timezone.now()
                 self.generate_invoice_number(save=False)
+                self.reference_number = generate_invoice_reference(self.client, self.invoice_number)
                 self.save()
 
     def regenerate(self):
