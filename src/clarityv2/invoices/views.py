@@ -18,7 +18,7 @@ class InvoiceDetailView(PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(InvoiceDetailView, self).get_context_data(**kwargs)
         tax_rates = self.object.invoiceitem_set.values('tax_rate').annotate(num=Count('tax_rate'))
-        items = self.object.invoiceitem_set.select_related('project').order_by('project', 'tax_rate')
+        items = self.object.invoiceitem_set.select_related('project').order_by('date', 'project', 'tax_rate')
         total_hours = items.aggregate(Sum('amount'))['amount__sum']
         context.update({
             'tax_rates': tax_rates,
