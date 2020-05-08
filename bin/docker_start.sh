@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -ex
+
+# Wait for the database container
+# See: https://docs.docker.com/compose/startup-order/
+export PGHOST=${DB_HOST:-db}
+export PGPORT=${DB_PORT:-5432}
