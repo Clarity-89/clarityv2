@@ -49,7 +49,7 @@ COPY --from=frontend-build /app/src/clarityv2/static/css /app/src/clarityv2/stat
 COPY --from=frontend-build /app/src/clarityv2/static/js /app/src/clarityv2/static/js
 COPY ./src /app/src
 
-ENV DJANGO_SETTINGS_MODULE=clarityv2.conf.development
+#ENV DJANGO_SETTINGS_MODULE=clarityv2.conf.development
 
 ARG SECRET_KEY=dummy
 EXPOSE 8000
