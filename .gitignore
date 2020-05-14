@@ -24,5 +24,6 @@ local.py
 /mail/
 /log/*.log*
 backup/
+.env
 
 private_media/
