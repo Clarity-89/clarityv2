@@ -59,6 +59,7 @@ psycopg2==2.8.3
 pycparser==2.19           # via cffi
 pyphen==0.9.5             # via weasyprint
 pyquery==1.4.0            # via readtime
+python-dotenv==0.13.0
 python3-openid==3.1.0     # via django-allauth
 pytz==2019.2
 pyyaml==5.1.2             # via tablib
