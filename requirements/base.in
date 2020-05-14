@@ -32,3 +32,4 @@ django==2.2.9
 rules
 phonenumbers
 readtime
+python-dotenv
