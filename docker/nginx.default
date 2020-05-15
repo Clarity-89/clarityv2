@@ -1,22 +1,31 @@
+upstream clarityv2 {
+    server web:8000;
+}
+
 server {
-    server_name localhost;
+    listen 80;
+    #server_name localhost;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /app/clarityv2;
+        alias /clarityv2/static;
     }
 
     location / {
-        proxy_pass http://unix:/app/clarityv2/clarityv2.sock;
+        #proxy_pass http://unix:/clarityv2/clarityv2.sock;
+        proxy_pass http://clarityv2
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
     }
 
     location /media  {
-        alias /app/clarityv2/media;
+        alias /clarityv2/media;
     }
 
     location /protected {
         internal;
         access_log /var/log/nginx/private.prod.access.log;
-        alias /app/clarityv2/private_media;
+        alias /clarityv2/private_media;
     }
 }

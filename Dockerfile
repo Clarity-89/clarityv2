@@ -14,16 +14,16 @@ RUN pip install -r requirements/production.txt
 # JS
 FROM node:12-stretch AS frontend-build
 
-WORKDIR /app
+WORKDIR /clarityv2
 
-COPY ./*.json /app/
+COPY ./*.json /clarityv2/
 RUN npm ci
 
-COPY ./gulpfile.js ./webpack.config.js ./.babelrc /app/
-COPY ./build /app/build/
+COPY ./gulpfile.js ./webpack.config.js ./.babelrc /clarityv2/
+COPY ./build /clarityv2/build/
 
-COPY src/clarityv2/js /app/src/clarityv2/js
-COPY src/clarityv2/sass /app/src/clarityv2/sass
+COPY src/clarityv2/js /clarityv2/src/clarityv2/js
+COPY src/clarityv2/sass /clarityv2/src/clarityv2/sass
 
 RUN npm run build
 
@@ -35,25 +35,37 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libgdal20 \
         libgeos-c1v5 \
         libproj12 \
+        nano \
+        vim \
     && rm -rf /var/lib/apt/lists/*
 
 
 COPY --from=build /usr/local/lib/python3.7 /usr/local/lib/python3.7
+COPY --from=build /usr/local/bin/gunicorn /usr/local/bin/gunicorn
 
-WORKDIR /app
+WORKDIR /clarityv2
+
 COPY ./bin/docker_start.sh /start.sh
+
 RUN chmod +x /start.sh
-RUN mkdir /app/log
+RUN mkdir /clarityv2/log
 
-COPY --from=frontend-build /app/src/clarityv2/static/css /app/src/clarityv2/static/css
-COPY --from=frontend-build /app/src/clarityv2/static/js /app/src/clarityv2/static/js
-COPY ./src /app/src
+COPY --from=frontend-build /clarityv2/src/clarityv2/static/css /clarityv2/src/clarityv2/static/css
+COPY --from=frontend-build /clarityv2/src/clarityv2/static/js /clarityv2/src/clarityv2/static/js
+COPY ./src /clarityv2/src
 
-
-ENV DJANGO_SETTINGS_MODULE=clarityv2.conf.production
+# enable opening editor
+ENV TERM xterm
+ENV DJANGO_SETTINGS_MODULE=clarityv2.conf.docker
 
 ARG SECRET_KEY=dummy
 ENV SECRET_KEY = ${SECRET_KEY}
+RUN mkdir /clarityv2/static
+RUN mkdir /etc/nginx/
+COPY ./docker/nginx.default /etc/nginx/conf.d
+
+RUN python src/manage.py collectstatic --noinput
+
 EXPOSE 8000
 
 CMD ["/start.sh"]

@@ -8,7 +8,7 @@ os.environ.setdefault("DB_PASSWORD", "clarity")
 
 os.environ.setdefault("LOG_STDOUT", "yes")
 
-from .dev import *  # noqa isort:skip
+from .production import *  # noqa isort:skip
 
 
 #
