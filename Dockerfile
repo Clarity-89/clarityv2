@@ -54,9 +54,8 @@ COPY --from=frontend-build /clarityv2/src/clarityv2/static/css /clarityv2/src/cl
 COPY --from=frontend-build /clarityv2/src/clarityv2/static/js /clarityv2/src/clarityv2/static/js
 COPY ./src /clarityv2/src
 
-# enable opening editor
-ENV TERM xterm
-ENV DJANGO_SETTINGS_MODULE=clarityv2.conf.docker
+ARG DJANGO_SETTINGS_MODULE=clarityv2.conf.docker
+ENV DJANGO_SETTINGS_MODULE=${DJANGO_SETTINGS_MODULE}
 
 ARG SECRET_KEY=dummy
 ENV SECRET_KEY = ${SECRET_KEY}
