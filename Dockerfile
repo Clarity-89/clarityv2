@@ -60,8 +60,6 @@ ENV DJANGO_SETTINGS_MODULE=clarityv2.conf.docker
 
 ARG SECRET_KEY=dummy
 ENV SECRET_KEY = ${SECRET_KEY}
-RUN mkdir /clarityv2/static
-RUN mkdir /etc/nginx/
 
 RUN python src/manage.py collectstatic --noinput
 
