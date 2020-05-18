@@ -62,7 +62,6 @@ ARG SECRET_KEY=dummy
 ENV SECRET_KEY = ${SECRET_KEY}
 RUN mkdir /clarityv2/static
 RUN mkdir /etc/nginx/
-COPY ./docker/nginx.default /etc/nginx/conf.d
 
 RUN python src/manage.py collectstatic --noinput
 
