@@ -1,4 +1,5 @@
 from django.views.generic import DetailView, ListView
+from django.contrib.syndication.views import Feed
 
 from .models import BlogPost
 
@@ -28,3 +29,18 @@ class BlogPostDetailView(DetailView):
         if self.request.user.is_superuser:
             return qs
         return qs.published()
+
+
+class BlogFeed(Feed):
+    title = "Latest blog posts"
+    link = "/feed/"
+    description = "Blog posts about interesting stuff around web development"
+
+    def items(self):
+        return BlogPost.objects.all()
+
+    def item_title(self, item):
+        return item.title
+
+    def item_description(self, item):
+        return item.description
