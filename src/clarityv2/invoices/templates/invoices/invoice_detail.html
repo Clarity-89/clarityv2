@@ -157,7 +157,7 @@
         <section class="invoice-end">
             {% if invoice.vat_reverse_charge %}
                 <hr>
-                {% if invoice.client.country != 'US' %}
+                {% if invoice.client.country != 'US' and invoice.client.country != 'IN' %}
                     <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
                     <br>
                 {% endif %}
