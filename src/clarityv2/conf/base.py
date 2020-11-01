@@ -111,7 +111,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'clarityv2.utils.context_processors.settings',
-                'django_admin_index.context_processors.dashboard'
             ],
             'loaders': RAW_TEMPLATE_LOADERS
         },

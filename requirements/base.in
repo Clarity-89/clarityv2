@@ -28,7 +28,7 @@ django-appconf
 django-solo
 django-taggit
 django-privates
-django==2.2.13
+django
 rules
 phonenumbers
 readtime
