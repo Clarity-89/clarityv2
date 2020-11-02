@@ -55,6 +55,7 @@ openpyxl==2.6.2           # via tablib
 phonenumbers==8.10.16     # via -r base.in
 pillow==6.2.0             # via -r base.in, cairosvg
 polib==1.1.0              # via django-rosetta
+#pip install -Iv psycopg2==2.7.7
 psycopg2==2.8.3           # via -r base.in
 pycparser==2.19           # via cffi
 pyphen==0.9.5             # via weasyprint
