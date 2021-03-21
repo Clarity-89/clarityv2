@@ -109,7 +109,7 @@ django==2.2.13
     #   django-sendfile2
     #   django-sniplates
     #   django-taggit
-djangorestframework==3.10.2
+djangorestframework==3.11.2
     # via -r base.in
 et-xmlfile==1.0.1
     # via openpyxl
