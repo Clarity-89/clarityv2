@@ -120,7 +120,7 @@ idna==2.8
     # via requests
 jdcal==1.4.1
     # via openpyxl
-lxml==4.6.2
+lxml==4.6.3
     # via
     #   pyquery
     #   weasyprint
