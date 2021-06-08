@@ -134,7 +134,7 @@ openpyxl==2.6.2
     # via tablib
 phonenumbers==8.10.16
     # via -r base.in
-pillow==8.1.1
+pillow==8.2.0
     # via
     #   -r base.in
     #   cairosvg
