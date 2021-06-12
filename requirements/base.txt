@@ -124,7 +124,7 @@ lxml==4.6.3
     # via
     #   pyquery
     #   weasyprint
-markdown2==2.3.8
+markdown2==2.4.0
     # via readtime
 oauthlib==3.1.0
     # via requests-oauthlib
