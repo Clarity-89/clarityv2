@@ -6,6 +6,7 @@ import "prismjs/components/prism-css.min.js";
 import "prismjs/components/prism-handlebars.min.js";
 import "prismjs/components/prism-markup-templating.min.js";
 import "prismjs/themes/prism.css";
-import 'prismjs/components/prism-jsx.min';
+import 'prismjs/components/prism-jsx.min.js';
+import 'prismjs/components/prism-tsx.min.js';
 
 export const initHighlight = () => Prism.highlightAll();
