@@ -6,7 +6,7 @@
 #
 babel==2.9.1
     # via django-phonenumber-field
-backports.csv==1.0.7
+backports-csv==1.0.7
     # via tablib
 beautifulsoup4==4.8.0
     # via readtime
@@ -134,7 +134,7 @@ openpyxl==2.6.2
     # via tablib
 phonenumbers==8.10.16
     # via -r base.in
-pillow==8.3.2
+pillow==9.0.1
     # via
     #   -r base.in
     #   cairosvg
