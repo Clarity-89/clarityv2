@@ -8,15 +8,15 @@
     <meta name="author" content="Alex Khomenko">
     <meta name="google-site-verification" content="U6RD1PbTLGlZGkXkbAFJaodD9xpct_2HZ1s1CQGSS88"/>
     {% block thumbnail %}
-        <meta property="image" content="/media/blog/deathtostock.jpg">
+        <meta property="image" content="{{ request.get_host }}/media/blog/deathtostock.jpg">
          <!-- Twitter tags -->
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:creator" content="@Clarity_89"/>
         <meta property="og:url" content="{{ request.get_host }}"/>
         <meta property="og:title" content="Alex Khomenko - Front end developer"/>
         <meta property="og:description" content="Alex Khomenko - web developer, personal website and portfolio"/>
-        <meta property="og:image" content="/media/blog/deathtostock.jpg">
-        <meta property="twitter:image" content="/media/blog/deathtostock.jpg">
+        <meta property="og:image" content="{{ request.get_host }}/media/blog/deathtostock.jpg">
+        <meta property="twitter:image" content="{{ request.get_host }}/media/blog/deathtostock.jpg">
     {% endblock %}
 
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
