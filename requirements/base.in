@@ -2,7 +2,7 @@ psycopg2
 Pillow
 pytz
 raven
-WeasyPrint==0.38
+WeasyPrint
 
 Django
 # django-admin-tools
@@ -28,7 +28,7 @@ django-appconf
 django-solo
 django-taggit
 django-privates
-django
+django~=3.2
 rules
 phonenumbers
 readtime
