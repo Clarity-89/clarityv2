@@ -15,29 +15,21 @@ brotli==1.0.9
 certifi==2019.6.16
     # via requests
 cffi==1.15.1
-    # via
-    #   -r requirements/base.in
-    #   cryptography
-    #   weasyprint
+    # via weasyprint
 chardet==3.0.4
     # via requests
-cryptography==38.0.1
-    # via pyjwt
 cssselect==1.1.0
     # via pyquery
 cssselect2==0.2.1
     # via weasyprint
 defusedxml==0.6.0
-    # via
-    #   odfpy
-    #   python3-openid
+    # via odfpy
 diff-match-patch==20181111
     # via django-import-export
 django==3.2.16
     # via
     #   -r requirements/base.in
     #   django-admin-index
-    #   django-allauth
     #   django-appconf
     #   django-axes
     #   django-choices
@@ -53,8 +45,6 @@ django==3.2.16
     #   django-taggit
     #   djangorestframework
 django-admin-index==2.0.2
-    # via -r requirements/base.in
-django-allauth==0.51.0
     # via -r requirements/base.in
 django-appconf==1.0.3
     # via
@@ -82,7 +72,7 @@ django-hijack==2.1.10
     #   django-hijack-admin
 django-hijack-admin==2.1.10
     # via -r requirements/base.in
-django-import-export==3.0.1
+django-import-export==2.9.0
     # via -r requirements/base.in
 django-ipware==2.1.0
     # via django-axes
@@ -126,8 +116,6 @@ markdown2==2.4.0
     # via readtime
 markuppy==1.14
     # via tablib
-oauthlib==3.1.0
-    # via requests-oauthlib
 odfpy==1.4.0
     # via tablib
 openpyxl==2.6.2
@@ -146,14 +134,10 @@ pycparser==2.19
     # via cffi
 pydyf==0.5.0
     # via weasyprint
-pyjwt[crypto]==2.6.0
-    # via django-allauth
 pyphen==0.9.5
     # via weasyprint
 pyquery==1.4.0
     # via readtime
-python3-openid==3.1.0
-    # via django-allauth
 pytz==2019.2
     # via
     #   -r requirements/base.in
@@ -168,12 +152,7 @@ readtime==1.1.1
 redis==3.3.7
     # via django-redis
 requests==2.22.0
-    # via
-    #   django-allauth
-    #   django-rosetta
-    #   requests-oauthlib
-requests-oauthlib==1.2.0
-    # via django-allauth
+    # via django-rosetta
 rules==2.1
     # via -r requirements/base.in
 six==1.16.0

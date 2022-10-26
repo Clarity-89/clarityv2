@@ -11,20 +11,19 @@ django-hijack
 django-hijack-admin
 django-axes
 django-admin-index
-django-choices>=1.7.2
+django-choices
 django-ckeditor
-django-extensions>=3.2.1
+django-extensions
 django-rosetta
-django-sniplates>=0.7.0
+django-sniplates
 django-redis
-django_admin_index~=2.0
+django_admin_index
 django-phonenumber-field
 djangorestframework
-django-autoslug>=1.9.8
-django_countries~=7.4
+django-autoslug
+django_countries
 django-sendfile
-django-import-export>=3.0.1
-django-allauth~=0.43
+django-import-export~=2.9
 django-appconf
 django-solo
 django-taggit
@@ -32,6 +31,3 @@ django-privates
 rules
 phonenumbers
 readtime
-
-# Python 10 compatible
-cffi~=1.15

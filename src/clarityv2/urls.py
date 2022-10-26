@@ -13,7 +13,6 @@ urlpatterns = [
     # path(r'admin_tools/', include('admin_tools.urls')),
     path('admin/', admin.site.urls),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
-    path('accounts/', include('allauth.urls')),
     path('accounts/', include('clarityv2.accounts.urls', namespace='accounts')),
     path('admin/password_reset/', auth_views.PasswordResetView, name='admin_password_reset'),
     path('admin/password_reset/done/', auth_views.PasswordResetDoneView, name='password_reset_done'),

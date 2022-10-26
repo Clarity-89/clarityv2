@@ -53,9 +53,6 @@ INSTALLED_APPS = [
     'hijack',
     'compat',  # Part of hijack
     'hijack_admin',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'django_countries',
     'import_export',
     'solo',
@@ -309,7 +306,6 @@ AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
     # 'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 #
