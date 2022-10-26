@@ -32,3 +32,6 @@ django~=3.2
 rules
 phonenumbers
 readtime
+
+# Python 10 compatible
+cffi~=1.15
