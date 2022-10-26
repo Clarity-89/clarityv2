@@ -31,16 +31,16 @@ pip-compile \
 pip-compile \
     --no-emit-index-url \
     --allow-unsafe \
-    --output-file requirements/ci.txt \
+    --output-file requirements/test.txt \
     "$@" \
     requirements/base.txt \
     requirements/test-tools.in
 
-# Dev depedencies - exact same set as CI + some extra tooling
+# Dev dependencies
 pip-compile \
     --no-emit-index-url \
     --allow-unsafe \
     --output-file requirements/dev.txt \
     "$@" \
-    requirements/ci.txt \
+    requirements/base.txt \
     requirements/dev.in

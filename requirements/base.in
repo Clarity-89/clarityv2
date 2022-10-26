@@ -20,7 +20,7 @@ django_admin_index
 django-phonenumber-field
 djangorestframework
 django-autoslug
-django_countries
+django_countries~=7.4
 django-sendfile
 django-import-export
 django-allauth

@@ -1,8 +1,0 @@
-coverage
-django-webtest
-factory_boy
-freezegun
-isort
-mock
-tblib
-webtest
