@@ -200,6 +200,8 @@ FIXTURE_DIRS = (
 
 DEFAULT_FROM_EMAIL = 'khomenkodev17@gmail.com'
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 LOGGING_DIR = os.path.join(BASE_DIR, 'log')
 
 LOGGING = {
