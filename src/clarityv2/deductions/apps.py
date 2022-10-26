@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DeductionsConfig(AppConfig):
-    name = 'deductions'
+    name = 'clarityv2.deductions'

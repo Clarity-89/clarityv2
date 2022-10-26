@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class CrmConfig(AppConfig):
-    name = 'crm'
+    name = 'clarityv2.crm'
