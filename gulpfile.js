@@ -1,5 +1,5 @@
 const gulp = require("gulp");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass")(require('node-sass'));
 const paths = require("./build/paths");
 const sourcemaps = require("gulp-sourcemaps");
 const del = require("del");
