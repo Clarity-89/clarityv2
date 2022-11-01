@@ -6,7 +6,7 @@
     "scripts": {
         "build": "node ./node_modules/gulp/bin/gulp.js build && webpack --config webpack.config.js --mode=production",
         "gulp": "node ./node_modules/gulp/bin/gulp.js watch",
-        "dev": "webpack --config webpack.config.js --mode=development --watch=true",
+        "dev": "webpack --config webpack.config.js --mode=development --watch",
         "test": "node ./node_modules/gulp/bin/gulp.js test"
     },
     "repository": {
@@ -43,7 +43,7 @@
         "require-dir": "^0.3.0",
         "style-loader": "^0.23.1",
         "url-loader": "^3.0.0",
-        "webpack": "^4.43.0",
-        "webpack-cli": "^3.3.11"
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0"
     }
 }
