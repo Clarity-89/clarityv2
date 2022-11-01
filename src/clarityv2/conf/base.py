@@ -190,7 +190,6 @@ PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private_media')
 
 PRIVATE_MEDIA_URL = '/protected/'
 
-
 SENDFILE_ROOT = PRIVATE_MEDIA_ROOT
 SENDFILE_URL = PRIVATE_MEDIA_URL[:-1]
 
@@ -340,7 +339,6 @@ AXES_BEHIND_REVERSE_PROXY = True  # Default: False (we are typically using Nginx
 AXES_ONLY_USER_FAILURES = False  # Default: False (you might want to block on username rather than IP)
 AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = False  # Default: False (you might want to block on username and IP)
 
-
 HIJACK_LOGIN_REDIRECT_URL = '/'
 HIJACK_LOGOUT_REDIRECT_URL = reverse_lazy('admin:accounts_user_changelist')
 HIJACK_REGISTER_ADMIN = False
@@ -358,3 +356,5 @@ CKEDITOR_CONFIGS = {
         'scayt_autoStartup': True
     },
 }
+
+BASE_URL = 'https://www.claritydev.net'

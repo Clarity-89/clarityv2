@@ -16,6 +16,8 @@ function scss(cb) {
                 includePaths: ["./node_modules"]
             }).on("error", sass.logError)
         )
+        // write the sourcemaps
+        .pipe(sourcemaps.write("./maps"))
         .pipe(gulp.dest(`${paths.cssDir}`));
     cb();
 }

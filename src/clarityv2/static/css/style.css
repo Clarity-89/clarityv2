@@ -7599,6 +7599,9 @@ h5 {
   height: 842px;
   margin: 0 auto;
   font-size: 12px; }
+  .invoice hr {
+    width: 100%;
+    margin: 12px 0; }
   .invoice p {
     font-size: 12px; }
   .invoice__head {
@@ -7606,9 +7609,9 @@ h5 {
     text-align: center;
     font-size: 1.2em; }
   .invoice__header {
-    display: block; }
-  .invoice__info {
-    float: right; }
+    display: flex;
+    width: 100%;
+    justify-content: space-between; }
   .invoice__total-hours {
     font-weight: bold; }
   .invoice__details {
@@ -7625,6 +7628,8 @@ h5 {
     margin-bottom: 1em; }
   .invoice__totals {
     margin: 1em 0; }
+  .invoice__header-section {
+    width: 100%; }
 
 .navbar {
   padding: 1em 2em;
@@ -8049,3 +8054,5 @@ h5 {
   @media only screen and (max-width: 767px) {
     .contact {
       height: 100%; } }
+
+/*# sourceMappingURL=maps/style.css.map */
