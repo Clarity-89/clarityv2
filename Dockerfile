@@ -50,6 +50,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY --from=build /usr/local/lib/python3.9 /usr/local/lib/python3.9
 COPY --from=build /usr/local/bin/gunicorn /usr/local/bin/gunicorn
+COPY --from=build /usr/local/bin/uwsgi /usr/local/bin/uwsgi
 
 WORKDIR /app
 COPY ./bin/docker_start.sh /start.sh
