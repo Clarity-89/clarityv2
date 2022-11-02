@@ -2,40 +2,53 @@ version: '3.8'
 
 services:
   db:
-    image: postgres
+    image: postgres:14
 #    env_file:
 #      - ../.env
     environment:
-      - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_USER=${DB_USER:-clarity}
-      - POSTGRES_PASSWORD=${DB_PASSWORD:-clarity}
-      - POSTGRES_DB=${DB_NAME:-clarity}
-      - PGUSER=${DB_USER:-clarity}
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - ./bin/docker-init-db.sql:/docker-entrypoint-initdb.d/init_db.sql
+      - db:/var/lib/postgresql/data
+
+  busybox:
+    image: busybox
+    command: /bin/chown -R 1000 /private-media
+    volumes:
+      - private_media:/private-media
 
   web:
-    build: ..
+    build: &web_build
+      context: .
+      args:
+        RELEASE: ${TAG:-latest}
+    image: clarityv2/website:${TAG:-latest}
     container_name: clarityv2
     environment:
       - DJANGO_SETTINGS_MODULE=clarityv2.conf.docker
       - SECRET_KEY=${SECRET_KEY:-7(h1r2hk)8z9+05edulo_3qzymwbo&c24=)qz7+_@3&2sp=u%i}
+      - DB_NAME=clarity
+      - DB_USER=clarity
+      - DB_HOST=db
     volumes:
-      - ..:/clarityv2
-      - ../static:/clarityv2/static
+      - private_media:/app/private-media
+#      - ..:/clarityv2
+#      - ../static:/clarityv2/static
     expose:
       - 8000
     depends_on:
       - db
 
-  nginx:
-    image: nginx
-    volumes:
-    - ./nginx.default:/etc/nginx/conf.d/default.conf
-    - ../static:/clarityv2/static
-#    environment:
-#      - SERVER_NAME=localhost
-#      - ROOT=/app
-    #command: bin/bash -c "envsubst "${SERVER_NAME} ${ROOT}" < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-    ports:
-      - "8000:80"
-    depends_on:
-      - web
+#  nginx:
+#    image: nginx
+#    volumes:
+#    - ./nginx.default:/etc/nginx/conf.d/default.conf
+#    - ../static:/clarityv2/static
+##    environment:
+##      - SERVER_NAME=localhost
+##      - ROOT=/app
+#    #command: bin/bash -c "envsubst "${SERVER_NAME} ${ROOT}" < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+#    ports:
+#      - "8000:80"
+#    depends_on:
+#      - web
