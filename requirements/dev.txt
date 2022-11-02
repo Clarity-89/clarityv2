@@ -289,6 +289,10 @@ pyquery==1.4.0
     #   -c requirements/base.txt
     #   -r requirements/base.txt
     #   readtime
+python-dotenv==0.21.0
+    # via
+    #   -c requirements/base.txt
+    #   -r requirements/base.txt
 pytz==2019.2
     # via
     #   -c requirements/base.txt

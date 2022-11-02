@@ -138,6 +138,8 @@ pyphen==0.9.5
     # via weasyprint
 pyquery==1.4.0
     # via readtime
+python-dotenv==0.21.0
+    # via -r requirements/base.in
 pytz==2019.2
     # via
     #   -r requirements/base.in

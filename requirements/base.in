@@ -2,7 +2,7 @@ psycopg2
 Pillow
 pytz
 raven
-WeasyPrint>=56.1
+WeasyPrint
 
 Django
 django~=3.2
@@ -31,3 +31,4 @@ django-privates
 rules
 phonenumbers
 readtime
+python-dotenv
