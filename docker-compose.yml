@@ -19,7 +19,7 @@ services:
 
   web:
     build: &web_build
-      context: .
+      context: docker
       args:
         RELEASE: ${TAG:-latest}
     image: clarityv2/website:${TAG:-latest}
@@ -38,6 +38,10 @@ services:
       - 8000
     depends_on:
       - db
+
+volumes:
+  db:
+  private_media:
 
 #  nginx:
 #    image: nginx
