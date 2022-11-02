@@ -13,6 +13,7 @@ function scss(cb) {
         .pipe(sourcemaps.init())
         .pipe(
             sass({
+                outputStyle: "compressed",
                 includePaths: ["./node_modules"]
             }).on("error", sass.logError)
         )

@@ -22,7 +22,7 @@ WORKDIR /app
 COPY ./*.json ./*.js /app/
 RUN npm ci && mkdir -p src/clarityv2/static/bundles/
 
-COPY ./src/sass /app/src/sass
+COPY ./src/clarityv2/sass /app/src/app/sass
 COPY ./build /app/build/
 
 #COPY src/clarityv2/js /clarityv2/src/clarityv2/js
@@ -34,12 +34,12 @@ RUN npm run build
 FROM python:3.9-slim-bullseye AS prod
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        postgresql-client \
-        libgdal20 \
-        libgeos-c1v5 \
-        libproj12 \
-        nano \
+        procps \
         vim \
+        mime-support \
+        postgresql-client \
+        gettext \
+        nano \
         # weasyprint deps
         libcairo2 \
         libpango-1.0-0 \
@@ -78,7 +78,7 @@ ENV RELEASE=${RELEASE} \
     GIT_SHA=${COMMIT_HASH} \
     PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=clarityv2.conf.docker \
-    SECRET_KEY = ${SECRET_KEY}
+    SECRET_KEY=${SECRET_KEY}
 
 LABEL org.label-schema.vcs-ref=$COMMIT_HASH \
       org.label-schema.vcs-url="https://github.com/Clarity-89/clarityv2" \
