@@ -19,7 +19,7 @@ services:
 
   web:
     build: &web_build
-      context: docker
+      context: .
       args:
         RELEASE: ${TAG:-latest}
     image: clarityv2/website:${TAG:-latest}
@@ -34,8 +34,8 @@ services:
       - private_media:/app/private-media
 #      - ..:/clarityv2
 #      - ../static:/clarityv2/static
-    expose:
-      - 8000
+    ports:
+      - "8000:8000"
     depends_on:
       - db
 

@@ -21,4 +21,4 @@ python src/manage.py migrate
 # Start server
 >&2 echo "Starting server"
 
-gunicorn --name=clarityv2 --pythonpath=/clarityv2/src --bind 0.0.0.0:8000 clarityv2.wsgi:application
+gunicorn --name=clarityv2 --pythonpath=/app/src --bind 0.0.0.0:8000 clarityv2.wsgi:application
