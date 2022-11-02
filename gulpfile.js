@@ -5,7 +5,7 @@ const sourcemaps = require("gulp-sourcemaps");
 const del = require("del");
 
 const sassFiles = ["style", "print", "screen"].map(
-    name => `${paths.sassSrcDir}/${name}.scss`
+    name => `${paths.sassSrcDir}${name}.scss`
 );
 
 function scss(cb) {

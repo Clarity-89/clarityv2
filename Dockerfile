@@ -22,11 +22,10 @@ WORKDIR /app
 COPY ./*.json ./*.js /app/
 RUN npm ci && mkdir -p src/clarityv2/static/bundles/
 
-COPY ./src/clarityv2/sass /app/src/app/sass
 COPY ./build /app/build/
 
-#COPY src/clarityv2/js /clarityv2/src/clarityv2/js
-#COPY src/clarityv2/sass /clarityv2/src/clarityv2/sass
+COPY src/clarityv2/js /app/src/clarityv2/js
+COPY ./src/clarityv2/sass /app/src/clarityv2/sass
 
 RUN npm run build
 
@@ -60,8 +59,8 @@ RUN mkdir /app/log
 RUN mkdir /app/media
 VOLUME ["/app/log", "/app/media"]
 
-COPY --from=frontend-build /app/src/app/static/css /app/src/app/static/css
-COPY --from=frontend-build /app/src/app/static/js /app/src/app/static/js
+COPY --from=frontend-build /app/src/clarityv2/static/css /app/src/clarityv2/static/css
+COPY --from=frontend-build /app/src/clarityv2/static/js /app/src/clarityv2/static/js
 COPY ./src /app/src
 
 RUN useradd -M -u 1000 clarity
