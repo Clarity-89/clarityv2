@@ -83,7 +83,7 @@ ENV RELEASE=${RELEASE} \
 LABEL org.label-schema.vcs-ref=$COMMIT_HASH \
       org.label-schema.vcs-url="https://github.com/Clarity-89/clarityv2" \
       org.label-schema.version=$RELEASE \
-      org.label-schema.name="Regex IT website"
+      org.label-schema.name="Personal website"
 
 RUN python src/manage.py collectstatic --noinput
 

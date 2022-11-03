@@ -115,4 +115,4 @@ LOGGING['handlers'].update({
     },
 })
 
-SENDFILE_BACKEND = 'sendfile.backends.nginx'
+SENDFILE_BACKEND = 'django_sendfile.backends.nginx'

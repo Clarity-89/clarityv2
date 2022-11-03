@@ -29,7 +29,7 @@ services:
       - SECRET_KEY=${SECRET_KEY:-7(h1r2hk)8z9+05edulo_3qzymwbo&c24=)qz7+_@3&2sp=u%i}
       - DB_NAME=clarity
       - DB_USER=clarity
-      - DB_HOST=db
+      - DB_HOST=host.docker.internal
     volumes:
       - private_media:/app/private-media
 #      - ..:/clarityv2
