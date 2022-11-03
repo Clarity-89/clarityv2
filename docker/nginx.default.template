@@ -1,0 +1,23 @@
+server {
+    server_name ${SERVER_NAME};
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root ${ROOT}/clarityv2;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:${ROOT}/clarityv2/clarityv2.sock;
+    }
+
+    location /media  {
+        alias ${ROOT}/clarityv2/media;
+    }
+
+    location /protected {
+        internal;
+        access_log /var/log/nginx/private.prod.access.log;
+        alias ${ROOT}/clarityv2/private_media;
+    }
+}
