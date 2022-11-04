@@ -25,7 +25,7 @@ DATABASES = {
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', 'test')
 
 ALLOWED_HOSTS = ['claritydev.net', '188.166.1.116', '0.0.0.0', '64.227.77.143']
 
