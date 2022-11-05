@@ -36,19 +36,9 @@ INSTALLED_APPS = [
     # Optional applications.
     'django_admin_index',
     'django.contrib.admin',
-    # 'django.contrib.admindocs',
-    # 'django.contrib.humanize',
     'django.contrib.sitemaps',
     'django_sendfile',
 
-    # django-admin-tools
-    # 'admin_tools',
-    # 'admin_tools.theming',
-    # 'admin_tools.menu',
-    # 'admin_tools.dashboard',
-
-    # External applications.
-    # 'axes',
     'sniplates',
     'hijack',
     'compat',  # Part of hijack
@@ -76,8 +66,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'axes.middleware.AxesMiddleware',
-    # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -115,9 +103,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'clarityv2.wsgi.application'
-
-# Database: Defined in target specific settings files.
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -179,7 +164,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
