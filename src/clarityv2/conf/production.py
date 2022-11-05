@@ -88,8 +88,8 @@ LOGGING['loggers'].update({
 SHOW_ALERT = False
 
 # We will assume we're running under https
-SESSION_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SECURE = False
 X_FRAME_OPTIONS = 'DENY'
 # Only set this when we're behind Nginx as configured in our example-deployment
