@@ -114,3 +114,5 @@ LOGGING['handlers'].update({
         # 'dsn': RAVEN_CONFIG['dsn']
     },
 })
+
+SENDFILE_BACKEND = 'django_sendfile.backends.nginx'

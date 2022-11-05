@@ -53,9 +53,6 @@ INSTALLED_APPS = [
     'hijack',
     'compat',  # Part of hijack
     'hijack_admin',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     'django_countries',
     'import_export',
     'solo',
@@ -111,7 +108,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'clarityv2.utils.context_processors.settings',
-                'django_admin_index.context_processors.dashboard'
             ],
             'loaders': RAW_TEMPLATE_LOADERS
         },
@@ -194,7 +190,6 @@ PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private_media')
 
 PRIVATE_MEDIA_URL = '/protected/'
 
-SENDFILE_BACKEND = 'sendfile.backends.nginx'
 SENDFILE_ROOT = PRIVATE_MEDIA_ROOT
 SENDFILE_URL = PRIVATE_MEDIA_URL[:-1]
 
@@ -203,6 +198,8 @@ FIXTURE_DIRS = (
 )
 
 DEFAULT_FROM_EMAIL = 'khomenkodev17@gmail.com'
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 LOGGING_DIR = os.path.join(BASE_DIR, 'log')
 
@@ -310,7 +307,6 @@ AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
     # 'axes.backends.AxesBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 #
@@ -343,7 +339,6 @@ AXES_BEHIND_REVERSE_PROXY = True  # Default: False (we are typically using Nginx
 AXES_ONLY_USER_FAILURES = False  # Default: False (you might want to block on username rather than IP)
 AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = False  # Default: False (you might want to block on username and IP)
 
-
 HIJACK_LOGIN_REDIRECT_URL = '/'
 HIJACK_LOGOUT_REDIRECT_URL = reverse_lazy('admin:accounts_user_changelist')
 HIJACK_REGISTER_ADMIN = False
@@ -361,3 +356,5 @@ CKEDITOR_CONFIGS = {
         'scayt_autoStartup': True
     },
 }
+
+BASE_URL = 'https://www.claritydev.net'

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class PortfolioConfig(AppConfig):
-    name = 'portfolio'
+    name = 'clarityv2.portfolio'

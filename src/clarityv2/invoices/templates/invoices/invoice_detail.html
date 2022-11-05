@@ -1,29 +1,29 @@
-{% extends "bs.html" %}{% load i18n math invoices %}
+{% extends "bs.html" %}{% load i18n math invoices static %}
 
-{% block body-class %}pdf invoice{% endblock %}
-
-{% block header %}
-    <h2 class="invoice__head">{% trans "Invoice" %}</h2>
-    <div class="invoice__header">
-        <div class="invoice__info">
-            <p class="invoice__date"><strong>{% trans "Date" %}:</strong> {{ invoice.date }}</p>
-            <p class="invoice__number"><strong>{% trans "Number" %}:</strong> {{ invoice.invoice_number }}</p>
-            {% if  invoice.reference_number %}
-                <p><strong>{% trans "Reference Number" %}:</strong> {{ invoice.reference_number }}</p>
-            {% endif %}
-        </div>
-
-        <div class="invoice__details">
-            {% company_details %}
-            {% company_details invoice.client %}
-        </div>
-
-    </div>
+{% block extra_css %}
+    <link href="{% static 'css/print.css' %}" media="print" rel="stylesheet"/>
 {% endblock %}
 
 {% block content %}
-    {% with items.first.project.get_currency_display as currency %}
-        <div>
+    <div class="invoice pdf">
+        <section class="invoice__header-section">
+            <h2 class="invoice__head">{% trans "Invoice" %}</h2>
+            <div class="invoice__header">
+                <div class="invoice__header-details">
+                    {% company_details %}
+                    {% company_details invoice.client %}
+                </div>
+                <div class="invoice__info">
+                    <p class="invoice__date"><strong>{% trans "Date" %}:</strong> {{ invoice.date }}</p>
+                    <p class="invoice__number"><strong>{% trans "Number" %}:</strong> {{ invoice.invoice_number }}</p>
+                    {% if  invoice.reference_number %}
+                        <p><strong>{% trans "Reference Number" %}:</strong> {{ invoice.reference_number }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+        {% with items.first.project.get_currency_display as currency %}
             <div>
                 {% if not invoice.vat_reverse_charge %}
                     <section>
@@ -46,8 +46,8 @@
                         </div>
                     </section>
 
-                    <hr>
                 {% endif %}
+                <hr>
 
                 {% if invoice.due_date %}
                     <p>
@@ -57,119 +57,112 @@
                     </p>
                 {% endif %}
             </div>
-        </div>
-        <hr>
-        <section class="page-break">
-            <table class="invoice__details">
-                <thead>
-                <tr>
-                    <th>{% trans "Notes" %}</th>
-                    <th>{% trans "Date" %}</th>
-                    {% if items.first.project.base_rate %}
-                        <th>
-                            {% trans "Hours" %}
-                        </th>
-                        <th>
-                            {% blocktrans %}
-                                Rate <br> ({{ currency }} / hour)
-                            {% endblocktrans %}
-                        </th>
-                    {% else %}
-                        <th>{% trans "Amount" %}</th>
-                    {% endif %}
-                    {% if items.first.project.flat_fee %}
-                        <th>{% trans "Flat fee" %}</th>
-                    {% endif %}
-                    {% if not invoice.vat_reverse_charge %}
-                        <th>{% trans "Tax rate" %}</th>
-                    {% endif %}
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in items %}
-                    {#                {% ifchanged item.project %}#}
-                    {#                    <tr class="project-row">#}
-                    {#                        <th colspan="{{ invoice.vat_reverse_charge|yesno:'4,5' }}">#}
-                    {#                            {% blocktrans with proj=item.project.name %}{{ proj }}{% endblocktrans %}#}
-                    {#                        </th>#}
-                    {#                    </tr>#}
-                    {#                {% endifchanged %}#}
+            <section class="">
+                <table class="invoice__details">
+                    <thead>
                     <tr>
-                        <td>{{ item.remarks|linebreaks }}</td>
-                        <td>{{ item.date|date:" d/m/y" }}</td>
-                        {% if item.project.base_rate %}
-                            <td>{{ item.amount }}</td>
+                        <th>{% trans "Notes" %}</th>
+                        <th>{% trans "Date" %}</th>
+                        {% if items.first.project.base_rate %}
+                            <th>
+                                {% trans "Hours" %}
+                            </th>
+                            <th>
+                                {% blocktrans %}
+                                    Rate <br> ({{ currency }} / hour)
+                                {% endblocktrans %}
+                            </th>
                         {% else %}
-                            <td>{{ item.amount|stringformat:'d' }}</td>
+                            <th>{% trans "Amount" %}</th>
                         {% endif %}
-                        {% if item.project.base_rate %}
-                            <td>{{ item.rate }}</td>
+                        {% if items.first.project.flat_fee %}
+                            <th>{% trans "Flat fee" %}</th>
                         {% endif %}
-                        {% if item.project.flat_fee %}
-                            <td>{{ item.rate }}</td>
-                        {% endif %}
-
                         {% if not invoice.vat_reverse_charge %}
-                            <td>{{ item.tax_rate|percentage }}</td>
+                            <th>{% trans "Tax rate" %}</th>
                         {% endif %}
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </section>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.remarks|linebreaks }}</td>
+                            <td>{{ item.date|date:" d/m/y" }}</td>
+                            {% if item.project.base_rate %}
+                                <td>{{ item.amount }}</td>
+                            {% else %}
+                                <td>{{ item.amount|stringformat:'d' }}</td>
+                            {% endif %}
+                            {% if item.project.base_rate %}
+                                <td>{{ item.rate }}</td>
+                            {% endif %}
+                            {% if item.project.flat_fee %}
+                                <td>{{ item.rate }}</td>
+                            {% endif %}
 
-        <section class="highlight">
-            <table class="invoice__totals">
-                <tr>
-                    <td></td>
-                </tr>
-                {% if not items.first.project.flat_fee %}
+                            {% if not invoice.vat_reverse_charge %}
+                                <td>{{ item.tax_rate|percentage }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="highlight">
+                <table class="invoice__totals">
                     <tr>
-                        <td class="invoice__total-hours">{% trans "Total hours" %}: {{ invoice.total_hours }}</td>
+                        <td></td>
                     </tr>
-                {% endif %}
-                {% if invoice.vat_reverse_charge %}
-                    <tr>
-                        <td>
-                            <strong>{% trans "Total price" %}: {{ currency }} {{ invoice.total_no_vat|floatformat:2 }}</strong>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <th>{% trans "Total (excl. tax)" %}</th>
-                        <th>{% trans "Total tax" %}</th>
-                        <th>{% trans "Total (incl. tax)" %}</th>
-                    </tr>
-                    <tr>
-                        <td>{{ currency }} {{ invoice.total_no_vat|floatformat:2 }}</td>
-                        <td>{{ currency }} {{ invoice.total_vat|floatformat:2 }}</td>
-                        <td>
+                    {% if not items.first.project.flat_fee %}
+                        <tr>
+                            <td class="invoice__total-hours">{% trans "Total hours" %}: {{ invoice.total_hours }}</td>
+                        </tr>
+                    {% endif %}
+                    {% if invoice.vat_reverse_charge %}
+                        <tr>
+                            <td>
+                                <strong>{% trans "Total price" %}: {{ currency }} {{ invoice.total_no_vat|floatformat:2 }}</strong>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <th>{% trans "Total (excl. tax)" %}</th>
+                            <th>{% trans "Total tax" %}</th>
+                            <th>{% trans "Total (incl. tax)" %}</th>
+                        </tr>
+                        <tr>
+                            <td>{{ currency }} {{ invoice.total_no_vat|floatformat:2 }}</td>
+                            <td>{{ currency }} {{ invoice.total_vat|floatformat:2 }}</td>
+                            <td>
                         <span class="total">
                             {{ currency }} <strong>{{ invoice.total_with_vat|floatformat:2 }}</strong>
                         </span>
-                        </td>
-                    </tr>
-                {% endif %}
-            </table>
-        <strong>Please use the reference number when paying this invoice.</strong>
-        </section>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </table>
+                <strong>Please use the reference number when paying this invoice.</strong>
+            </section>
 
-        <section class="invoice-end">
-            {% if invoice.vat_reverse_charge %}
-                <hr>
-                {% if invoice.client.country != 'US' and invoice.client.country != 'IN' %}
-                    <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
-                    <br>
+            <section class="invoice-end">
+                {% if invoice.vat_reverse_charge %}
+                    <hr>
+                    {% if invoice.client.country != 'US' and invoice.client.country != 'IN' %}
+                        <p>{% trans "IC delivery of services EU, no VAT applied." %}</p>
+                        <br>
+                    {% endif %}
+                    <h4>{% trans 'Payment information' %}</h4>
+                    {% bank_details %}
                 {% endif %}
-                <h4>{% trans 'Payment information' %}</h4>
-                {% bank_details %}
-            {% endif %}
-            <hr>
-            {% identity_string %}
-            <hr>
-            <p class="pull-right">{% trans "End of invoice" %}</p>
-        </section>
-    {% endwith %}
+                <hr>
+                {% identity_string %}
+                <hr>
+                <p class="pull-right">{% trans "End of invoice" %}</p>
+            </section>
+        {% endwith %}
+    </div>
 {% endblock %}
 
 {% block footer %}{% endblock %}
+

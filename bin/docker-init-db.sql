@@ -1,0 +1,3 @@
+CREATE USER clarity;
+CREATE DATABASE clarity;
+GRANT ALL PRIVILEGES ON DATABASE clarity TO clarity;

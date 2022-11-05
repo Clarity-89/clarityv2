@@ -78,6 +78,8 @@ DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS': False
 }
 
+SENDFILE_BACKEND = "django_sendfile.backends.development"
+
 # Override settings with local settings.
 try:
     from .local import *

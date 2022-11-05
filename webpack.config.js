@@ -34,11 +34,11 @@ module.exports = (env, argv) => ({
             },
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
-                loader: "url-loader"
+                use: ["url-loader"]
             },
             {
                 test: /\.css/,
-                loader: "style-loader!css-loader"
+                use: ["style-loader", {loader: 'css-loader'}],
             }
         ]
     },
@@ -48,5 +48,5 @@ module.exports = (env, argv) => ({
     // Minify output
     optimization: {
         minimize: argv.mode === 'production'
-    }
+    },
 });
