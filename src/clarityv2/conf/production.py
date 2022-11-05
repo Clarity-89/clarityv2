@@ -23,7 +23,7 @@ DATABASES = {
 }
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.getenv('SECRET_KEY', 'test')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = ['claritydev.net', '188.166.1.116', '0.0.0.0', '64.227.77.143', '*']
 
@@ -63,6 +63,7 @@ LOGGING['loggers'].update({
 # Show active environment in admin.
 SHOW_ALERT = False
 
+# HTTPS
 IS_HTTPS = os.getenv("IS_HTTPS", False)
 SESSION_COOKIE_SECURE = IS_HTTPS
 SESSION_COOKIE_HTTPONLY = True
@@ -71,15 +72,5 @@ X_FRAME_OPTIONS = 'DENY'
 # Only set this when we're behind Nginx as configured in our example-deployment
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-#
-# Library settings
-#
-
-LOGGING['handlers'].update({
-    'sentry': {
-        'level': 'WARNING',
-        'class': 'raven.handlers.logging.SentryHandler',
-    },
-})
 
 SENDFILE_BACKEND = 'django_sendfile.backends.nginx'
