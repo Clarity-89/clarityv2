@@ -34,4 +34,4 @@ jobs:
     - name: Add remote
       run: git remote add live ${{ secrets.REMOTE }}
     - name: Deploy
-      run: git pull --rebase live master && git push live master
+      run: git push live master
