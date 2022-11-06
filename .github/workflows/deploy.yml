@@ -26,8 +26,8 @@ jobs:
         add: './src/clarityv2/static'
     - name: Install SSH Key
       uses: webfactory/ssh-agent@v0.6.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_DEPLOY_KEY }}
+      with:
+        ssh-private-key: ${{ secrets.SSH_DEPLOY_KEY }}
     - name: Add remote
       run: git remote add live ${{ secrets.REMOTE }}
     - name: Deploy
