@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         ref: deploy
-      run: git merge master
+    - run: git merge master
     - name: build assets
       uses: actions/setup-node@v3
       with:
