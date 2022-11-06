@@ -20,7 +20,6 @@ jobs:
     - name: Commit changes
       uses: EndBug/add-and-commit@v9
       with:
-        new_branch: deploy
         author_name: Alex K
         author_email: mail@example.com
         message: 'Your commit message'
@@ -35,6 +34,4 @@ jobs:
     - name: Add remote
       run: git fetch --prune --unshallow && git remote add live ${{ secrets.REMOTE }}
     - name: Deploy
-      run: git push -f live deploy
-    - name: Delete deploy branch
-      run: git branch --delete deploy
+      run: git push -f live master
