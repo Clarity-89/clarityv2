@@ -36,3 +36,5 @@ jobs:
       run: git fetch --prune --unshallow && git remote add live ${{ secrets.REMOTE }}
     - name: Deploy
       run: git push -f live deploy
+    - name: Delete deploy branch
+      run: git branch --delete deploy
