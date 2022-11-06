@@ -3,6 +3,5 @@
     "compact": true,
     "presets": [
         "@babel/env",
-        "@babel/react"
     ]
 }
