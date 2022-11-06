@@ -34,11 +34,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 # Production logging facility.
 LOGGING['loggers'].update({
-    '': {
-        'handlers': ['sentry'],
-        'level': 'ERROR',
-        'propagate': False,
-    },
     'clarityv2': {
         'handlers': ['project'],
         'level': 'WARNING',
@@ -47,6 +42,11 @@ LOGGING['loggers'].update({
     'django': {
         'handlers': ['django'],
         'level': 'WARNING',
+        'propagate': True,
+    },
+    'django_error': {
+        'handlers': ['django', 'project'],
+        'level': 'ERROR',
         'propagate': True,
     },
     'django.security.DisallowedHost': {
