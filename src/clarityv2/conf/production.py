@@ -54,6 +54,7 @@ LOGGING['loggers'].update({
         'level': 'CRITICAL',
         'propagate': False,
     },
+
 })
 
 #
