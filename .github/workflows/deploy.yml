@@ -34,4 +34,4 @@ jobs:
     - name: Add remote
       run: git fetch --prune --unshallow && git remote add live ${{ secrets.REMOTE }}
     - name: Deploy
-      run: git push if live master
+      run: git push -f live master
