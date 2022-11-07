@@ -12,7 +12,6 @@
             <div class="dashboard__item project">
                 <h2 class="project__title">{{ project.name }}</h2>
                 <p class="project__details">
-                    <i class="fa fa-eur"></i>
                     {% if project.flat_fee %}
                         {% trans "Flat fee" %}: {{ project.flat_fee }} &euro;
                     {% else %}

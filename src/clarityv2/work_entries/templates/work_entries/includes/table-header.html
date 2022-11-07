@@ -5,7 +5,7 @@
             {{ label }}
 
             {% if order == title %}
-                <i class="fa fa-arrow-{% if direction == 'desc' %}down{% else %}up{% endif %}"></i>
+                {% if direction == 'desc' %}down{% else %}up{% endif %}
             {% endif %}
         </a>
     {% else %}
