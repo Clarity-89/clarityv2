@@ -19,8 +19,6 @@
         <meta property="twitter:image" content="{{ request.get_host }}/media/blog/deathtostock.jpg">
     {% endblock %}
 
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" media="screen">
-
     {% block main_css %}
         <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
     {% endblock %}
@@ -31,9 +29,7 @@
 
 <body class="{% block body-class %}{% endblock %}">
 
-{% block header %}
-
-{% endblock %}
+{% block header %}{% endblock %}
 
 <main>
     {% block content %} {% endblock %}
@@ -65,7 +61,7 @@
 {% endblock footer %}
 
 {% block scripts %}
-    <script src="{% static 'js/app.js' %}"></script>
+    <script defer src="{% static 'js/app.js' %}"></script>
     {% include 'includes/scripts.html' %}
 {% endblock %}
 </body>
