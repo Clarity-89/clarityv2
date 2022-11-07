@@ -20,11 +20,7 @@
     {% endblock %}
 
     {% block main_css %}
-        <link rel="preload" href="{% static 'css/screen.css' %}" as="style"
-              onload="this.onload=null;this.rel='stylesheet'">
-        <noscript>
             <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
-        </noscript>
     {% endblock %}
 
     {% block extra_css %}{% endblock %}
