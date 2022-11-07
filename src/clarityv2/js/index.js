@@ -1,9 +1,9 @@
-import Navbar from "./components/navbar";
+import { initNavbar } from "./components/navbar";
 import { initHighlight } from "./components/codeHighlight";
+import { initEmail } from "./components/email";
 
 window.addEventListener("DOMContentLoaded", () => {
-  Navbar.init();
+  initNavbar();
   initHighlight();
+  initEmail();
 });
-
-console.log("test");

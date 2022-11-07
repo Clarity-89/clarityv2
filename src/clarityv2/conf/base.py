@@ -181,7 +181,7 @@ FIXTURE_DIRS = (
     os.path.join(DJANGO_PROJECT_DIR, 'fixtures'),
 )
 
-DEFAULT_FROM_EMAIL = 'khomenkodev17@gmail.com'
+DEFAULT_FROM_EMAIL = 'claritydevsolutions@gmail.com'
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
