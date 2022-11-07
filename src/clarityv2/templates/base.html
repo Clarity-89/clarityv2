@@ -20,7 +20,11 @@
     {% endblock %}
 
     {% block main_css %}
-        <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
+        <link rel="preload" href="{% static 'css/screen.css' %}" as="style"
+              onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link href="{% static 'css/screen.css' %}" media="screen" rel="stylesheet"/>
+        </noscript>
     {% endblock %}
 
     {% block extra_css %}{% endblock %}
@@ -39,11 +43,11 @@
     <footer class="footer">
         <p class="footer__social">
             <a class="footer__social" href="https://www.linkedin.com/in/oleksandr-khomenko-81310b48/">
-                <img class="footer__logo" src="{% static 'img/logos/linkedin.png' %}" alt="Linkedin">
+                <img class="footer__logo" src="{% static 'img/logos/linkedin.webp' %}" alt="Linkedin">
             </a>
 
             <a class="footer__social" href="https://github.com/Clarity-89">
-                <img class="footer__logo" src="{% static 'img/logos/github.png' %}" alt="Github">
+                <img class="footer__logo" src="{% static 'img/logos/github.webp' %}" alt="Github">
             </a>
 
             <a class="footer__social" href="https://www.codewars.com/users/Clarity">
@@ -51,7 +55,7 @@
             </a>
 
             <a class="footer__social" href="https://twitter.com/Clarity_89">
-                <img class="footer__logo" src="{% static 'img/logos/twitter.png' %}" alt="Twitter">
+                <img class="footer__logo" src="{% static 'img/logos/twitter.webp' %}" alt="Twitter">
             </a>
         </p>
         <p class="footer__text-copyright">
