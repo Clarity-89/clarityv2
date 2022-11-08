@@ -68,6 +68,12 @@
     display: flex;
     flex-direction: column;
     padding: 16px;
+
+    .blog__tags {
+      .badge {
+        background: #4f5359;
+      }
+    }
   }
 
   &__title {
