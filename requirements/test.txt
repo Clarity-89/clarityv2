@@ -28,20 +28,14 @@ brotli==1.0.9
     #   -r requirements/base.txt
     #   fonttools
 certifi==2019.6.16
-    # via
-    #   -c requirements/base.txt
-    #   -r requirements/base.txt
-    #   requests
+    # via requests
 cffi==1.15.1
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.txt
     #   weasyprint
 chardet==3.0.4
-    # via
-    #   -c requirements/base.txt
-    #   -r requirements/base.txt
-    #   requests
+    # via requests
 coverage==4.5.4
     # via -r requirements/test-tools.in
 cssselect==1.1.0
@@ -79,7 +73,6 @@ django==3.2.16
     #   django-phonenumber-field
     #   django-privates
     #   django-redis
-    #   django-rosetta
     #   django-sendfile
     #   django-sendfile2
     #   django-sniplates
@@ -164,10 +157,6 @@ django-redis==4.10.0
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.txt
-django-rosetta==0.9.3
-    # via
-    #   -c requirements/base.txt
-    #   -r requirements/base.txt
 django-sendfile==0.3.11
     # via
     #   -c requirements/base.txt
@@ -219,10 +208,7 @@ html5lib==1.1
     #   -r requirements/base.txt
     #   weasyprint
 idna==2.8
-    # via
-    #   -c requirements/base.txt
-    #   -r requirements/base.txt
-    #   requests
+    # via requests
 isort==5.10.1
     # via pylint
 jdcal==1.4.1
@@ -272,11 +258,6 @@ pillow==9.0.1
     #   weasyprint
 platformdirs==2.5.2
     # via pylint
-polib==1.1.0
-    # via
-    #   -c requirements/base.txt
-    #   -r requirements/base.txt
-    #   django-rosetta
 psycopg2==2.8.3
     # via
     #   -c requirements/base.txt
@@ -341,11 +322,7 @@ redis==3.3.7
     #   -r requirements/base.txt
     #   django-redis
 requests==2.22.0
-    # via
-    #   -c requirements/base.txt
-    #   -r requirements/base.txt
-    #   django-rosetta
-    #   requests-mock
+    # via requests-mock
 requests-mock==1.10.0
     # via -r requirements/test-tools.in
 rules==2.1
@@ -359,7 +336,6 @@ six==1.16.0
     #   django-appconf
     #   django-choices
     #   django-compat
-    #   django-rosetta
     #   html5lib
     #   python-dateutil
     #   requests-mock
@@ -397,11 +373,8 @@ typing-extensions==4.4.0
     #   astroid
     #   django-countries
     #   pylint
-urllib3==1.26.5
-    # via
-    #   -c requirements/base.txt
-    #   -r requirements/base.txt
-    #   requests
+urllib3==1.25.11
+    # via requests
 waitress==2.1.2
     # via webtest
 weasyprint==57.0

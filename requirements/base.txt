@@ -12,12 +12,8 @@ beautifulsoup4==4.8.0
     # via readtime
 brotli==1.0.9
     # via fonttools
-certifi==2019.6.16
-    # via requests
 cffi==1.15.1
     # via weasyprint
-chardet==3.0.4
-    # via requests
 cssselect==1.1.0
     # via pyquery
 cssselect2==0.2.1
@@ -38,7 +34,6 @@ django==3.2.16
     #   django-phonenumber-field
     #   django-privates
     #   django-redis
-    #   django-rosetta
     #   django-sendfile
     #   django-sendfile2
     #   django-sniplates
@@ -86,8 +81,6 @@ django-privates==1.1.0
     # via -r requirements/base.in
 django-redis==4.10.0
     # via -r requirements/base.in
-django-rosetta==0.9.3
-    # via -r requirements/base.in
 django-sendfile==0.3.11
     # via -r requirements/base.in
 django-sendfile2==0.7.0
@@ -106,8 +99,6 @@ fonttools[woff]==4.38.0
     # via weasyprint
 html5lib==1.1
     # via weasyprint
-idna==2.8
-    # via requests
 jdcal==1.4.1
     # via openpyxl
 lxml==4.9.1
@@ -126,8 +117,6 @@ pillow==9.0.1
     # via
     #   -r requirements/base.in
     #   weasyprint
-polib==1.1.0
-    # via django-rosetta
 psycopg2==2.8.3
     # via -r requirements/base.in
 pycparser==2.19
@@ -153,8 +142,6 @@ readtime==1.1.1
     # via -r requirements/base.in
 redis==3.3.7
     # via django-redis
-requests==2.22.0
-    # via django-rosetta
 rules==2.1
     # via -r requirements/base.in
 six==1.16.0
@@ -162,7 +149,6 @@ six==1.16.0
     #   django-appconf
     #   django-choices
     #   django-compat
-    #   django-rosetta
     #   html5lib
 soupsieve==1.9.2
     # via beautifulsoup4
@@ -176,8 +162,6 @@ tinycss2==1.0.2
     #   weasyprint
 typing-extensions==4.4.0
     # via django-countries
-urllib3==1.25.8
-    # via requests
 weasyprint==57.0
     # via -r requirements/base.in
 webencodings==0.5.1

@@ -14,7 +14,6 @@ django-admin-index
 django-choices
 django-ckeditor
 django-extensions
-django-rosetta
 django-sniplates
 django-redis
 django_admin_index
