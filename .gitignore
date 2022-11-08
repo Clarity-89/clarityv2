@@ -27,3 +27,6 @@ local.py
 backup/
 
 private_media/
+
+# Backups
+db
