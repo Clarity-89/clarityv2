@@ -12,7 +12,7 @@
         <!-- Twitter tags -->
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:creator" content="@Clarity_89"/>
-        <meta property="twitter:image" content="{{ request.get_host }}/media/blog/deathtostock.jpg">
+        <meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/media/blog/deathtostock.jpg">
         <meta name="twitter:title" content="Alex Khomenko - Front end developer">
         <meta name="twitter:description" content="Alex Khomenko - web developer, personal website and portfolio">
         <meta name="twitter:url" content="{{ request.get_host }}">
@@ -20,7 +20,7 @@
         <meta property="og:url" content="{{ request.get_host }}"/>
         <meta property="og:title" content="Alex Khomenko - Front end developer"/>
         <meta property="og:description" content="Alex Khomenko - web developer, personal website and portfolio"/>
-        <meta property="og:image" content="{{ request.get_host }}/media/blog/deathtostock.jpg">
+        <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}/media/blog/deathtostock.jpg">
     {% endblock %}
 
     {% block main_css %}
