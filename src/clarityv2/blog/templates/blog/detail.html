@@ -11,11 +11,15 @@
         <!-- Twitter tags -->
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:creator" content="@Clarity_89"/>
+        <meta property="twitter:image" content="{{ request.get_host }}{{ blog_post.image.url }}">
+        <meta name="twitter:title" content="{{ blog_post.title }}">
+        <meta name="twitter:description" content="{{ blog_post.description|truncatechars:140 }}">
+        <meta name="twitter:url" content="{{ request.get_host }}{{ blog_post.get_absolute_url }}">
+        <!-- FB tags -->
         <meta property="og:url" content="{{ request.get_host }}{{ blog_post.get_absolute_url }}"/>
         <meta property="og:title" content="{{ blog_post.title }}"/>
         <meta property="og:description" content="{{ blog_post.description|truncatechars:140 }}"/>
         <meta property="og:image" content="{{ request.get_host }}{{ blog_post.image.url }}">
-        <meta property="twitter:image" content="{{ request.get_host }}{{ blog_post.image.url }}">
     {% endif %}
 {% endblock %}
 
