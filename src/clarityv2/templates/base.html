@@ -12,7 +12,8 @@
         <!-- Twitter tags -->
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:creator" content="@Clarity_89"/>
-        <meta property="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/media/blog/deathtostock.jpg">
+        <meta property="twitter:image"
+              content="{{ request.scheme }}://{{ request.get_host }}/media/blog/deathtostock.jpg">
         <meta name="twitter:title" content="Alex Khomenko - Front end developer">
         <meta name="twitter:description" content="Alex Khomenko - web developer, personal website and portfolio">
         <meta name="twitter:url" content="{{ request.get_host }}">
@@ -41,7 +42,19 @@
 
 {% block footer %}
     <footer class="footer">
-        <p class="footer__social">
+        <div class="footer__banner">
+            <a href="https://www.cloudways.com/en/?id=1329632&amp;a_bid=fe9a371f" target="_top">
+                <img src="//www.cloudways.com/affiliate/accounts/default1/banners/fe9a371f.png"
+                     alt="Cloudways banner"
+                     title=""
+                     width="250" height="61"/>
+            </a>
+            <img style="border:0"
+                 src="https://www.cloudways.com/affiliate/scripts/imp.php?id=1329632&amp;a_bid=fe9a371f"
+                 width="1" height="1" alt=""/>
+        </div>
+
+        <div class="footer__social">
             <a class="footer__social" href="https://www.linkedin.com/in/oleksandr-khomenko-81310b48/">
                 <img class="footer__logo" width='32' height="32" src="{% static 'img/logos/linkedin.webp' %}"
                      alt="Linkedin">
@@ -61,7 +74,9 @@
                 <img class="footer__logo" width='32' height="32" src="{% static 'img/logos/twitter.webp' %}"
                      alt="Twitter">
             </a>
-        </p>
+
+        </div>
+
         <p class="footer__text-copyright">
             © Copyright {% now "Y" %} Alex Khomenko. {% trans "All rights reserved" %}.
         </p>

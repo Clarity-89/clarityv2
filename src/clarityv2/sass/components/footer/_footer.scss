@@ -4,6 +4,13 @@
   align-items: center;
   padding: 1em;
 
+  @media only screen and (max-width: $xs-screen) {
+    flex-direction: column;
+    > * {
+      margin-bottom: 12px;
+    }
+  }
+
   &__text-copyright {
     font-size: 16px;
     text-align: right;
@@ -21,5 +28,11 @@
   &__logo {
     height: 32px;
     width: 32px;
+  }
+
+  &__banner {
+    img {
+      filter: grayscale(1);
+    }
   }
 }
