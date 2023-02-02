@@ -1,0 +1,15 @@
+.separator {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 24px auto;
+
+  &__bullet {
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 20px;
+  }
+}
