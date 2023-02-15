@@ -27,7 +27,7 @@ brotli==1.0.9
     #   -c requirements/base.txt
     #   -r requirements/base.txt
     #   fonttools
-certifi==2019.6.16
+certifi==2022.12.7
     # via requests
 cffi==1.15.1
     # via
