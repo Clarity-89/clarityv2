@@ -321,7 +321,7 @@ redis==3.3.7
     #   -c requirements/base.txt
     #   -r requirements/base.txt
     #   django-redis
-requests==2.22.0
+requests==2.31.0
     # via requests-mock
 requests-mock==1.10.0
     # via -r requirements/test-tools.in
