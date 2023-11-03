@@ -251,7 +251,7 @@ phonenumbers==8.10.16
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.txt
-pillow==9.0.1
+pillow==10.0.1
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.txt
