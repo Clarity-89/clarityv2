@@ -7,4 +7,4 @@ class WorkEntryResource(resources.ModelResource):
 
     class Meta:
         model = WorkEntry
-        fields = ('user', 'project', 'date', 'duration', 'notes')
+        fields = ('project', 'date', 'duration', 'notes')

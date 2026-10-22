@@ -1,7 +1,6 @@
 import datetime
 from decimal import Decimal
 
-from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -9,7 +8,6 @@ from clarityv2.invoices.constants import TWO_DIGITS
 
 
 class WorkEntry(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     project = models.ForeignKey('crm.Project', on_delete=models.PROTECT)
     date = models.DateField(_('date'), default=datetime.date.today)
     duration = models.DurationField(_('duration'))
