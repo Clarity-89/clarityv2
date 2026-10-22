@@ -21,7 +21,7 @@ It does not install packages or migrate, so a Python upgrade goes in this order:
 2. Build the venv from the new lock file before pushing:
    `python3.14 -m venv env314 && env314/bin/pip install -r requirements/production.txt`
    (all wheels, no compiler needed), then `mv env env39 && mv env314 env` and fix the
-   scripts' absolute shebangs: `sed -i 's#/env314/#/env/#' env/bin/*`. Skipping the
+   scripts' absolute shebangs: `grep -l /env314/ env/bin/* | xargs sed -i 's#/env314/#/env/#'`. Skipping the
    `sed` leaves `env/bin/gunicorn` pointing at a deleted interpreter (systemd 203/EXEC).
    Check with `env/bin/gunicorn --version` before restarting anything.
 3. Push, or run the hook steps by hand.
