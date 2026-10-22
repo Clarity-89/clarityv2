@@ -1,8 +1,7 @@
-from django.utils.translation import ugettext_lazy as _
+from django.db import models
+from django.utils.translation import gettext_lazy as _
 
-from djchoices import ChoiceItem, DjangoChoices
 
-
-class Currencies(DjangoChoices):
-    usd = ChoiceItem('usd', _('USD'))
-    euro = ChoiceItem('euro', _('\u20AC'))
+class Currencies(models.TextChoices):
+    usd = 'usd', _('USD')
+    euro = 'euro', _('\u20AC')

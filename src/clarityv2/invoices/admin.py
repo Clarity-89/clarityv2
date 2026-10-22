@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.db.models import Count
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 
 from privates.admin import PrivateMediaMixin
 
-from .forms import AdminInvoiceForm
 from .models import Invoice, InvoiceItem
 from .utils import render_invoice_pdf
 
@@ -33,7 +33,6 @@ class InvoiceItemInline(admin.TabularInline):
 
 @admin.register(Invoice)
 class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
-    form = AdminInvoiceForm
     list_display = ('client', 'date', 'due_date', 'received', 'invoice_number',
                     'created', 'n_items', 'generated', 'invoice_items')
     list_filter = ('client', 'date', 'due_date', 'received')
@@ -41,8 +40,6 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
     private_media_fields = ('pdf',)
     inlines = [InvoiceItemInline]
     actions = [generate_invoices, render_pdf]
-
-    permission_required = 'invoices.can_view_invoice'
 
     def get_queryset(self, request=None):
         return super().get_queryset(request=request).annotate(n_items=Count('invoiceitem'))
@@ -54,10 +51,9 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
 
     def invoice_items(self, obj):
         url = reverse('admin:invoices_invoiceitem_changelist')
-        return '<a href="{}?invoice={}">{}</a>'.format(url, obj.pk, _('invoice items'))
+        return format_html('<a href="{}?invoice={}">{}</a>', url, obj.pk, _('invoice items'))
 
     invoice_items.short_description = _('invoice items')
-    invoice_items.allow_tags = True
 
 
 @admin.register(InvoiceItem)

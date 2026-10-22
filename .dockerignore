@@ -1,6 +1,5 @@
 .git
 .idea/
 log/
-node_modules/
 media/
 private-media/
