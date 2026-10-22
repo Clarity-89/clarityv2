@@ -1,4 +1,4 @@
-name: Build static assets and deploy 
+name: Deploy
 on:
   push:
     branches: 
@@ -11,19 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: build assets
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    - run: npm ci
-    - run: npm run build
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v9
-      with:
-        author_name: Alex K
-        author_email: mail@example.com
-        message: 'Your commit message'
-        add: './src/clarityv2/static'
     - name: Install SSH Key
       uses: shimataro/ssh-key-action@v2
       with:

@@ -1,8 +1,7 @@
 import os
 
-# Django-hijack (and Django-hijack-admin)
 from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 DJANGO_PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
@@ -22,33 +21,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-
     # Note: contenttypes should be first, see Django ticket #10827
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sessions',
-
-    # Note: If enabled, at least one Site object is required
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
     # Optional applications.
     'django_admin_index',
+    'ordered_model',  # required by django_admin_index >= 2
     'django.contrib.admin',
-    'django.contrib.sitemaps',
     'django_sendfile',
-
-    'sniplates',
-    'hijack',
-    'compat',  # Part of hijack
-    'hijack_admin',
     'django_countries',
     'import_export',
     'solo',
-    'ckeditor',
     'django_extensions',
-    'taggit',
     'privates',
 
     # Project applications.
@@ -57,10 +45,7 @@ INSTALLED_APPS = [
     'clarityv2.crm',
     'clarityv2.invoices',
     'clarityv2.work_entries',
-    'clarityv2.homepage',
-    'clarityv2.portfolio',
-    'clarityv2.blog',
-    'clarityv2.deductions'
+    'clarityv2.deductions',
 ]
 
 MIDDLEWARE = [
@@ -85,9 +70,7 @@ RAW_TEMPLATE_LOADERS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(DJANGO_PROJECT_DIR, 'templates'),
-        ],
+        'DIRS': [],
         'APP_DIRS': False,  # conflicts with explicitly specifying the loaders
         'OPTIONS': {
             'context_processors': [
@@ -95,7 +78,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'clarityv2.utils.context_processors.settings',
             ],
             'loaders': RAW_TEMPLATE_LOADERS
         },
@@ -133,8 +115,6 @@ LANGUAGE_CODE = 'en-uk'
 TIME_ZONE = 'Europe/Helsinki'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 
@@ -175,7 +155,16 @@ PRIVATE_MEDIA_ROOT = os.path.join(BASE_DIR, 'private_media')
 PRIVATE_MEDIA_URL = '/protected/'
 
 SENDFILE_ROOT = PRIVATE_MEDIA_ROOT
-SENDFILE_URL = PRIVATE_MEDIA_URL[:-1]
+SENDFILE_URL = PRIVATE_MEDIA_URL
+
+STORAGES = {
+    "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
+    "privates": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "OPTIONS": {"location": PRIVATE_MEDIA_ROOT, "base_url": PRIVATE_MEDIA_URL},
+    },
+}
 
 FIXTURE_DIRS = (
     os.path.join(DJANGO_PROJECT_DIR, 'fixtures'),
@@ -274,8 +263,6 @@ CACHES = {
     }
 }
 
-AXES_CACHE = 'axes_cache'
-
 #
 # Additional Django settings
 #
@@ -283,50 +270,18 @@ AXES_CACHE = 'axes_cache'
 # Custom user model
 AUTH_USER_MODEL = 'accounts.User'
 
-# Allow logging in with both username+password and email+password
-AUTHENTICATION_BACKENDS = [
-    'rules.permissions.ObjectPermissionBackend',
-    # 'axes.backends.AxesBackend',
-    'django.contrib.auth.backends.ModelBackend',
-]
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 #
 # Custom settings
 #
 PROJECT_NAME = 'clarityv2'
 ENVIRONMENT = None
-SHOW_ALERT = True
-SITE_ID = 1
-
-# Allauth
-LOGIN_REDIRECT_URL = reverse_lazy('accounts:projects')
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
+LOGIN_REDIRECT_URL = reverse_lazy('admin:index')
 
 #
 # Library settings
 #
 
 ADMIN_INDEX_SHOW_REMAINING_APPS = True
-
-HIJACK_LOGIN_REDIRECT_URL = '/'
-HIJACK_LOGOUT_REDIRECT_URL = reverse_lazy('admin:accounts_user_changelist')
-HIJACK_REGISTER_ADMIN = False
-# This is a CSRF-security risk.
-# See: http://django-hijack.readthedocs.io/en/latest/configuration/#allowing-get-method-for-hijack-views
-HIJACK_ALLOW_GET_REQUESTS = True
-
-#
-# RICH TEXT EDITOR
-#
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'extraPlugins': ','.join(['codesnippet']),
-        'scayt_autoStartup': True
-    },
-}
-
 BASE_URL = 'https://www.claritydev.net'

@@ -12,7 +12,6 @@ by the custom :class:`UrlFetcher`.
 """
 import logging
 import mimetypes
-from io import BytesIO
 from pathlib import PurePosixPath
 from typing import Optional, Tuple
 from urllib.parse import ParseResult, urljoin, urlparse
@@ -24,6 +23,7 @@ from django.core.files.storage import FileSystemStorage, default_storage
 from django.template.loader import render_to_string
 
 import weasyprint
+from weasyprint.urls import URLFetcher, URLFetcherResponse
 
 logger = logging.getLogger(__name__)
 
@@ -48,13 +48,14 @@ def get_base_url() -> str:
     return settings.BASE_URL
 
 
-class UrlFetcher:
+class UrlFetcher(URLFetcher):
 
     """
-    URL fetcher that skips the network for /static/* files.
+    URL fetcher that skips the network for /static/* and /media/* files.
     """
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.static_url = self._get_fully_qualified_url(settings.STATIC_URL)
         is_static_local_storage = issubclass(
             staticfiles_storage.__class__, FileSystemStorage
@@ -77,8 +78,7 @@ class UrlFetcher:
             fully_qualified_url = urljoin(get_base_url(), setting)
         return urlparse(fully_qualified_url)
 
-    def __call__(self, url: str) -> dict:
-        orig_url = url
+    def fetch(self, url: str, headers=None) -> URLFetcherResponse:
         parsed_url = urlparse(url)
 
         candidate = self.get_match_candidate(parsed_url)
@@ -96,19 +96,13 @@ class UrlFetcher:
 
             if absolute_path is None:
                 logger.error("Could not resolve path '%s'", path)
-                return weasyprint.default_url_fetcher(orig_url)
+                return super().fetch(url, headers)
 
-            content_type, encoding = mimetypes.guess_type(absolute_path)
-            result = dict(
-                mime_type=content_type,
-                encoding=encoding,
-                redirected_url=orig_url,
-                filename=path.parts[-1],
-            )
+            content_type, _ = mimetypes.guess_type(absolute_path)
+            response_headers = {"Content-Type": content_type} if content_type else {}
             with open(absolute_path, "rb") as f:
-                result["file_obj"] = BytesIO(f.read())
-            return result
-        return weasyprint.default_url_fetcher(orig_url)
+                return URLFetcherResponse(url, f.read(), response_headers)
+        return super().fetch(url, headers)
 
     def get_match_candidate(
         self, url: ParseResult

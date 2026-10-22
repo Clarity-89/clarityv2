@@ -3,11 +3,10 @@ from decimal import Decimal
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from autoslug.fields import AutoSlugField
 from django_countries.fields import CountryField
-from djchoices import ChoiceItem, DjangoChoices
 from phonenumber_field.modelfields import PhoneNumberField
 
 from .constants import Currencies
@@ -70,9 +69,9 @@ class Client(models.Model):
         return self.name
 
 
-class TaxRates(DjangoChoices):
-    no_vat = ChoiceItem(Decimal('0.00'), _('no vat'))
-    standard = ChoiceItem(Decimal('0.24'), _('standard vat rate'))
+class TaxRates(Decimal, models.Choices):
+    no_vat = Decimal('0.00'), _('no vat')
+    standard = Decimal('0.24'), _('standard vat rate')
 
 
 class Project(models.Model):
@@ -93,7 +92,7 @@ class Project(models.Model):
         _('tax rate'), max_digits=4, decimal_places=2,
         choices=TaxRates.choices, default=TaxRates.no_vat
     )
-    currency = models.CharField(_('currency'), max_length=20, choices=Currencies, default=Currencies.euro)
+    currency = models.CharField(_('currency'), max_length=20, choices=Currencies.choices, default=Currencies.euro)
 
     class Meta:
         verbose_name = _('project')

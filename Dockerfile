@@ -1,5 +1,5 @@
 # Python
-FROM python:3.9-slim-bullseye AS build
+FROM python:3.14-slim-trixie AS build
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         pkg-config \
@@ -14,43 +14,24 @@ COPY ./requirements /app/requirements
 RUN pip install pip setuptools -U
 RUN pip install -r requirements/production.txt
 
-# JS
-FROM node:16-bullseye AS frontend-build
-
-WORKDIR /app
-
-COPY ./*.json ./*.js /app/
-RUN npm ci && mkdir -p src/clarityv2/static/bundles/
-
-COPY ./build /app/build/
-
-COPY src/clarityv2/js /app/src/clarityv2/js
-COPY ./src/clarityv2/sass /app/src/clarityv2/sass
-
-RUN npm run build
-
 # Build prod image
-FROM python:3.9-slim-bullseye AS prod
+FROM python:3.14-slim-trixie AS prod
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         procps \
         vim \
-        mime-support \
+        nano \
+        media-types \
         postgresql-client \
         gettext \
-        nano \
         # weasyprint deps
-        libcairo2 \
         libpango-1.0-0 \
-        libpangocairo-1.0-0 \
-        libgdk-pixbuf2.0-0 \
-        shared-mime-info \
+        libpangoft2-1.0-0 \
+        libharfbuzz-subset0 \
     && rm -rf /var/lib/apt/lists/*
 
-
-COPY --from=build /usr/local/lib/python3.9 /usr/local/lib/python3.9
+COPY --from=build /usr/local/lib/python3.14 /usr/local/lib/python3.14
 COPY --from=build /usr/local/bin/gunicorn /usr/local/bin/gunicorn
-COPY --from=build /usr/local/bin/uwsgi /usr/local/bin/uwsgi
 
 WORKDIR /app
 COPY ./bin/docker_start.sh /start.sh
@@ -60,8 +41,6 @@ RUN mkdir /app/log
 RUN mkdir /app/media
 VOLUME ["/app/log", "/app/media"]
 
-COPY --from=frontend-build /app/src/clarityv2/static/css /app/src/clarityv2/static/css
-COPY --from=frontend-build /app/src/clarityv2/static/js /app/src/clarityv2/static/js
 COPY ./src /app/src
 
 RUN useradd -M -u 1000 clarity
