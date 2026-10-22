@@ -20,7 +20,10 @@ It does not install packages or migrate, so a Python upgrade goes in this order:
 1. `sudo apt install python3.14 python3.14-venv` (deadsnakes PPA is configured).
 2. Build the venv from the new lock file before pushing:
    `python3.14 -m venv env314 && env314/bin/pip install -r requirements/production.txt`
-   (all wheels, no compiler needed), then `mv env env39 && mv env314 env`.
+   (all wheels, no compiler needed), then `mv env env39 && mv env314 env` and fix the
+   scripts' absolute shebangs: `sed -i 's#/env314/#/env/#' env/bin/*`. Skipping the
+   `sed` leaves `env/bin/gunicorn` pointing at a deleted interpreter (systemd 203/EXEC).
+   Check with `env/bin/gunicorn --version` before restarting anything.
 3. Push, or run the hook steps by hand.
 4. `DB_NAME=clarity DB_USER=clarity DB_PASSWORD=... env/bin/python src/manage.py migrate`
    (the DB settings live only in the gunicorn unit).
