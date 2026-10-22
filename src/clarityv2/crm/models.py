@@ -26,8 +26,6 @@ class Contact(models.Model):
     city = models.CharField(_('city'), max_length=255, blank=True)
     country = CountryField(default=settings.DEFAULT_COUNTRY, verbose_name=_('Country'))
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.PROTECT)
-
     created = models.DateTimeField(_('created'), auto_now_add=True)
     modified = models.DateTimeField(_('modified'), auto_now=True)
 
