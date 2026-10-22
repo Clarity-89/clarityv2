@@ -60,7 +60,7 @@ LOGGING['loggers'].update({
 #
 
 # HTTPS
-IS_HTTPS = os.getenv("IS_HTTPS", False)
+IS_HTTPS = os.getenv("IS_HTTPS", "").lower() in ("true", "1", "yes")
 SESSION_COOKIE_SECURE = IS_HTTPS
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = IS_HTTPS
