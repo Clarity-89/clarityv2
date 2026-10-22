@@ -1,10 +1,12 @@
-{% extends "bs.html" %}{% load i18n math invoices static %}
-
-{% block extra_css %}
-    <link href="{% static 'css/print.css' %}" media="print" rel="stylesheet"/>
-{% endblock %}
-
-{% block content %}
+{% load i18n math invoices static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% trans "Invoice" %} {{ invoice.invoice_number }}</title>
+    <link href="{% static 'css/print.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<main>
     <div class="invoice pdf">
         <section class="invoice__header-section">
             <h2 class="invoice__head">{% trans "Invoice" %}</h2>
@@ -162,7 +164,6 @@
             </section>
         {% endwith %}
     </div>
-{% endblock %}
-
-{% block footer %}{% endblock %}
-
+</main>
+</body>
+</html>

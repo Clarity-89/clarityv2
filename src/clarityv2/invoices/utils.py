@@ -6,10 +6,7 @@ from io import BytesIO
 from django.db.models import Count
 from django.utils import translation
 
-from django_sendfile import sendfile
-
 from clarityv2.utils.pdf import render_to_pdf
-from clarityv2.utils.views.pdf import PDFTemplateResponse, PDFTemplateResponseMixin
 
 
 def get_invoice_context(invoice, **extra):
@@ -42,43 +39,6 @@ def render_invoice_pdf(request, invoice, template_name="invoices/invoice_detail.
         translation.activate(request.LANGUAGE_CODE)
     else:
         translation.deactivate()
-
-
-class InvoicePDFTemplateResponse(PDFTemplateResponse):
-    def __init__(self, invoice=None, *args, **kwargs):
-        self.invoice = invoice
-        super(InvoicePDFTemplateResponse, self).__init__(*args, **kwargs)
-
-    @property
-    def rendered_content(self):
-        """
-        Read the invoices pdf, or generate it and return the rendered pdf.
-        """
-        assert self.invoice is not None
-
-        if not self.invoice.pdf:
-            render_invoice_pdf(
-                self._request, self.invoice, template_name=self.template_name
-            )
-        return self.invoice.pdf.read()
-
-
-class InvoicePDFTemplateResponseMixin(PDFTemplateResponseMixin):
-    response_class = InvoicePDFTemplateResponse
-
-    def render_to_response(self, *args, **kwargs):
-        # if the pdf exists, use sendfile
-        if self.object.pdf:
-            return sendfile(
-                self.request,
-                self.object.pdf.path,
-                attachment=True,
-                attachment_filename=self.get_filename(),
-            )
-        kwargs["invoice"] = self.object
-        return super(InvoicePDFTemplateResponseMixin, self).render_to_response(
-            *args, **kwargs
-        )
 
 
 INVOICE_MULTIPLIERS = [1, 3, 7]

@@ -7,9 +7,7 @@ from .base import *
 DEBUG = False
 ENVIRONMENT = 'production'
 
-ADMINS = (
-    'Alex', 'khomenkodev17@gmail.com'
-)
+ADMINS = [('Alex', 'khomenkodev17@gmail.com')]
 
 DATABASES = {
     'default': {
@@ -17,8 +15,8 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',  # Set to empty string for default.
+        'HOST': os.getenv('DB_HOST', ''),  # Empty for localhost through domain sockets.
+        'PORT': os.getenv('DB_PORT', ''),  # Empty for the default port.
     }
 }
 
@@ -61,17 +59,17 @@ LOGGING['loggers'].update({
 # Custom settings
 #
 
-# Show active environment in admin.
-SHOW_ALERT = False
-
 # HTTPS
-IS_HTTPS = os.getenv("IS_HTTPS", False)
+IS_HTTPS = os.getenv("IS_HTTPS", "").lower() in ("true", "1", "yes")
 SESSION_COOKIE_SECURE = IS_HTTPS
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SECURE = IS_HTTPS
 X_FRAME_OPTIONS = 'DENY'
 # Only set this when we're behind Nginx as configured in our example-deployment
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# Django >= 4.0 checks the Origin header on POSTs; set when the admin is reached
+# through a host that differs from what nginx forwards, e.g. "https://admin.example.com".
+CSRF_TRUSTED_ORIGINS = [origin for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if origin]
 
 
 SENDFILE_BACKEND = 'django_sendfile.backends.nginx'

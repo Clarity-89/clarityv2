@@ -7,10 +7,9 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.core import validators
 from django.db import models, transaction
 from django.db.models import F, Max, Sum
-from django.urls import reverse
 from django.utils import timezone
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from privates.fields import PrivateMediaFileField
 
@@ -45,9 +44,6 @@ class Invoice(models.Model):
 
     def __str__(self):
         return '{client} - {date}'.format(client=self.client, date=self.date)
-
-    def get_absolute_url(self):
-        return reverse('invoices:detail', kwargs={'invoice_number': self.invoice_number})
 
     def get_previous(self, **kwargs):
         kwargs['client'] = self.client

@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date, timedelta
 from decimal import Decimal
 
 from django.test import TestCase, override_settings
@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from freezegun import freeze_time
 
+from clarityv2.crm.models import TaxRates
 from clarityv2.crm.tests.factories import ClientFactory, ProjectFactory
 from clarityv2.work_entries.tests.factories import WorkEntryFactory
 
@@ -21,41 +22,21 @@ class InvoiceTests(TestCase):
         Test that the work entries are correctly picked up for a given invoice date.
         """
         client1, client2 = ClientFactory.create_batch(2)
-        project1, project2 = ProjectFactory.create_batch(2, client=client1)
+        project1, project2 = ProjectFactory.create_batch(2, client=client1, vat=TaxRates.standard)
         project3 = ProjectFactory.create(client=client2)
 
         # worked a bit on project 1
-        WorkEntryFactory.create(
-            project=project1,
-            start=datetime(2015, 9, 14, 8, 0).replace(tzinfo=timezone.utc),
-            end=datetime(2015, 9, 14, 12, 0).replace(tzinfo=timezone.utc)
-        )
+        WorkEntryFactory.create(project=project1, date=date(2015, 9, 14), duration=timedelta(hours=4))
 
         # worked a bit on project 2
-        WorkEntryFactory.create(
-            project=project2,
-            start=datetime(2015, 9, 14, 13, 0).replace(tzinfo=timezone.utc),
-            end=datetime(2015, 9, 14, 15, 30).replace(tzinfo=timezone.utc)
-        )
-        WorkEntryFactory.create(
-            project=project2,
-            start=datetime(2015, 9, 30, 13, 0).replace(tzinfo=timezone.utc),
-            end=datetime(2015, 9, 30, 15, 30).replace(tzinfo=timezone.utc)
-        )
+        WorkEntryFactory.create(project=project2, date=date(2015, 9, 14), duration=timedelta(hours=2, minutes=30))
+        WorkEntryFactory.create(project=project2, date=date(2015, 9, 30), duration=timedelta(hours=2, minutes=30))
 
         # future entry to be ignored
-        WorkEntryFactory.create(
-            project=project1,
-            start=datetime(2015, 10, 1, 8, 0).replace(tzinfo=timezone.utc),
-            end=datetime(2015, 10, 1, 11, 0).replace(tzinfo=timezone.utc)
-        )
+        WorkEntryFactory.create(project=project1, date=date(2015, 10, 1), duration=timedelta(hours=3))
 
         # different client
-        WorkEntryFactory.create(
-            project=project3,
-            start=datetime(2015, 9, 21, 8, 0).replace(tzinfo=timezone.utc),
-            end=datetime(2015, 9, 21, 11, 0).replace(tzinfo=timezone.utc)
-        )
+        WorkEntryFactory.create(project=project3, date=date(2015, 9, 21), duration=timedelta(hours=3))
 
         # create the invoices
         invoice1 = InvoiceFactory.create(client=client1, date=date(2015, 9, 30))
@@ -73,7 +54,7 @@ class InvoiceTests(TestCase):
 
         expected_vat_free_total = project1.base_rate * 4 + project2.base_rate * 5
         self.assertEqual(invoice1.total_no_vat, expected_vat_free_total)
-        self.assertEqual(invoice1.total_with_vat, expected_vat_free_total * Decimal('1.21'))
+        self.assertEqual(invoice1.total_with_vat, expected_vat_free_total * Decimal('1.24'))
 
         invoice2.generate()
         self.assertEqual(InvoiceItem.objects.count(), 4)
@@ -81,11 +62,7 @@ class InvoiceTests(TestCase):
     @freeze_time('2015-10-02')
     def test_multiple_generate_idempotent(self):
         client = ClientFactory.create()
-        WorkEntryFactory.create(
-            project__client=client,
-            start=datetime(2015, 9, 14, 8, 0).replace(tzinfo=timezone.utc),
-            end=datetime(2015, 9, 14, 12, 0).replace(tzinfo=timezone.utc)
-        )
+        WorkEntryFactory.create(project__client=client, date=date(2015, 9, 14), duration=timedelta(hours=4))
 
         invoice = InvoiceFactory.create(client=client, date=date(2015, 9, 30))
         invoice.generate()
@@ -127,7 +104,7 @@ class InvoiceTests(TestCase):
         invoice = InvoiceFactory.create(client=project.client, date=date(2015, 10, 15))
         InvoiceItemFactory.create(
             invoice=invoice, project=project,
-            rate=3500, amount=1,
+            rate=3500, amount=1, tax_rate=TaxRates.standard,
             source_object=project
         )
 
@@ -135,8 +112,8 @@ class InvoiceTests(TestCase):
         invoice.generate()
         self.assertEqual(invoice.invoice_number, '201500001')
         self.assertEqual(invoice.get_totals(), {
-            'base__sum': Decimal(3500),
-            'tax__sum': Decimal('735')
+            'base__sum': Decimal('3500'),
+            'tax__sum': Decimal('840')
         })
 
     @override_settings(SITE_COUNTRY='NL')

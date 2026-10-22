@@ -1,12 +1,9 @@
 -c base.txt
 
 # Dependencies only relevant for (unit) testing
-coverage < 5.0
-django-webtest
+coverage
 factory-boy
 freezegun
 flake8
 pylint
-pyquery  # integrates with webtest
-requests-mock
 tblib
