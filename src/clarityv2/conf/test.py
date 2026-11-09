@@ -13,11 +13,11 @@ ADMINS = ()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'clarityv2',
-        'USER': 'jenkins',
-        'PASSWORD': 'jenkins',
-        'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',  # Set to empty string for default.
+        'NAME': os.getenv('DB_NAME', 'clarityv2'),
+        'USER': os.getenv('DB_USER', 'jenkins'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'jenkins'),
+        'HOST': os.getenv('DB_HOST', ''),  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': os.getenv('DB_PORT', ''),  # Set to empty string for default.
         'TEST': {
             'NAME': 'test_%s' % os.getenv('JOB_NAME', default='clarityv2')
         }
