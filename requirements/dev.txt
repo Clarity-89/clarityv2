@@ -10,7 +10,7 @@ asgiref==3.12.1
     #   -r requirements/base.txt
     #   django
     #   django-countries
-brotli==1.2.0
+brotli==1.2.1
     # via
     #   -c requirements/base.txt
     #   -r requirements/base.txt
