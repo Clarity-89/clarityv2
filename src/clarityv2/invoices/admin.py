@@ -50,6 +50,12 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
             initial.setdefault('client', default_client.pk)
         return initial
 
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+        if not change:
+            # Generate after inlines are saved so manual items are part of the invoice.
+            form.instance.generate()
+
     def get_queryset(self, request=None):
         return super().get_queryset(request=request).annotate(n_items=Count('invoiceitem'))
 
