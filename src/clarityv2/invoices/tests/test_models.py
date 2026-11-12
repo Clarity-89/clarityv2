@@ -116,6 +116,17 @@ class InvoiceTests(TestCase):
             'tax__sum': Decimal('840')
         })
 
+    def test_generate_uses_work_entry_rate_override(self):
+        project = ProjectFactory.create(base_rate=Decimal('100'))
+        invoice = InvoiceFactory.create(client=project.client, date=date.today())
+        WorkEntryFactory.create(project=project, date=date.today(), rate=Decimal('42'))
+
+        invoice.generate()
+
+        item = invoice.invoiceitem_set.get()
+        self.assertEqual(item.rate, Decimal('42'))
+        self.assertEqual(item.amount, 1)
+
     @override_settings(SITE_COUNTRY='NL')
     def test_international_vat(self):
         invoice = InvoiceFactory.create(client__country='BE', date=date(2015, 10, 15))

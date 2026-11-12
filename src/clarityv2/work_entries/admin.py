@@ -11,7 +11,7 @@ from import_export.admin import ImportExportActionModelAdmin
 
 from clarityv2.crm.models import Client
 
-from .models import WorkEntry
+from .models import WorkEntry, WorkEntryTemplate
 
 
 class CustomDateTimeFilter(DateFieldListFilter):
@@ -37,7 +37,7 @@ class CustomDateTimeFilter(DateFieldListFilter):
 
 @admin.register(WorkEntry)
 class WorkEntryAdmin(ImportExportActionModelAdmin):
-    list_display = ('date', 'duration', 'project', 'notes')
+    list_display = ('date', 'duration', 'rate', 'project', 'notes')
     list_filter = ('project__client', 'project', ('date', CustomDateTimeFilter))
     search_fields = ('notes',)
     change_list_template = 'admin/work_entries/workentry/change_list.html'
@@ -62,3 +62,10 @@ class WorkEntryAdmin(ImportExportActionModelAdmin):
                 duration = (queryset.aggregate(Sum('duration'))['duration__sum']) or timedelta()
                 response.context_data['total_duration'] = duration.total_seconds() / 3600
         return response
+
+
+@admin.register(WorkEntryTemplate)
+class WorkEntryTemplateAdmin(admin.ModelAdmin):
+    list_display = ('project', 'title', 'duration', 'rate')
+    list_filter = ('project__client', 'project')
+    search_fields = ('title',)

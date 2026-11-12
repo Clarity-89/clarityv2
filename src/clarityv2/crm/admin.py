@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from clarityv2.utils.admin.decorators import link_list
+from clarityv2.work_entries.models import WorkEntryTemplate
 
 from .models import Client, Contact, Project
 
@@ -40,8 +41,14 @@ class ClientAdmin(admin.ModelAdmin):
         return obj.project_set.all()
 
 
+class WorkEntryTemplateInline(admin.TabularInline):
+    model = WorkEntryTemplate
+    extra = 0
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'client', 'base_rate', 'flat_fee')
     list_filter = ('client',)
     search_fields = ('name',)
+    inlines = [WorkEntryTemplateInline]

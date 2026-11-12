@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from privates.fields import PrivateMediaFileField
 
 from clarityv2.crm.models import TaxRates
-from clarityv2.work_entries.models import WorkEntry
+from clarityv2.work_entries.models import WorkEntry, WorkEntryTemplate
 
 from .utils import generate_invoice_reference
 
@@ -47,6 +47,28 @@ class Invoice(models.Model):
 
     def __str__(self):
         return '{client} - {date}'.format(client=self.client, date=self.date)
+
+    def save(self, *args, **kwargs):
+        adding = self._state.adding
+        super().save(*args, **kwargs)
+        if adding:
+            self.create_default_work_entries()
+
+    def create_default_work_entries(self):
+        if not self.client.is_default:
+            return
+        templates = WorkEntryTemplate.objects.filter(project__client=self.client).select_related('project')
+        WorkEntry.objects.bulk_create(
+            WorkEntry(
+                project=template.project,
+                date=self.date,
+                duration=template.duration,
+                rate=template.rate,
+                notes=template.title,
+                source_invoice=self,
+            )
+            for template in templates
+        )
 
     def get_previous(self, **kwargs):
         kwargs['client'] = self.client
@@ -92,7 +114,9 @@ class Invoice(models.Model):
                 InvoiceItem.objects.create(
                     invoice=self,
                     project=entry.project,
-                    rate=entry.project.base_rate if not entry.project.flat_fee else entry.project.flat_fee,
+                    rate=entry.rate if entry.rate is not None else (
+                        entry.project.base_rate if not entry.project.flat_fee else entry.project.flat_fee
+                    ),
                     amount=entry.duration.total_seconds() / 3600,
                     tax_rate=entry.project.vat,
                     source_object=entry,
