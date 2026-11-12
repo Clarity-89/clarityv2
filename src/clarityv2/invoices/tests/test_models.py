@@ -10,7 +10,7 @@ from clarityv2.crm.models import TaxRates
 from clarityv2.crm.tests.factories import ClientFactory, ProjectFactory
 from clarityv2.work_entries.tests.factories import WorkEntryFactory
 
-from ..models import InvoiceItem
+from ..models import InvoiceItem, InvoiceItemTemplate
 from .factories import InvoiceFactory, InvoiceItemFactory
 
 
@@ -123,3 +123,56 @@ class InvoiceTests(TestCase):
 
         invoice2 = InvoiceFactory.create(client__country='NL', date=date(2015, 10, 15))
         self.assertFalse(invoice2.vat_reverse_charge)
+
+
+class InvoiceItemTemplateTests(TestCase):
+    def setUp(self):
+        self.client = ClientFactory(is_default=True)
+        self.project = ProjectFactory(client=self.client)
+
+    def test_generate_bills_templates_for_default_client(self):
+        InvoiceItemTemplate.objects.create(project=self.project, title='Monthly rate', rate=Decimal('3500'))
+        invoice = InvoiceFactory.create(client=self.client, date=date(2026, 1, 1))
+
+        invoice.generate()
+
+        item = invoice.invoiceitem_set.get()
+        self.assertEqual(item.remarks, 'Monthly rate')
+        self.assertEqual(item.rate, Decimal('3500'))
+        self.assertEqual(item.amount, 1)
+
+    def test_generate_skips_templates_for_non_default_client(self):
+        client = ClientFactory()
+        project = ProjectFactory(client=client)
+        InvoiceItemTemplate.objects.create(project=project, title='Monthly rate')
+        invoice = InvoiceFactory.create(client=client, date=date(2026, 1, 1))
+
+        invoice.generate()
+
+        self.assertFalse(invoice.invoiceitem_set.exists())
+
+    def test_two_invoices_same_date_each_bill_their_template_lines(self):
+        InvoiceItemTemplate.objects.create(project=self.project, title='Monthly rate', rate=Decimal('3500'))
+        first = InvoiceFactory.create(client=self.client, date=date(2026, 1, 1))
+        second = InvoiceFactory.create(client=self.client, date=date(2026, 1, 1))
+
+        first.generate()
+        second.generate()
+
+        self.assertEqual(first.invoiceitem_set.get().remarks, 'Monthly rate')
+        self.assertEqual(second.invoiceitem_set.get().remarks, 'Monthly rate')
+
+    def test_regenerate_keeps_number_and_manual_lines(self):
+        InvoiceItemTemplate.objects.create(project=self.project, title='Monthly rate', rate=Decimal('3500'))
+        invoice = InvoiceFactory.create(client=self.client, date=date(2026, 1, 1))
+        invoice.generate()
+        invoice_number = invoice.invoice_number
+        InvoiceItem.objects.create(
+            invoice=invoice, project=self.project, rate=Decimal('10'), amount=1, remarks='Manual line')
+
+        invoice.regenerate()
+
+        invoice.refresh_from_db()
+        self.assertEqual(invoice.invoice_number, invoice_number)
+        self.assertEqual(invoice.invoiceitem_set.filter(remarks='Manual line').count(), 1)
+        self.assertEqual(invoice.invoiceitem_set.filter(remarks='Monthly rate').count(), 1)

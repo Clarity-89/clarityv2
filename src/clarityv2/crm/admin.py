@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
+from clarityv2.invoices.models import InvoiceItemTemplate
 from clarityv2.utils.admin.decorators import link_list
 
 from .models import Client, Contact, Project
@@ -22,7 +23,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'city', 'country', 'get_contacts')
+    list_display = ('name', 'is_default', 'email', 'city', 'country', 'get_contacts')
     list_filter = ('created', 'modified')
     search_fields = ('name', 'email', 'contacts__name')
     filter_horizontal = ('contacts',)
@@ -40,8 +41,21 @@ class ClientAdmin(admin.ModelAdmin):
         return obj.project_set.all()
 
 
+class InvoiceItemTemplateInline(admin.TabularInline):
+    model = InvoiceItemTemplate
+    extra = 0
+
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
+        if obj is not None:
+            # New rows start at the project's current rate instead of an empty override.
+            formset.form.base_fields['rate'].initial = obj.rate_for()
+        return formset
+
+
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'client', 'base_rate', 'flat_fee')
     list_filter = ('client',)
     search_fields = ('name',)
+    inlines = [InvoiceItemTemplateInline]
