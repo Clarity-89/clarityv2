@@ -23,7 +23,7 @@ DATABASES = {
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-ALLOWED_HOSTS = ['claritydev.net']
+ALLOWED_HOSTS = [host for host in os.getenv('ALLOWED_HOSTS', 'claritydev.net').split(',') if host]
 
 # Caching templates.
 TEMPLATES[0]['OPTIONS']['loaders'] = [
