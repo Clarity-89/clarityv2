@@ -22,7 +22,7 @@ class ContactAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'city', 'country', 'get_contacts')
+    list_display = ('name', 'is_default', 'email', 'city', 'country', 'get_contacts')
     list_filter = ('created', 'modified')
     search_fields = ('name', 'email', 'contacts__name')
     filter_horizontal = ('contacts',)

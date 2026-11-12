@@ -6,6 +6,8 @@ from django.utils.translation import gettext_lazy as _
 
 from privates.admin import PrivateMediaMixin
 
+from clarityv2.crm.models import Client
+
 from .models import Invoice, InvoiceItem
 from .utils import render_invoice_pdf
 
@@ -40,6 +42,13 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
     private_media_fields = ('pdf',)
     inlines = [InvoiceItemInline]
     actions = [generate_invoices, render_pdf]
+
+    def get_changeform_initial_data(self, request):
+        initial = super().get_changeform_initial_data(request)
+        default_client = Client.get_default()
+        if default_client is not None:
+            initial.setdefault('client', default_client.pk)
+        return initial
 
     def get_queryset(self, request=None):
         return super().get_queryset(request=request).annotate(n_items=Count('invoiceitem'))

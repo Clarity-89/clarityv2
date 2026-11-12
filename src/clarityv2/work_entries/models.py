@@ -10,7 +10,7 @@ from clarityv2.invoices.constants import TWO_DIGITS
 class WorkEntry(models.Model):
     project = models.ForeignKey('crm.Project', on_delete=models.PROTECT)
     date = models.DateField(_('date'), default=datetime.date.today)
-    duration = models.DurationField(_('duration'))
+    duration = models.DurationField(_('duration'), default=datetime.timedelta(hours=1))
 
     notes = models.TextField(blank=True)
 

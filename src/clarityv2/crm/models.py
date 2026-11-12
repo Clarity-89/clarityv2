@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, transaction
 from django.utils.translation import gettext_lazy as _
 
 from autoslug.fields import AutoSlugField
@@ -53,6 +53,10 @@ class Client(models.Model):
     # invoicing fields
     crn = models.CharField(_('registration number'), max_length=50, blank=True, help_text=_('Business ID'))
     vat_number = models.CharField(_('VAT number'), max_length=50, blank=True)
+    is_default = models.BooleanField(
+        _('default'), default=False,
+        help_text=_('Pre-select this client when creating invoices and work entries.'),
+    )
 
     contacts = models.ManyToManyField('Contact', blank=True)
 
@@ -62,9 +66,30 @@ class Client(models.Model):
     class Meta:
         verbose_name = _("client")
         verbose_name_plural = _("clients")
+        constraints = [
+            models.UniqueConstraint(
+                fields=['is_default'],
+                condition=models.Q(is_default=True),
+                name='unique_default_client',
+            ),
+        ]
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        # Leaving the previous default in place would violate the partial unique constraint.
+        with transaction.atomic():
+            if self.is_default:
+                others = type(self).objects.filter(is_default=True)
+                if self.pk is not None:
+                    others = others.exclude(pk=self.pk)
+                others.update(is_default=False)
+            super().save(*args, **kwargs)
+
+    @classmethod
+    def get_default(cls):
+        return cls.objects.filter(is_default=True).first()
 
 
 class TaxRates(Decimal, models.Choices):

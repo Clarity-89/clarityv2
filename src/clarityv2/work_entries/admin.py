@@ -9,6 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 from import_export.admin import ImportExportActionModelAdmin
 
+from clarityv2.crm.models import Client
+
 from .models import WorkEntry
 
 
@@ -39,6 +41,16 @@ class WorkEntryAdmin(ImportExportActionModelAdmin):
     list_filter = ('project__client', 'project', ('date', CustomDateTimeFilter))
     search_fields = ('notes',)
     change_list_template = 'admin/work_entries/workentry/change_list.html'
+
+    def get_changeform_initial_data(self, request):
+        initial = super().get_changeform_initial_data(request)
+        default_client = Client.get_default()
+        if default_client is not None:
+            # Work entries link to a project, so preselect one of the default client's projects.
+            project = default_client.project_set.order_by('name').first()
+            if project is not None:
+                initial.setdefault('project', project.pk)
+        return initial
 
     def changelist_view(self, request, extra_context=None):
         response = super().changelist_view(request, extra_context=None)

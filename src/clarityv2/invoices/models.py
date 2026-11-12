@@ -25,7 +25,10 @@ RE_INVOICE_NUMBER = re.compile(r'(?P<year>20\d{2})\d{5}$')
 
 class Invoice(models.Model):
     client = models.ForeignKey('crm.Client', on_delete=models.PROTECT)
-    date = models.DateField(_('date'), help_text=_('Include work up to (including) this day.'))
+    date = models.DateField(
+        _('date'), default=date.today,
+        help_text=_('Include work up to (including) this day.'),
+    )
 
     generated = models.DateTimeField(editable=False, null=True)
     invoice_number = models.CharField(
