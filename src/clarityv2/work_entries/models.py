@@ -32,7 +32,7 @@ class WorkEntry(models.Model):
 
     @property
     def total(self):
-        rate = self.rate or self.project.base_rate
+        rate = self.rate if self.rate is not None else self.project.base_rate
         if rate:
             total_seconds = int(self.duration.total_seconds())
             duration = total_seconds / 3600
