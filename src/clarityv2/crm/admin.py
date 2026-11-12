@@ -45,6 +45,13 @@ class InvoiceItemTemplateInline(admin.TabularInline):
     model = InvoiceItemTemplate
     extra = 0
 
+    def get_formset(self, request, obj=None, **kwargs):
+        formset = super().get_formset(request, obj, **kwargs)
+        if obj is not None:
+            # New rows start at the project's current rate instead of an empty override.
+            formset.form.base_fields['rate'].initial = obj.rate_for()
+        return formset
+
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
