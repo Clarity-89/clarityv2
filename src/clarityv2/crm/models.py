@@ -78,9 +78,11 @@ class Client(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        update_fields = kwargs.get('update_fields')
         # Leaving the previous default in place would violate the partial unique constraint.
+        # Only clear when this save writes the flag, otherwise a partial save would leave no default.
         with transaction.atomic():
-            if self.is_default:
+            if self.is_default and (update_fields is None or 'is_default' in update_fields):
                 others = type(self).objects.filter(is_default=True)
                 if self.pk is not None:
                     others = others.exclude(pk=self.pk)
@@ -137,3 +139,9 @@ class Project(models.Model):
         """
         if not self.base_rate and not self.flat_fee:
             raise ValidationError(_('Provide a base hourly rate or a flat fee.'))
+
+    def rate_for(self, override=None):
+        """Rate for an invoice line: explicit override, else flat fee, else the hourly rate."""
+        if override is not None:
+            return override
+        return self.flat_fee or self.base_rate

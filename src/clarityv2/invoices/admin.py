@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib import admin
 from django.db.models import Count
 from django.urls import reverse
@@ -8,16 +10,16 @@ from privates.admin import PrivateMediaMixin
 
 from clarityv2.crm.models import Client
 
-from .models import Invoice, InvoiceItem
+from .models import Invoice, InvoiceItem, InvoiceItemTemplate
 from .utils import render_invoice_pdf
 
 
-def generate_invoices(modeladmin, request, queryset):
+def regenerate_invoices(modeladmin, request, queryset):
     for invoice in queryset:
-        invoice.generate()
+        invoice.regenerate()
 
 
-generate_invoices.short_description = _("Generate invoice details")
+regenerate_invoices.short_description = _("Regenerate invoice details")
 
 
 def render_pdf(modeladmin, request, queryset):
@@ -41,13 +43,14 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
     search_fields = ('invoice_number',)
     private_media_fields = ('pdf',)
     inlines = [InvoiceItemInline]
-    actions = [generate_invoices, render_pdf]
+    actions = [regenerate_invoices, render_pdf]
 
     def get_changeform_initial_data(self, request):
         initial = super().get_changeform_initial_data(request)
         default_client = Client.get_default()
         if default_client is not None:
             initial.setdefault('client', default_client.pk)
+        initial.setdefault('date', date.today())
         return initial
 
     def save_related(self, request, form, formsets, change):
@@ -75,3 +78,10 @@ class InvoiceAdmin(PrivateMediaMixin, admin.ModelAdmin):
 class InvoiceItemAdmin(admin.ModelAdmin):
     list_display = ('invoice', 'project', 'rate', 'amount', 'tax_rate')
     list_filter = ('invoice__client', 'project')
+
+
+@admin.register(InvoiceItemTemplate)
+class InvoiceItemTemplateAdmin(admin.ModelAdmin):
+    list_display = ('project', 'title', 'duration', 'rate')
+    list_filter = ('project__client', 'project')
+    search_fields = ('title',)

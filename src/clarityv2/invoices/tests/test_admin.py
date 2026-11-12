@@ -6,9 +6,8 @@ from django.urls import reverse
 
 from clarityv2.accounts.models import User
 from clarityv2.crm.tests.factories import ClientFactory, ProjectFactory
-from clarityv2.work_entries.models import WorkEntryTemplate
 
-from ..models import Invoice
+from ..models import Invoice, InvoiceItemTemplate
 
 
 class InvoiceAdminDefaultsTests(TestCase):
@@ -30,7 +29,7 @@ class InvoiceAdminDefaultsTests(TestCase):
 
     def test_add_form_generates_invoice(self):
         project = ProjectFactory(client=self.default_client)
-        WorkEntryTemplate.objects.create(project=project, title='Monthly rate', rate=Decimal('3500'))
+        InvoiceItemTemplate.objects.create(project=project, title='Monthly rate', rate=Decimal('3500'))
 
         response = self.client.post(reverse('admin:invoices_invoice_add'), {
             'client': self.default_client.pk,

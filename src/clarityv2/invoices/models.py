@@ -14,7 +14,7 @@ from django.utils.translation import gettext_lazy as _
 from privates.fields import PrivateMediaFileField
 
 from clarityv2.crm.models import TaxRates
-from clarityv2.work_entries.models import WorkEntry, WorkEntryTemplate
+from clarityv2.work_entries.models import WorkEntry
 
 from .utils import generate_invoice_reference
 
@@ -25,10 +25,7 @@ RE_INVOICE_NUMBER = re.compile(r'(?P<year>20\d{2})\d{5}$')
 
 class Invoice(models.Model):
     client = models.ForeignKey('crm.Client', on_delete=models.PROTECT)
-    date = models.DateField(
-        _('date'), default=date.today,
-        help_text=_('Include work up to (including) this day.'),
-    )
+    date = models.DateField(_('date'), help_text=_('Include work up to (including) this day.'))
 
     generated = models.DateTimeField(editable=False, null=True)
     invoice_number = models.CharField(
@@ -47,28 +44,6 @@ class Invoice(models.Model):
 
     def __str__(self):
         return '{client} - {date}'.format(client=self.client, date=self.date)
-
-    def save(self, *args, **kwargs):
-        adding = self._state.adding
-        super().save(*args, **kwargs)
-        if adding:
-            self.create_default_work_entries()
-
-    def create_default_work_entries(self):
-        if not self.client.is_default:
-            return
-        templates = WorkEntryTemplate.objects.filter(project__client=self.client).select_related('project')
-        WorkEntry.objects.bulk_create(
-            WorkEntry(
-                project=template.project,
-                date=self.date,
-                duration=template.duration,
-                rate=template.rate,
-                notes=template.title,
-                source_invoice=self,
-            )
-            for template in templates
-        )
 
     def get_previous(self, **kwargs):
         kwargs['client'] = self.client
@@ -108,15 +83,14 @@ class Invoice(models.Model):
         work_entries = WorkEntry.objects.filter(
             project__client=self.client, date__range=[lower, upper]
         ).select_related('project')
+        templates = self.get_item_templates()
 
         with transaction.atomic():
             for entry in work_entries:
                 InvoiceItem.objects.create(
                     invoice=self,
                     project=entry.project,
-                    rate=entry.rate if entry.rate is not None else (
-                        entry.project.base_rate if not entry.project.flat_fee else entry.project.flat_fee
-                    ),
+                    rate=entry.project.rate_for(),
                     amount=entry.duration.total_seconds() / 3600,
                     tax_rate=entry.project.vat,
                     source_object=entry,
@@ -125,12 +99,31 @@ class Invoice(models.Model):
 
                 )
 
+            for template in templates:
+                InvoiceItem.objects.create(
+                    invoice=self,
+                    project=template.project,
+                    rate=template.project.rate_for(template.rate),
+                    amount=template.duration.total_seconds() / 3600,
+                    tax_rate=template.project.vat,
+                    source_object=template,
+                    remarks=template.title,
+                    date=self.date,
+                )
+
             # either created from hourly rate (work_entries) or manual invoice items
-            if work_entries or self.invoiceitem_set.exists():
+            if work_entries or templates or self.invoiceitem_set.exists():
                 self.generated = timezone.now()
-                self.generate_invoice_number(save=False)
+                if not self.invoice_number:
+                    self.generate_invoice_number(save=False)
                 self.reference_number = generate_invoice_reference(self.client, self.invoice_number)
                 self.save()
+
+    def get_item_templates(self):
+        """Recurring invoice lines are configured for the default client."""
+        if not self.client.is_default:
+            return []
+        return InvoiceItemTemplate.objects.filter(project__client=self.client).select_related('project')
 
     def regenerate(self):
         if self.received is not None:
@@ -138,7 +131,8 @@ class Invoice(models.Model):
             return
 
         if self.generated is not None:
-            self.invoiceitem_set.all().delete()
+            # Keep manual lines; only rebuild the ones generated from work entries and templates.
+            self.invoiceitem_set.exclude(content_type=None).delete()
             self.generated = None
             logger.info('Regenerating invoice %d, potentially rewriting sent-out invoices.', self.pk)
         self.generate()
@@ -192,3 +186,24 @@ class InvoiceItem(models.Model):
     class Meta:
         verbose_name = _('invoice item')
         verbose_name_plural = _('invoice items')
+
+
+class InvoiceItemTemplate(models.Model):
+    """Reusable invoice line for a project's recurring billing."""
+
+    project = models.ForeignKey(
+        'crm.Project', on_delete=models.CASCADE, related_name='invoice_item_templates')
+    title = models.CharField(_('title'), max_length=255, help_text=_('Invoice line description.'))
+    duration = models.DurationField(_('duration'), default=timedelta(hours=1))
+    rate = models.DecimalField(
+        _('rate'), max_digits=10, decimal_places=2, null=True, blank=True,
+        help_text=_('Overrides the project rate for this line.'),
+    )
+
+    class Meta:
+        verbose_name = _('invoice item template')
+        verbose_name_plural = _('invoice item templates')
+        ordering = ('project', 'title')
+
+    def __str__(self):
+        return '{project} - {title}'.format(project=self.project, title=self.title)

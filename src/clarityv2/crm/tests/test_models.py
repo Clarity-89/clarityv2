@@ -20,3 +20,15 @@ class ClientDefaultTests(TestCase):
         previous.refresh_from_db()
         self.assertFalse(previous.is_default)
         self.assertEqual(Client.get_default(), current)
+
+    def test_saving_other_fields_does_not_clear_the_default(self):
+        default = ClientFactory(is_default=True)
+        other = ClientFactory()
+        other.is_default = True
+
+        other.save(update_fields=['name'])
+
+        default.refresh_from_db()
+        other.refresh_from_db()
+        self.assertTrue(default.is_default)
+        self.assertFalse(other.is_default)
