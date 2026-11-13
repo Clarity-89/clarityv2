@@ -6,29 +6,66 @@ from freezegun import freeze_time
 from privates.test import temp_private_root
 
 from clarityv2.accounts.models import AdminUser
-from clarityv2.crm.tests.factories import ProjectFactory
+from clarityv2.crm.constants import Currencies
+from clarityv2.crm.tests.factories import ClientFactory, ProjectFactory
 
 from ..utils import (
-    generate_ref_number, generate_rf_reference, render_invoice_pdf
+    generate_ref_number, generate_rf_reference, get_invoice_pdf_filename, render_invoice_pdf
 )
 from .factories import InvoiceFactory, InvoiceItemFactory
 
 
 @temp_private_root()
 class InvoiceUtilsTests(TestCase):
+    def _create_invoice(self):
+        AdminUser.get_solo()  # the invoice tags read the singleton with .objects.get()
+        client = ClientFactory.create(name='Raintank Inc')
+        project = ProjectFactory.create(client=client, flat_fee=3500)
+        invoice = InvoiceFactory.create(client=client, date=date(2015, 10, 15))
+        InvoiceItemFactory.create(invoice=invoice, project=project, rate=3500, amount=1, source_object=project)
+        invoice.generate()
+        return invoice
+
     @freeze_time('2015-10-21')
     # UrlFetcher only falls back to staticfiles finders (no collectstatic in tests) when DEBUG is on
     @override_settings(DEBUG=True)
     def test_render_pdf(self):
-        AdminUser.get_solo()  # the invoice tags read the singleton with .objects.get()
-        project = ProjectFactory.create(flat_fee=3500)
-        invoice = InvoiceFactory.create(client=project.client, date=date(2015, 10, 15))
-        InvoiceItemFactory.create(invoice=invoice, project=project, rate=3500, amount=1, source_object=project)
-        invoice.generate()
+        invoice = self._create_invoice()
 
         render_invoice_pdf(RequestFactory().get('/'), invoice)
 
-        self.assertEqual(invoice.pdf.name, 'invoices/2015/10/201500001.pdf')
+        self.assertEqual(
+            invoice.pdf.name,
+            'invoices/2015/10/2015_10_15_Sales_invoice_201500001_Raintank_Inc_3500.00e.pdf',
+        )
+        with invoice.pdf.open('rb') as pdf:
+            self.assertEqual(pdf.read(5), b'%PDF-')
+
+    @freeze_time('2015-10-21')
+    def test_pdf_filename_appends_the_project_currency(self):
+        client = ClientFactory.create(name='Raintank Inc')
+        project = ProjectFactory.create(client=client, flat_fee=3500, currency=Currencies.usd)
+        invoice = InvoiceFactory.create(client=client, date=date(2015, 10, 15))
+        InvoiceItemFactory.create(invoice=invoice, project=project, rate=3500, amount=1, source_object=project)
+        invoice.generate()
+
+        self.assertEqual(
+            get_invoice_pdf_filename(invoice),
+            '2015_10_15_Sales_invoice_201500001_Raintank_Inc_3500.00usd.pdf',
+        )
+
+    @freeze_time('2015-10-21')
+    @override_settings(DEBUG=True)
+    def test_rerender_pdf_overwrites_and_keeps_the_name(self):
+        invoice = self._create_invoice()
+        render_invoice_pdf(RequestFactory().get('/'), invoice)
+        filename = invoice.pdf.name
+
+        invoice.invoiceitem_set.update(rate=4000)
+        render_invoice_pdf(RequestFactory().get('/'), invoice)
+
+        self.assertEqual(invoice.pdf.name, filename)
+        self.assertTrue(invoice.pdf.storage.exists(filename))
         with invoice.pdf.open('rb') as pdf:
             self.assertEqual(pdf.read(5), b'%PDF-')
 
