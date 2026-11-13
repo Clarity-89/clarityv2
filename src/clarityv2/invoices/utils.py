@@ -1,6 +1,8 @@
 """
 Utility functions for invoices.
 """
+import re
+from decimal import Decimal
 from io import BytesIO
 
 from django.db.models import Count
@@ -24,6 +26,27 @@ def get_invoice_context(invoice, **extra):
     return context
 
 
+# Euro is abbreviated to a single "e" in filenames, other currencies keep their stored code.
+PDF_CURRENCY_SUFFIXES = {"euro": "e"}
+
+
+def get_invoice_pdf_filename(invoice):
+    client_name = re.sub(r"\s+", "_", invoice.client.name)
+    client_name = re.sub(r"[^\w.-]", "", client_name)
+    totals = invoice.get_totals()
+    total = (totals["base__sum"] or Decimal("0.00")) + (totals["tax__sum"] or Decimal("0.00"))
+    item = invoice.invoiceitem_set.select_related("project").order_by("project", "tax_rate").first()
+    currency = item.project.currency if item and item.project else ""
+    currency = PDF_CURRENCY_SUFFIXES.get(currency, currency)
+    return "{date}_Sales_invoice_{number}_{client}_{total:.2f}{currency}.pdf".format(
+        date=invoice.date.strftime("%Y_%m_%d"),
+        number=invoice.invoice_number or "",
+        client=client_name,
+        total=total,
+        currency=currency,
+    )
+
+
 def render_invoice_pdf(request, invoice, template_name="invoices/invoice_detail.html"):
     # render the invoice in the client's language
     lang_code = invoice.client.language
@@ -31,8 +54,17 @@ def render_invoice_pdf(request, invoice, template_name="invoices/invoice_detail.
 
     context = get_invoice_context(invoice, request=request)
     pdf = render_to_pdf(template_name, context)[1]
-    filename = "{}.pdf".format(invoice.invoice_number)
-    invoice.pdf.save(filename, BytesIO(pdf))
+
+    if invoice.pdf:
+        # Regenerating keeps the existing name so it overwrites the file instead of adding a suffix.
+        filename = invoice.pdf.name
+        storage = invoice.pdf.storage
+        if storage.exists(filename):
+            storage.delete(filename)
+        invoice.pdf.name = storage.save(filename, BytesIO(pdf))
+        invoice.save()
+    else:
+        invoice.pdf.save(get_invoice_pdf_filename(invoice), BytesIO(pdf))
 
     # go back to the previous language
     if hasattr(request, "LANGUAGE_CODE"):
